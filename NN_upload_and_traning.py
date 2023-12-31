@@ -212,7 +212,7 @@ if uploaded_file is not None:
             # Converto il dataframe e lo salvo in un file csv (se l'utente clicca un pulsante)
             dataframe_test = dataframe_test.to_csv(index=False).encode('utf-8')
             st.download_button(
-                "Press to Download the dataframe",
+                "Download the dataframe",
                 dataframe_test,
                 "Predictions.csv",
                 "text/csv",
