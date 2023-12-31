@@ -60,8 +60,9 @@ def Metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list) :
         ax2.plot(rangg,rangg, '-r')
         ax2.set_xlabel("Real")
         ax2.set_ylabel("Predictions")
-        ax3.set_xlabel("Prections-Real")
-    
+        ax3.set_xlabel("Predictions - Actual")
+        
+    st.write(Norm_tar_list[2].inverse_transform(Model.Predict(X_test)), Norm_tar_list[2].inverse_transform(y_test))
     st.pyplot(fig)
 
     return 0
