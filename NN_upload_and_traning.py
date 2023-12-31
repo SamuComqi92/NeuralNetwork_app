@@ -144,7 +144,7 @@ if uploaded_file is not None:
         st.write("Now, if you want, you can finalize the model!")
         st.write("The Training and the Test set will be used together to create the final model.")
         st.write("The dataset will be standardized and the Target normalized using the methods defined above.") 
-        st.write(r"The JSON file with the model parameters and weights will be saved in the folder 'Studio\Studio Personale\STREAMLIT'.")
+        st.write(r"The JSON file with the model parameters and weights will be saved.")
 
         # Flag finalizzazione
         flag_finalization = 0
@@ -168,7 +168,7 @@ if uploaded_file is not None:
             st.session_state["Norm_tar_list_final"] = Norm_tar_list_final
 
             # Salvataggio del modello finale nel file "Best_model_parameters.json"
-            file_path = r"C:\Users\ECAMPISFI\OneDrive - NTT DATA EMEAL\Desktop\Studio\Studio Personale\1. Neural_Network_Model_Streamlit\Best_model_parameters.json"
+            file_path = "Best_model_parameters.json"
             Final_model.Save_model(file_path)
 
         ########################################################################################################################################################################################################
