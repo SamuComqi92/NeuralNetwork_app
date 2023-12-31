@@ -11,7 +11,6 @@ from scipy.special import softmax
 from sklearn.preprocessing import MinMaxScaler, StandardScaler, LabelBinarizer, OneHotEncoder
 from sklearn.metrics import precision_score,recall_score,f1_score, accuracy_score, confusion_matrix, r2_score, precision_recall_curve, roc_auc_score, roc_curve
 
-
 ##################################################################################################################################################################################################################
 
 #Class NeuralNet
