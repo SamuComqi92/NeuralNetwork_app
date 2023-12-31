@@ -40,7 +40,12 @@ if uploaded_file is not None:
     
     # Salvo il file caricato in un dataframe
     # Quest'ultimo verrà modificato a seconda delle scelte dell'utente
+    # Leggo il dataframe con separatore ;
+    # Se il separatore è diverso, uso un if per ri-leggerlo.
     dataframe = pd.read_csv(uploaded_file, delimiter=";")
+    if len( dataframe.columns ) == 1 :
+        dataframe = pd.read_csv(uploaded_file, delimiter=",")
+        
     if st.checkbox('Show dataframe', key=50):                
         st.write(dataframe)
 
