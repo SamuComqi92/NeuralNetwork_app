@@ -52,9 +52,7 @@ def Metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list) :
         elif Norm_tar_list[3] == 10 :
             ax2.plot( 10**Model.Predict(X_test)+1, 10**(y_test)+1, 'ob')
             rangg = np.arange( (10**Model.Predict(X_test) +1 ).min(), (10**Model.Predict(X_test)).max())
-            #ax3.hist(10**Model.Predict(X_test) - 10**(y_test), bins = 20, color = 'blue', alpha = 0.7)
-            import seaborn as sns
-            sns.histplot(10**Model.Predict(X_test)-10**(y_test), kde=True, color='blue', stat='density')
+            ax3.hist(10**Model.Predict(X_test) - 10**(y_test), bins = 20, color = 'blue', alpha = 0.7)
         else :
             ax2.plot(Model.Predict(X_test),y_test, 'ob')
             rangg = np.arange(Model.Predict(X_test).min(), Model.Predict(X_test).max())
