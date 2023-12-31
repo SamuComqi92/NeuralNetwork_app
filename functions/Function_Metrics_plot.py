@@ -35,7 +35,7 @@ def Metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list) :
     st.session_state["res_te"]  = res_te
 
     # Plot delle Learning curves
-    fig, (ax1,ax2,ax3) = plt.subplots(1, 3, figsize = (15, 5))
+    fig, (ax1,ax2,ax3) = plt.subplots(1, 3, figsize = (15, 4))
     ax1.plot(Model.cost_function_tr, '-b')
     ax1.plot(Model.cost_function_te,'-r')
     ax1.legend(["Training set","Test set"])
@@ -53,6 +53,8 @@ def Metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list) :
         elif Norm_tar_list[3] == 10 :
             ax2.plot( 10**Model.Predict(X_test)+1, 10**(y_test)+1, 'ob')
             rangg = np.arange( (10**Model.Predict(X_test) +1 ).min(), (10**Model.Predict(X_test)).max())
+
+            ax3.hist(10**Model.Predict(X_test) - 10**(y_test), bins=30, color='blue', alpha=0.7)
         else :
             ax2.plot(Model.Predict(X_test),y_test, 'ob')
             rangg = np.arange(Model.Predict(X_test).min(), Model.Predict(X_test).max())
