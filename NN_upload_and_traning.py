@@ -44,7 +44,7 @@ if uploaded_file is not None:
     # Se il separatore è diverso, uso un if per ri-leggerlo.
     #dataframe = pd.read_csv(uploaded_file, delimiter=";")
 
-    for delimiter in [",", ";"]:
+    for delimiter in [";", ","]:
         try:
             dataframe = pd.read_csv(uploaded_file, delimiter = delimiter)
         except pd.errors.ParserError:
