@@ -708,7 +708,7 @@ class NeuralNet :
         return self.best_weights
     
     # Module to save the best model in a given path as a JSON file
-    def Save_model(self, file_path) :
+    def Save_model(self, file_name) :
         # Set di variabili
         data = {
             "Task": self.task,
@@ -726,7 +726,7 @@ class NeuralNet :
         }
 
         # Salvo i dati in un file JSON nel path indicato
-        with open(file_path, 'w') as json_file:
-            json.dump(data, json_file)
+        with open(file_name, 'w') as json_file:
+            json.dump(data, json_file, indent=2)
 
         return True
