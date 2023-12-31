@@ -35,7 +35,7 @@ def Metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list) :
     st.session_state["res_te"]  = res_te
 
     # Plot delle Learning curves
-    fig, (ax1,ax2) = plt.subplots()
+    fig, (ax1,ax2) = plt.subplots(1, 2, figsize = (12, 5))
     ax1.plot(Model.cost_function_tr, '-b')
     ax1.plot(Model.cost_function_te,'-r')
     ax1.legend(["Training set","Test set"])
