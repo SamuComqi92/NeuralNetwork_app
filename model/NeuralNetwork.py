@@ -728,15 +728,9 @@ class NeuralNet :
         # Salvo i dati in un file JSON nel path indicato
         json_string = json.dumps(data)
         st.download_button(
-            label = "Download JSON file with model parameters and weights",
+            label = "Download best parameters",
             file_name = "Best_parameters.json",
             mime = "application/json",
             data = json_string,
         )
-        #with open(file_name, 'w') as json_file:
-        #    json.dump(data, json_file, indent=2)
-        #    b64 = base64.b64encode(data.encode()).decode()
-        #    href = f'<a href="data:application/json;base64,{b64}" download="{file_name}">Download JSON file</a>'
-        #    st.markdown(href, unsafe_allow_html=True)
-            
         return True
