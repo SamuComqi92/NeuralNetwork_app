@@ -197,10 +197,10 @@ if uploaded_file is not None:
                 Predictions_prob_test = st.session_state["Final_model"].Predict_proba( X_test_final )
                 dataframe_test["Predictions"] = Predictions_test
                 dataframe_test["Probability"] = Predictions_prob_test
-            if Task == "Regression" and Norm_tar_list_final[0] == 3:
-                Predictions_test = Norm_tar_list_final[1].inverse_transform(Predictions_test)
+            if Task == "Regression" and st.session_state["Norm_tar_list_final"][0] == 3:
+                Predictions_test = st.session_state["Norm_tar_list_final"][1].inverse_transform(Predictions_test)
                 dataframe_test["Predictions"] = Predictions_test
-            elif Task == "Regression" and Norm_tar_list_final[0] == 1:
+            elif Task == "Regression" and st.session_state["Norm_tar_list_final"][0] == 1:
                 Predictions_test = 10**Predictions_test + 1
                 dataframe_test["Predictions"] = Predictions_test
 
