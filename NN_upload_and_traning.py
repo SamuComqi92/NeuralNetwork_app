@@ -119,7 +119,7 @@ if uploaded_file is not None:
 
         # Scelta dei diversi parametri da parte dell'utente e costruzione dell'oggetto "Model"
         Task, Hidden_layers, Algo, Alpha, Regularization, Momentum, Early_stopping, Verbose, Max_iter, Function_, Batch, Decay, Lambda, Random_state, Patient, Final_metric = Function_NN_Builder.NN_Builder(dataframe)
-        Model = NeuralNetwork_module.NeuralNet(task=Task, function = Function_, Hidden_layers = Hidden_layers, algo = Algo, batch = None, alpha = float(Alpha), decay = float(Decay), 
+        Model = NeuralNetwork.NeuralNet(task=Task, function = Function_, Hidden_layers = Hidden_layers, algo = Algo, batch = None, alpha = float(Alpha), decay = float(Decay), 
                         regularization = Regularization, Lambda = float(Lambda), Max_iter = int(Max_iter), momentum = float(Momentum), random_state = int(Random_state), verbose = Verbose,
                         early_stopping = Early_stopping, patient = int(Patient), flag_plot = False, metric = Final_metric)
     
