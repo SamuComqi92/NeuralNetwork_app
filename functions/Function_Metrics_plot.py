@@ -48,19 +48,21 @@ def Metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list) :
         if Norm_tar_list[3] == 20 :
             ax2.plot(Norm_tar_list[2].inverse_transform(Model.Predict(X_test)), Norm_tar_list[2].inverse_transform(y_test), 'ob')
             rangg = np.arange(Norm_tar_list[2].inverse_transform(Model.Predict(X_test)).min(), Norm_tar_list[2].inverse_transform(Model.Predict(X_test)).max())
-
-            ax3.hist(Norm_tar_list[2].inverse_transform(Model.Predict(X_test)) - Norm_tar_list[2].inverse_transform(y_test), bins=30, color='blue', alpha=0.7)
+            ax3.hist(Norm_tar_list[2].inverse_transform(Model.Predict(X_test)) - Norm_tar_list[2].inverse_transform(y_test), bins = 20, color = 'blue', alpha = 0.7)
         elif Norm_tar_list[3] == 10 :
             ax2.plot( 10**Model.Predict(X_test)+1, 10**(y_test)+1, 'ob')
             rangg = np.arange( (10**Model.Predict(X_test) +1 ).min(), (10**Model.Predict(X_test)).max())
-
-            ax3.hist(10**Model.Predict(X_test) - 10**(y_test), bins=30, color='blue', alpha=0.7)
+            #ax3.hist(10**Model.Predict(X_test) - 10**(y_test), bins = 20, color = 'blue', alpha = 0.7)
+            import seaborn as sns
+            sns.histplot(10**Model.Predict(X_test)-10**(y_test), kde=True, color='blue', stat='density')
         else :
             ax2.plot(Model.Predict(X_test),y_test, 'ob')
             rangg = np.arange(Model.Predict(X_test).min(), Model.Predict(X_test).max())
+            ax3.hist(Model.Predict(X_test) - y_test, bins = 20, color = 'blue', alpha = 0.7)
         ax2.plot(rangg,rangg, '-r')
         ax2.set_xlabel("Real")
         ax2.set_ylabel("Predictions")
+        ax3.set_xlabel("Prections-Real")
     
     st.pyplot(fig)
 
