@@ -50,13 +50,13 @@ def Metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list) :
             rangg = np.arange(Norm_tar_list[2].inverse_transform(Model.Predict(X_test)).min(), Norm_tar_list[2].inverse_transform(Model.Predict(X_test)).max())
             ax3.hist(Norm_tar_list[2].inverse_transform(Model.Predict(X_test)) - Norm_tar_list[2].inverse_transform(y_test), bins = 20, color = 'blue', alpha = 0.7)
             
-            st.write(Norm_tar_list[2].inverse_transform(Model.Predict(X_test)), Norm_tar_list[2].inverse_transform(y_test))
+            st.write(Norm_tar_list[2].inverse_transform(Model.Predict(X_test)) - Norm_tar_list[2].inverse_transform(y_test))
         elif Norm_tar_list[3] == 10 :
             ax2.plot( 10**Model.Predict(X_test)+1, 10**(y_test)+1, 'ob')
             rangg = np.arange( (10**Model.Predict(X_test) +1 ).min(), (10**Model.Predict(X_test)).max())
             ax3.hist(10**Model.Predict(X_test) - 10**(y_test), bins = 20, color = 'blue', alpha = 0.7)
 
-            st.write(10**Model.Predict(X_test)+1, 10**(y_test)+1)
+            st.write(10**Model.Predict(X_test) - 10**(y_test))
         else :
             ax2.plot(Model.Predict(X_test),y_test, 'ob')
             rangg = np.arange(Model.Predict(X_test).min(), Model.Predict(X_test).max())
