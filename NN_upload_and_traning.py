@@ -144,7 +144,7 @@ if uploaded_file is not None:
         st.write("Now, if you want, you can finalize the model!")
         st.write("The Training and the Test set will be used together to create the final model.")
         st.write("The dataset will be standardized and the Target normalized using the methods defined above.") 
-        st.write(r"The JSON file with the model parameters and weights will be saved.")
+        st.write(r"After the model finalization, you can download the JSON file with the model parameters and weights.")
 
         # Flag finalizzazione
         flag_finalization = 0
