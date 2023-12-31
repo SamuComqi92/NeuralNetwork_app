@@ -22,12 +22,12 @@ def Metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list) :
         res_tr = Model.metric_tr
         res_te = Model.metric_te
     elif Task == "Regression" and Norm_tar_list[3] == 20:
-        res_tr = np.sqrt(((Norm_tar_list[2].inverse_transform(Model.Predict(X_train)) -  Norm_tar_list[2].inverse_transform(y_train))**2).sum()/len(y_train))
-        res_te = np.sqrt(((Norm_tar_list[2].inverse_transform(Model.Predict(X_test)) -  Norm_tar_list[2].inverse_transform(y_test))**2).sum()/len(y_test))
+        res_tr = np.sqrt( ((Norm_tar_list[2].inverse_transform(Model.Predict(X_train)) -  Norm_tar_list[2].inverse_transform(y_train))**2).sum()/len(y_train)  )
+        res_te = np.sqrt( ((Norm_tar_list[2].inverse_transform(Model.Predict(X_test)) -  Norm_tar_list[2].inverse_transform(y_test))**2).sum()/len(y_test) )
         st.write('Training real RMSE: {:.5f} -- Validation real RMSE: {:.5f}'.format(res_tr, res_te))
     elif Task == "Regression" and Norm_tar_list[3] == 10:
-        res_tr = np.sqrt((( 10**Model.Predict(X_train) + 1) -  10**(y_train+1))**2).sum()/len(y_train)
-        res_te = np.sqrt((( 10**Model.Predict(X_test) + 1) -  10**(y_test+1))**2).sum()/len(y_test)
+        res_tr = np.sqrt( (( 10**Model.Predict(X_train) + 1 -  10**(y_train+1))**2).sum()/len(y_train)  )
+        res_te = np.sqrt( (( 10**Model.Predict(X_test) + 1 -  10**(y_test+1))**2).sum()/len(y_test) )
         st.write('Training real RMSE: {:.5f} -- Validation real RMSE: {:.5f}'.format(res_tr, res_te))
     
     # Salvo risultati in session
