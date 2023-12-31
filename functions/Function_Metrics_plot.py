@@ -35,16 +35,15 @@ def Metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list) :
     st.session_state["res_te"]  = res_te
 
     # Plot delle Learning curves
-    fig, ax = plt.subplots()
-    fig2, ax2 = plt.subplots()
-    ax.plot(Model.cost_function_tr, '-b')
-    ax.plot(Model.cost_function_te,'-r')
-    ax.legend(["Training set","Test set"])
-    ax.set_xlabel("Epoch")
-    ax.set_ylabel("Cost function")
+    fig, (ax1,ax2) = plt.subplots()
+    ax1.plot(Model.cost_function_tr, '-b')
+    ax1.plot(Model.cost_function_te,'-r')
+    ax1.legend(["Training set","Test set"])
+    ax1.set_xlabel("Epoch")
+    ax1.set_ylabel("Cost function")
     
     # Confronto risultati Test (solo per regressione)
-    st.pyplot(fig)
+    #st.pyplot(fig)
     if Task == "Regression" :
         if Norm_tar_list[3] == 20 :
             ax2.plot(Norm_tar_list[2].inverse_transform(Model.Predict(X_test)), Norm_tar_list[2].inverse_transform(y_test), 'ob')
@@ -58,6 +57,7 @@ def Metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list) :
         ax2.plot(rangg,rangg, '-r')
         ax2.set_xlabel("Real")
         ax2.set_ylabel("Predictions")
-        st.pyplot(fig2)
+    
+    st.pyplot(fig)
 
     return 0
