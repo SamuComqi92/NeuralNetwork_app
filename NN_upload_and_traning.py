@@ -42,17 +42,14 @@ if uploaded_file is not None:
     # Quest'ultimo verrà modificato a seconda delle scelte dell'utente
     # Leggo il dataframe con separatore ;
     # Se il separatore è diverso, uso un if per ri-leggerlo.
-    #dataframe = pd.read_csv(uploaded_file, delimiter=";")
+    dataframe1 = pd.read_csv(uploaded_file, delimiter=";")
+    dataframe2 = pd.read_csv(uploaded_file, delimiter=",")
 
-    for delimiter in [";", ","]:
-        try:
-            dataframe = pd.read_csv(uploaded_file, delimiter = delimiter)
-        except pd.errors.ParserError:
-            st.write("Something wrong with the csv file...")
-
-    # If none of the delimiters work, raise an exception or handle it accordingly
-    #raise ValueError("Unable to determine the delimiter")
-   
+    if len(dataframe1.columns) == 1:
+        dataframe = dataframe2
+    else :
+        dataframe = dataframe1
+        
     if st.checkbox('Show dataframe', key=50):                
         st.write(dataframe)
 
