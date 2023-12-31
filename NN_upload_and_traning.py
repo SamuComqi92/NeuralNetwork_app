@@ -14,13 +14,13 @@ from sklearn.metrics import precision_score,recall_score,f1_score, accuracy_scor
 # Importo i moduli custom presenti nella cartella "Functions" e il modello di rete neurale nella cartella "Model"
 # In alternativa, lasciarli nella stessa cartella di questo file .py e chiamarli con from name_module import *
 # Modello Neural Network
-from Model import NeuralNetwork
+from model import NeuralNetwork
 # Pulizia e trasformazione dataset
-from Functions import Function_Remove_70_missing, Function_Feature_selection, Function_Imputation_process, Function_Missing_target, Function_Categoric_to_numeric
+from functions import Function_Remove_70_missing, Function_Feature_selection, Function_Imputation_process, Function_Missing_target, Function_Categoric_to_numeric
 # Training, Finalizzazione, e Pipeline
-from Functions import Function_Train_Test_Split, Function_Standard_X_train, Function_Target_transformation, Function_NN_Builder, Function_Metrics_plot
+from functions import Function_Train_Test_Split, Function_Standard_X_train, Function_Target_transformation, Function_NN_Builder, Function_Metrics_plot
 # Finalizzazione e Pipeline
-from Functions import Function_Model_Finalization, Function_Pipeline
+from functions import Function_Model_Finalization, Function_Pipeline
 
 ##################################################################################################################################################################################################################
 ##################################################################################################################################################################################################################
