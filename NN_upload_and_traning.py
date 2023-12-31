@@ -42,8 +42,8 @@ if uploaded_file is not None:
     # Quest'ultimo verrà modificato a seconda delle scelte dell'utente
     # Leggo il dataframe con separatore ;
     # Se il separatore è diverso, uso un if per ri-leggerlo.
-    dataframe1 = pd.read_csv(uploaded_file, delimiter=";")
-    dataframe2 = pd.read_csv(uploaded_file, delimiter=",")
+    dataframe1 = pd.read_csv(uploaded_file, delimiter=",")
+    dataframe2 = pd.read_csv(uploaded_file, delimiter=";")
 
     if len(dataframe1.columns) == 1:
         dataframe = dataframe2
