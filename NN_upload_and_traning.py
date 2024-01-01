@@ -41,9 +41,12 @@ if uploaded_file is not None:
     # Salvo il file caricato in un dataframe
     # Quest'ultimo verrà modificato a seconda delle scelte dell'utente
     try:
-        dataframe = pd.read_csv(uploaded_file, delimiter = ';')
-        if len(dataframe.columns) == 1 :
-            dataframe = pd.read_csv(uploaded_file, delimiter = ',')
+        dataframe1 = pd.read_csv(uploaded_file, delimiter = ';')
+        dataframe2 = pd.read_csv(uploaded_file, delimiter = ',')
+        if len(dataframe1.columns) == 1 :
+            dataframe = dataframe2
+        else :
+            dataframe = dataframe1
     except Exception as e:
         st.error(f"Error: {e}")
 
