@@ -25,19 +25,10 @@ from functions import Function_Model_Finalization, Function_Pipeline
 
 
 def read_csv_file(file_path):
-    try:
-        # Try reading with comma as delimiter
-        df = pd.read_csv(file_path, delimiter=',')
-        if df.shape[1] > 1:
-            return df
-        else:
-            df = pd.read_csv(file_path, delimiter=';')
-            return df
-
-    except (pd.errors.ParserError, pd.errors.EmptyDataError):
-        st.write(f"Error reading CSV file...")
-        return None
-
+    if pd.read_csv(file_path, delimiter=',').columns == 1 :
+        return pd.read_csv(file_path, delimiter=',')
+    else :
+        return pd.read_csv(file_path, delimiter=';')
 
 ##################################################################################################################################################################################################################
 ##################################################################################################################################################################################################################
