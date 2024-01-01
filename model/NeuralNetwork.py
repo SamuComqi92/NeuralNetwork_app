@@ -303,6 +303,7 @@ class NeuralNet :
                 Metricc = 100*( abs((anodes[-1] - yy)/yy) ).sum()/len(yy)
             elif self.metric == "R2" :
                 Metricc = r2_score(yy, anodes[-1] )
+                st.write(yy)
             else :
                 raise ValueError("Misspelled or inappropriate metric for %s" % self.task)
 
