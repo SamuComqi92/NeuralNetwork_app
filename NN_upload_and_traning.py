@@ -40,12 +40,7 @@ if uploaded_file is not None:
     
     # Salvo il file caricato in un dataframe
     # Quest'ultimo verrà modificato a seconda delle scelte dell'utente
-    dataframe1 = pd.read_csv(uploaded_file, delimiter = ';')
-    dataframe2 = pd.read_csv(uploaded_file, delimiter = ',')
-    if len(dataframe1.columns) == 1 :
-        dataframe = dataframe2
-    else :
-        dataframe = dataframe1
+    dataframe = pd.read_csv(uploaded_file, engine = 'python')
 
     if st.checkbox('Show dataframe', key=50):                
         st.write(dataframe)
