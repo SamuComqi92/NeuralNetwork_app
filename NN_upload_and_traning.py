@@ -24,20 +24,27 @@ from functions import Function_Model_Finalization, Function_Pipeline
 
 
 
-def read_csv_file(uploaded_file):
+def read_csv_file(file_path):
     try:
         # Try reading with comma as delimiter
-        df = pd.read_csv(uploaded_file, delimiter=',')
-        return df
-    except pd.errors.ParserError:
+        df = pd.read_csv(file_path, delimiter=',')
+        if df.shape[1] > 1:
+            return df
+        else:
+            raise pd.errors.ParserError("Number of columns is 1")
+
+    except (pd.errors.ParserError, pd.errors.EmptyDataError):
         try:
             # If reading with comma fails, try reading with semicolon as delimiter
-            df = pd.read_csv(uploaded_file, delimiter=';')
-            return df
-        except pd.errors.ParserError as e:
+            df = pd.read_csv(file_path, delimiter=';')
+            if df.shape[1] > 1:
+                return df
+            else:
+                raise pd.errors.ParserError("Number of columns is 1")
+
+        except (pd.errors.ParserError, pd.errors.EmptyDataError) as e:
             print(f"Error reading CSV file: {e}")
             return None
-
 
 
 ##################################################################################################################################################################################################################
