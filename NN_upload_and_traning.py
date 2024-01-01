@@ -53,6 +53,9 @@ if uploaded_file is not None:
 
     # Messaggio di caricamento            
     st.write("File successfully uploaded!")
+
+    # Salvo in sessione
+    st.session_state["uploaded_file"] = uploaded_file
     
     # Salvo il file caricato in un dataframe
     # Quest'ultimo verrà modificato a seconda delle scelte dell'utente
