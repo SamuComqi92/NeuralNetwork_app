@@ -22,8 +22,12 @@ def Pipeline_NN(uploaded_file_test, Selected_columns_start, Numer, Categ, Tar, S
      - Norm_tar_list: lista con flag di trasformazione della colonna target e possibile min_max_scaler
     """
  
-    # Save uploaded file into a dataframe
-    dataframe_test = pd.read_csv(uploaded_file_test, delimiter=";")
+    # Salvo il file caricato in un dataframe
+    # Quest'ultimo verrà modificato a seconda delle scelte dell'utente
+    try:
+        dataframe_test = pd.read_csv(uploaded_file_test, engine = 'python')
+    except Exception as e:
+        st.error(f"Error: {e}")
     
     # Drop rows and columns with more than 70% of missing data
     dataframe_test = dataframe_test[Selected_columns_start]
