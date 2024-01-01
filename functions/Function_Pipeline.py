@@ -25,7 +25,9 @@ def Pipeline_NN(uploaded_file_test, Selected_columns_start, Numer, Categ, Tar, S
     # Salvo il file caricato in un dataframe
     # Quest'ultimo verrà modificato a seconda delle scelte dell'utente
     try:
-        dataframe_test = pd.read_csv(uploaded_file_test, engine = 'python')
+        dataframe_test = pd.read_csv(uploaded_file_test, delimiter = ';')
+        if len(dataframe_test.columns) == 1 :
+            dataframe_test = pd.read_csv(uploaded_file_test, delimiter = ',')
     except Exception as e:
         st.error(f"Error: {e}")
     
