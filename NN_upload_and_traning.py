@@ -31,20 +31,12 @@ def read_csv_file(file_path):
         if df.shape[1] > 1:
             return df
         else:
-            raise pd.errors.ParserError("Number of columns is 1")
+            df = pd.read_csv(file_path, delimiter=';')
+            return df
 
     except (pd.errors.ParserError, pd.errors.EmptyDataError):
-        try:
-            # If reading with comma fails, try reading with semicolon as delimiter
-            df = pd.read_csv(file_path, delimiter=';')
-            if df.shape[1] > 1:
-                return df
-            else:
-                raise pd.errors.ParserError("Number of columns is 1")
-
-        except (pd.errors.ParserError, pd.errors.EmptyDataError) as e:
-            print(f"Error reading CSV file: {e}")
-            return None
+        print(f"Error reading CSV file: {e}")
+        return None
 
 
 ##################################################################################################################################################################################################################
