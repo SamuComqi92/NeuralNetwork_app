@@ -65,7 +65,6 @@ if uploaded_file is not None:
     st.text("")
     st.write("### Select Target, Categorical, and Numerical features")
     dataframe, Tar, Categ, Numer = Function_Feature_selection.Feature_selection(dataframe)
-    st.write(len(Categ))
 
     ##############################################################################################################################################################################################################
     # Gestione dei valori mancanti nelle colonne categoriche e categoriche, e infine i valori mancanti nella colonna Target (che vengono eliminati)
@@ -87,7 +86,7 @@ if uploaded_file is not None:
     # Conversione dei valori categorici in valori numerici
     # Viene data la possibilità di convertire i valori in due modi diversi
     # Check dello step, della presenza di colonne categoriche e dell'assenza di valori mancanti (altrimenti, lo script si interrompe)
-    if step_further == 3 and Categ.count("None") == 0 and dataframe.isna().sum().sum() == 0 :
+    if step_further == 3 and len(Categ) != 0 and dataframe.isna().sum().sum() == 0 :
         dataframe, Tra_categ_list, step_further = Function_Categoric_to_numeric.Categoric_to_numeric(dataframe, Categ, step_further)
     else :
         Tra_categ = []
