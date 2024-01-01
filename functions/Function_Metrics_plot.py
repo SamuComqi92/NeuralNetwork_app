@@ -22,8 +22,8 @@ def Metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list) :
         res_tr = Model.metric_tr
         res_te = Model.metric_te
     elif Task == "Regression" and Norm_tar_list[3] == 20:
-        res_tr = np.sqrt( ((Norm_tar_list[2].inverse_transform(Model.Predict(X_train)) -  Norm_tar_list[2].inverse_transform(y_train))**2).sum()/len(y_train)  )
-        res_te = np.sqrt( ((Norm_tar_list[2].inverse_transform(Model.Predict(X_test)) -  Norm_tar_list[2].inverse_transform(y_test))**2).sum()/len(y_test) )
+        res_tr = np.sqrt( ((Norm_tar_list[1].inverse_transform(Model.Predict(X_train)) -  Norm_tar_list[1].inverse_transform(y_train))**2).sum()/len(y_train)  )
+        res_te = np.sqrt( ((Norm_tar_list[1].inverse_transform(Model.Predict(X_test)) -  Norm_tar_list[1].inverse_transform(y_test))**2).sum()/len(y_test) )
         st.write('Training real RMSE: {:.5f} -- Validation real RMSE: {:.5f}'.format(res_tr, res_te))
     elif Task == "Regression" and Norm_tar_list[3] == 10:
         res_tr = np.sqrt( (( 10**Model.Predict(X_train) -  10**(y_train))**2).sum()/len(y_train)  )
@@ -46,9 +46,9 @@ def Metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list) :
     #st.pyplot(fig)
     if Task == "Regression" :
         if Norm_tar_list[3] == 20 :
-            ax2.plot(Norm_tar_list[2].inverse_transform(Model.Predict(X_test)), Norm_tar_list[2].inverse_transform(y_test), 'ob')
-            rangg = np.arange(Norm_tar_list[2].inverse_transform(Model.Predict(X_test)).min(), Norm_tar_list[2].inverse_transform(Model.Predict(X_test)).max())
-            ax3.hist(Norm_tar_list[2].inverse_transform(Model.Predict(X_test)) - Norm_tar_list[2].inverse_transform(y_test), bins = 20, color = 'blue', alpha = 0.7)
+            ax2.plot(Norm_tar_list[1].inverse_transform(Model.Predict(X_test)), Norm_tar_list[1].inverse_transform(y_test), 'ob')
+            rangg = np.arange(Norm_tar_list[1].inverse_transform(Model.Predict(X_test)).min(), Norm_tar_list[1].inverse_transform(Model.Predict(X_test)).max())
+            ax3.hist(Norm_tar_list[1].inverse_transform(Model.Predict(X_test)) - Norm_tar_list[1].inverse_transform(y_test), bins = 20, color = 'blue', alpha = 0.7)
         elif Norm_tar_list[3] == 10 :
             ax2.plot( 10**Model.Predict(X_test)+1, 10**(y_test)+1, 'ob')
             rangg = np.arange( (10**Model.Predict(X_test) +1 ).min(), (10**Model.Predict(X_test)).max())
