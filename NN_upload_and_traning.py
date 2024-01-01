@@ -56,7 +56,7 @@ if uploaded_file is not None:
     
     # Salvo il file caricato in un dataframe
     # Quest'ultimo verrà modificato a seconda delle scelte dell'utente
-    dataframe = read_csv_file(uploaded_file)#pd.read_csv(uploaded_file, engine = 'python')
+    dataframe = read_file(uploaded_file)#pd.read_csv(uploaded_file, engine = 'python')
 
     if st.checkbox('Show dataframe', key=50):                
         st.write(dataframe)
