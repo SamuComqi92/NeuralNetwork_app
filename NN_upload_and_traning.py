@@ -25,10 +25,8 @@ from functions import Function_Model_Finalization, Function_Pipeline
 
 
 def read_csv_file(file_path):
-    if pd.read_csv(file_path, delimiter=',').columns == 1 :
-        return pd.read_csv(file_path, delimiter=',')
-    else :
-        return pd.read_csv(file_path, delimiter=';')
+    return pd.read_csv(file_path, delimiter=',')
+    #return pd.read_csv(file_path, delimiter=';')
 
 ##################################################################################################################################################################################################################
 ##################################################################################################################################################################################################################
