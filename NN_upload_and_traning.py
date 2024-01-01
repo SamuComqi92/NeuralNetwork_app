@@ -39,7 +39,7 @@ if uploaded_file is not None:
 
     # Messaggio di caricamento            
     st.write("File successfully uploaded!")
-    dataframe = pd.read_csv(st.session_state["uploaded_file"], delimiter=';')
+    dataframe = pd.read_csv(uploaded_file, delimiter=';')
     if st.checkbox('Show dataframe', key=50):                
         st.write(dataframe)
 
