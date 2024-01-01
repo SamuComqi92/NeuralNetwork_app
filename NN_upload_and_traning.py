@@ -24,19 +24,13 @@ from functions import Function_Model_Finalization, Function_Pipeline
 
 
 
-def read_csv_file_a(file_path):
+def read_csv_file(file_path):
     a = pd.read_csv(file_path, delimiter=',')
-    return a
-
-def read_csv_file_b(file_path):
     b = pd.read_csv(file_path, delimiter=';')
-    return b
-
-def read_file(file_path) :
-    if len( read_csv_file_a(file_path).columns ) == 1 :
-        return read_csv_file_b
+    if len( a.columns ) == 1 :
+        return b
     else :
-        return read_csv_file_a
+        return a
 
 ##################################################################################################################################################################################################################
 ##################################################################################################################################################################################################################
@@ -59,7 +53,7 @@ if uploaded_file is not None:
     
     # Salvo il file caricato in un dataframe
     # Quest'ultimo verrà modificato a seconda delle scelte dell'utente
-    dataframe = read_file(uploaded_file)#pd.read_csv(uploaded_file, engine = 'python')
+    dataframe = read_csv_file(st.session_state["uploaded_file"])#pd.read_csv(uploaded_file, engine = 'python')
 
     if st.checkbox('Show dataframe', key=50):                
         st.write(dataframe)
