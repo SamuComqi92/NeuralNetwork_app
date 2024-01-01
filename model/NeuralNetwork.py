@@ -296,14 +296,13 @@ class NeuralNet :
                 raise ValueError("Misspelled or inappropriate metric for %s" % self.task)
         else :
             if self.metric == "RMSE" :
-                Metricc = np.sqrt(((anodes[-1] - yy)**2).sum()/len(yy))
+                Metricc = np.sqrt(((anodes[-1].T - yy)**2).sum()/len(yy))
             elif self.metric == "MAE" :
-                Metricc = (abs(anodes[-1] - yy)).sum()/len(yy)
+                Metricc = (abs(anodes[-1].T - yy)).sum()/len(yy)
             elif self.metric == "MPE" :
-                Metricc = 100*( abs((anodes[-1] - yy)/yy) ).sum()/len(yy)
+                Metricc = 100*( abs((anodes[-1].T - yy)/yy) ).sum()/len(yy)
             elif self.metric == "R2" :
-                st.write(yy, anodes[-1].T, anodes[-1].T-yy)
-                Metricc = r2_score(yy, anodes[-1] )
+                Metricc = r2_score(yy, anodes[-1].T )
             else :
                 raise ValueError("Misspelled or inappropriate metric for %s" % self.task)
 
