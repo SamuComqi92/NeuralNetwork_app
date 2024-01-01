@@ -35,7 +35,7 @@ def read_csv_file(file_path):
             return df
 
     except (pd.errors.ParserError, pd.errors.EmptyDataError):
-        st.write(f"Error reading CSV file: {e}")
+        st.write(f"Error reading CSV file...")
         return None
 
 
