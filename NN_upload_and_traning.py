@@ -24,13 +24,19 @@ from functions import Function_Model_Finalization, Function_Pipeline
 
 
 
-def read_csv_file(file_path):
+def read_csv_file_a(file_path):
     a = pd.read_csv(file_path, delimiter=',')
+    return a
+
+def read_csv_file_b(file_path):
     b = pd.read_csv(file_path, delimiter=';')
-    if len(a.columns) == 1 :
-        return b
+    return b
+
+def read_file(file_path) :
+    if len( read_csv_file_a.columns ) == 1 :
+        return read_csv_file_b
     else :
-        return a
+        return read_csv_file_a
 
 ##################################################################################################################################################################################################################
 ##################################################################################################################################################################################################################
