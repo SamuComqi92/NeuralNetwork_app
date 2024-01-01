@@ -25,8 +25,12 @@ from functions import Function_Model_Finalization, Function_Pipeline
 
 
 def read_csv_file(file_path):
-    #return pd.read_csv(file_path, delimiter=',')
-    return pd.read_csv(file_path, delimiter=';')
+    a = pd.read_csv(file_path, delimiter=',')
+    b = pd.read_csv(file_path, delimiter=';')
+    if len(a.columns) == 1 :
+        return b
+    else :
+        return a
 
 ##################################################################################################################################################################################################################
 ##################################################################################################################################################################################################################
