@@ -65,7 +65,7 @@ if uploaded_file is not None:
     st.text("")
     st.write("### Select Target, Categorical, and Numerical features")
     dataframe, Tar, Categ, Numer = Function_Feature_selection.Feature_selection(dataframe)
-   
+    st.write(Categ)
 
     ##############################################################################################################################################################################################################
     # Gestione dei valori mancanti nelle colonne categoriche e categoriche, e infine i valori mancanti nella colonna Target (che vengono eliminati)
