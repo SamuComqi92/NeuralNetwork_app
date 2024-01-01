@@ -79,7 +79,7 @@ def Model_Finalization(X, y, Model, Task, Final_metric, Tra_num, Norm_tar_list, 
     # MinMax
     if Task == "Regression" and Norm_tar_list[3] == 20:
         res_tr_final = np.sqrt( ((target_minmax_y.inverse_transform(Model.Predict(XX_train)) -  target_minmax_y.inverse_transform(yy_train))**2).sum()/len(yy_train) )
-        st.write('Real {}: {:.5f} ({:.5f})'.format(Final_metric, res_tr_final))
+        st.write('Real {}: {:.5f}'.format(Final_metric, res_tr_final))
         st.write("Previous {}: {:.5f}".format(Final_metric, st.session_state.res_tr))
     # Log(x+1)
     elif Task == "Regression" and Norm_tar_list[3] == 10:
