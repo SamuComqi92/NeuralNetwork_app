@@ -33,7 +33,7 @@ def read_csv_file_b(file_path):
     return b
 
 def read_file(file_path) :
-    if len( read_csv_file_a.columns ) == 1 :
+    if len( read_csv_file_a(file_path).columns ) == 1 :
         return read_csv_file_b
     else :
         return read_csv_file_a
