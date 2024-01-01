@@ -22,6 +22,24 @@ from functions import Function_Train_Test_Split, Function_Standard_X_train, Func
 # Finalizzazione e Pipeline
 from functions import Function_Model_Finalization, Function_Pipeline
 
+
+
+def read_csv_file(uploaded_file):
+    try:
+        # Try reading with comma as delimiter
+        df = pd.read_csv(uploaded_file, delimiter=',')
+        return df
+    except pd.errors.ParserError:
+        try:
+            # If reading with comma fails, try reading with semicolon as delimiter
+            df = pd.read_csv(uploaded_file, delimiter=';')
+            return df
+        except pd.errors.ParserError as e:
+            print(f"Error reading CSV file: {e}")
+            return None
+
+
+
 ##################################################################################################################################################################################################################
 ##################################################################################################################################################################################################################
 
@@ -40,7 +58,7 @@ if uploaded_file is not None:
     
     # Salvo il file caricato in un dataframe
     # Quest'ultimo verrà modificato a seconda delle scelte dell'utente
-    dataframe = pd.read_csv(uploaded_file, engine = 'python')
+    dataframe = read_csv_file(uploaded_file)#pd.read_csv(uploaded_file, engine = 'python')
 
     if st.checkbox('Show dataframe', key=50):                
         st.write(dataframe)
