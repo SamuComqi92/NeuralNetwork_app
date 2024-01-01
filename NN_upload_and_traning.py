@@ -32,26 +32,14 @@ st.write("# Predictions with Neural Networks")
 
 # Pulsante per upload dati (file CSV)
 st.write("### Upload Data")
-uploaded_file = st.file_uploader("Choose a CSV file for the analysis")
+uploaded_file = st.file_uploader("Choose a CSV file for the analysis (Important: the delimiter must be ;)")
 
 # Check se il file è stato caricato o meno - Tutto lo script si basa sul caricamento o meno di un file
 if uploaded_file is not None:   
 
     # Messaggio di caricamento            
     st.write("File successfully uploaded!")
-
-    # Salvo in sessione
-    st.session_state["uploaded_file"] = uploaded_file
-    a = pd.read_csv(st.session_state["uploaded_file"], delimiter=',')
-    b = pd.read_csv(st.session_state["uploaded_file"], delimiter=';')
-    if len( a.columns ) == 1 :
-        dataframe = b
-    else :
-        dataframe = a
-    # Salvo il file caricato in un dataframe
-    # Quest'ultimo verrà modificato a seconda delle scelte dell'utente
-    #dataframe = read_csv_file(st.session_state["uploaded_file"])#pd.read_csv(uploaded_file, engine = 'python')
-
+    dataframe = pd.read_csv(st.session_state["uploaded_file"], delimiter=';')
     if st.checkbox('Show dataframe', key=50):                
         st.write(dataframe)
 
