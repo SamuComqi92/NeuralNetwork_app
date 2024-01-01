@@ -135,6 +135,7 @@ if uploaded_file is not None:
             Model.Training(X_train, y_train, X_test, y_test)
             st.write('Training complete!')
 
+            st.write(Norm_tar_list)
             # Calcolo metriche finali (per Regressione) e plot
             Function_Metrics_plot.Metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list)
 
