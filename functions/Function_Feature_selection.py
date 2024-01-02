@@ -31,14 +31,9 @@ def Feature_selection(dataframe) :
     elif "None" in Numer :
         pass
 
-    # Conversione delle colonne numeriche
+    # Conversione delle colonne numeriche e Target
     # Può capitare che dopo la lettura di un file CSV, i dati numerici (con decimali) non siano convertiti in modo corretto
-    for i in Numer :
-        dataframe[i] = dataframe[i].astype(str).str.replace(',', '.').astype(float)
-        dataframe[i].apply(pd.to_numeric)
-
-    # Conversione valori nella colonna target
-    for i in Tar :
+    for i in Numer+Tar :
         dataframe[i] = dataframe[i].astype(str).str.replace(',', '.').astype(float)
         dataframe[i].apply(pd.to_numeric)
 
