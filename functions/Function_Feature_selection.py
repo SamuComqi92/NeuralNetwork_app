@@ -38,4 +38,9 @@ def Feature_selection(dataframe) :
         dataframe[i] = dataframe[i].astype(str).str.replace(',', '.').astype(float)
         dataframe[i].apply(pd.to_numeric)
 
+    # Conversione valori nella colonna target
+    for i in Tar :
+        dataframe[i] = dataframe[i].astype(str).str.replace(',', '.').astype(float)
+        dataframe[i].apply(pd.to_numeric)
+
     return dataframe, Tar, Categ, Numer
