@@ -2,14 +2,13 @@
 import pandas as pd
 import streamlit as st
 
-
 # Funzione per scegliere le feature categoriche, numeriche e target da usare
 def Feature_selection(dataframe) :
     """
     La funzione accetta come unico argomento il dataframe da controllare. La funzione converte anche in modo corretto le colonne numeriche
     La funzione restituisce il dataframe con valori numerici corretti, la colonna target, e le liste delle colonne categoriche e numeriche
     """
-    # Check per controllare se il dataframe non sia vuoto
+    # Check per controllare che il dataframe non sia vuoto + selezione della colonna target
     if dataframe.empty == False :
         Tar = st.multiselect('Select the target:', dataframe.columns, key = 100)
 
