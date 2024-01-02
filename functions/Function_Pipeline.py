@@ -38,6 +38,11 @@ def Pipeline_NN(uploaded_file_test, Selected_columns_start, Numer, Categ, Tar, S
     for i in Numer :
         dataframe_test[i] = dataframe_test[i].astype(str).str.replace(',', '.').astype(float)
         dataframe_test[i].apply(pd.to_numeric)
+
+    # Trasformazione della colonna Target
+    for i in Tar :
+        dataframe_test[i] = dataframe_test[i].astype(str).str.replace(',', '.').astype(float)
+        dataframe_test[i].apply(pd.to_numeric)
         
     # Missing numerical features
     if Sub_num_list[0] == '' :
