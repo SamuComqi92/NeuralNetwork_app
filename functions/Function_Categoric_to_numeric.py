@@ -17,7 +17,6 @@ def Categoric_to_numeric(dataframe, Categ, step_further) :
     - step_further: step di avanzamento
     """
     # Check dello step, della presenza di colonne categoriche e dell'assenza di valori mancanti (altrimenti, lo script si interrompe)
-    #if step_further == 3 and Categ.count("None") == 0 and dataframe.isna().sum().sum() == 0 :
     st.text("")
     st.text("")
     st.text("")
@@ -30,11 +29,9 @@ def Categoric_to_numeric(dataframe, Categ, step_further) :
     # Gestione delle varie scelte
     if Tra_categ == '' :
         jobs_encoder = None
-        step_further = 4
         pass
     elif Tra_categ == 'OneHotEncoder':
         jobs_encoder = LabelBinarizer()
-        step_further = 4
         for i in Categ :
             columns = np.unique(dataframe[i].astype(str))
             m = 0
@@ -46,15 +43,18 @@ def Categoric_to_numeric(dataframe, Categ, step_further) :
 
     elif Tra_categ == 'String to numbers':
         jobs_encoder = None
-        step_further = 4
         for i in Categ :
             dataframe[i].replace(np.unique(dataframe[i]),np.arange(0,len(np.unique(dataframe[i]))),inplace = True)
 
+    # Aggiornamento dello step
+    step_further = 4
+
+    # Possibilità di visualizzare il dataframe
     if Tra_categ != '':
         if st.checkbox('Show dataframe', key = 530):                
             st.write(dataframe)
 
-    # Creo lista per l'applicazione della pipline finale
+    # Creazione lista per l'applicazione della pipeline finale
     Tra_categ_list = [Tra_categ, jobs_encoder]
 
     return dataframe, Tra_categ_list, step_further
