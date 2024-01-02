@@ -79,13 +79,13 @@ def Model_Finalization(X, y, Model, Task, Final_metric, Tra_num, Norm_tar_list, 
     # MinMax
     if Task == "Regression" and Norm_tar_list[3] == 20:
         res_tr_final = np.sqrt( ((target_minmax_y.inverse_transform(Model.Predict(XX_train)) -  target_minmax_y.inverse_transform(yy_train))**2).sum()/len(yy_train) )
-        st.write('Real RMSE: {:.5f}'.format(Final_metric, res_tr_final))
-        st.write("Previous RMSE: {:.5f}".format(Final_metric, st.session_state.res_tr))
+        st.write('Real RMSE: {:.5f}'.format(res_tr_final))
+        st.write("Previous RMSE: {:.5f}".format(st.session_state.res_tr))
     # Log(x+1)
     elif Task == "Regression" and Norm_tar_list[3] == 10:
         res_tr_final = np.sqrt( (( 10**Model.Predict(XX_train) -  10**(yy_train) )**2).sum()/len(yy_train) )
-        st.write('Real RMSE: {:.5f}'.format(Final_metric, res_tr_final))
-        st.write("Previous RMSE: {:.5f}".format(Final_metric, st.session_state.res_tr))
+        st.write('Real RMSE: {:.5f}'.format(res_tr_final))
+        st.write("Previous RMSE: {:.5f}".format(st.session_state.res_tr))
     # Nessuna trasformazione
     else :
         st.write("Final {}: {:.5f}".format(Final_metric, Model.metric_te))
