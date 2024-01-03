@@ -12,7 +12,7 @@ from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
 from sklearn.metrics import precision_score,recall_score,f1_score, accuracy_score, confusion_matrix, r2_score, precision_recall_curve, roc_auc_score, roc_curve
 
 # Importo i moduli custom presenti nella cartella "Functions" e il modello di rete neurale nella cartella "Model"
-# In alternativa, lasciarli nella stessa cartella di questo file .py e chiamarli con from name_module import *
+# In alternativa, lasciarli nella stessa cartella di questo file .py e chiamarli con from name_module import * 
 # Modello Neural Network
 from model import NeuralNetwork
 # Pulizia e trasformazione dataset
