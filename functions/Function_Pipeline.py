@@ -82,12 +82,11 @@ def Pipeline_NN(uploaded_file_test, Selected_columns_start, Numer, Categ, Tar, S
     elif Tra_categ_list[0] == 'String to numbers':
         for i in Categ :
             dataframe_test[i].replace(np.unique(dataframe_orig[i]),np.arange(0,len(np.unique(dataframe_orig[i]))),inplace=True)
-        
+        st.write(dataframe_test)
     # Creation of X (attributes) and y (target)
     X_test_final = pd.DataFrame(dataframe_test.drop(Tar,axis=1), columns = dataframe_test.drop(Tar,axis=1).columns)
     y_test_final = np.array( dataframe_test[Tar] )
 
-    st.write(X_test_final)
     # Standardize the file
     if Tra_num_list[0] == '' :
         pass
