@@ -81,6 +81,7 @@ def pipeline_nn(uploaded_file_test, Selected_columns_start, Numer, Categ, Tar, S
             idx = idx + 1
 
     # Impostazione nome per le colonne del dataframe finale
+    st.write(dataframe_test.columns, dataframe_columns)
     dataframe_test.columns = dataframe_columns
                   
     # Creation of X (attributes) and y (target)
