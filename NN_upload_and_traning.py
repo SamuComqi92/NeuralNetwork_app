@@ -91,6 +91,9 @@ if uploaded_file is not None:
         step_further = 4
         Tra_categ_list = [Tra_categ, jobs_encoder, list_imputation_dict]
 
+    # Salvo in sessione il nome delle colonne del dataframe dopo tutte le trasformazioni
+    st.session_state["Final_columns"] = dataframe.columns
+    
     ##############################################################################################################################################################################################################
     # Creazione dei set di Training e Validation per la valutazione del modello
     # Check iniziale per mostrare la sezione
