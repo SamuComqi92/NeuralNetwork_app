@@ -45,8 +45,8 @@ def train_test_customsplit(dataframe, target, step_further) :
     st.write("Number of data in the Test set: %d" % len(X_test))
 
     # Conversione dei due array in dataframe Pandas
-    X_train = pd.DataFrame(X_train, columns = dataframe.drop(Tar,axis=1).drop(["index"], axis = 1).columns)
-    X_test = pd.DataFrame(X_test, columns = dataframe.drop(Tar,axis=1).drop(["index"], axis = 1).columns)
+    X_train = pd.DataFrame(X_train, columns = dataframe.drop(target,axis=1).drop(["index"], axis = 1).columns)
+    X_test = pd.DataFrame(X_test, columns = dataframe.drop(target,axis=1).drop(["index"], axis = 1).columns)
     step_further = 5
 
     return X, y, X_train, X_test, y_train, y_test, step_further
