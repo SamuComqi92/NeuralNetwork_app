@@ -30,24 +30,31 @@ def standardize_X_train(dataframe, X_train, X_test, step_further) :
     flag_stand = 0
 
     # Menu dropdown per la scelta del motodo da utilizzare
-    Tra_num = st.selectbox( 'How would you like to normalize data?', ['','MinMaxScaler','StandardScaler','Do not normalize'] )
+    type_transformation = st.selectbox( 'How would you like to normalize data?', ['','MinMaxScaler','StandardScaler','Do not normalize'] )
 
     # Gestione dei vari casi
-    if Tra_num == '' :                                        # L'app non va avanti se non viene selezionato un valore (grazie a step_further non aggiornaot)
+    if type_transformation == '' :                                  # L'app non va avanti se non viene selezionato un valore (grazie a step_further non aggiornaot)
         pass
-    elif Tra_num == 'MinMaxScaler':
-        Set_scaler = MinMaxScaler()
-        Set_scaler.fit(X_train)
-        X_train = pd.DataFrame(Set_scaler.transform(X_train), columns = X_train.columns)
-        X_test = pd.DataFrame(Set_scaler.transform(X_test), columns = X_test.columns)
-        flag_stand, step_further = 1, 6
-    elif Tra_num == 'StandardScaler':
-        Set_scaler = StandardScaler()
-        Set_scaler.fit(X_train)
-        X_train = pd.DataFrame(Set_scaler.transform(X_train), columns = X_train.columns)
-        X_test = pd.DataFrame(Set_scaler.transform(X_test), columns = X_test.columns)
-        flag_stand, step_further = 2, 6
-    elif Tra_num == 'Do not normalize':
-        flag_stand, step_further = 3, 6
+    else :
+        if type_transformation == 'MinMaxScaler':
+            Set_scaler = MinMaxScaler()
+            #Set_scaler.fit(X_train)
+            #X_train = pd.DataFrame(Set_scaler.transform(X_train), columns = X_train.columns)
+            #X_test = pd.DataFrame(Set_scaler.transform(X_test), columns = X_test.columns)
+            flag_stand, step_further = 1, 6
+        elif type_transformation == 'StandardScaler':
+            Set_scaler = StandardScaler()
+            #Set_scaler.fit(X_train)
+            #X_train = pd.DataFrame(Set_scaler.transform(X_train), columns = X_train.columns)
+            #X_test = pd.DataFrame(Set_scaler.transform(X_test), columns = X_test.columns)
+            flag_stand, step_further = 2, 6
+        elif type_transformation == 'Do not normalize':
+            flag_stand, step_further = 3, 6
+
+        # Fit e trasformazione
+        if type_transformation != 'Do not normalize':
+            set_scaler.fit(X_train)
+            X_train = pd.DataFrame(set_scaler.transform(X_train), columns = X_train.columns)
+            X_test = pd.DataFrame(set_scaler.transform(X_test), columns = X_test.columns)
 
     return X_train, X_test, Tra_num, step_further, flag_stand
