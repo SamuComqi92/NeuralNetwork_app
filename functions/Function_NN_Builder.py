@@ -99,7 +99,7 @@ def NN_Builder(dataframe) :
         if Task == 'Classification' :
             Metrics_final = ["Accuracy", "Precision", "Recall", "F1 score", "AUC"]
         else :
-            Metrics_final = ["RMSE", "MAE", "MPE", "R2"]
+            Metrics_final = ["RMSE", "MAE", "MAPE", "R2"]
         Final_metric = st.selectbox(
             'Choose the Evaluation metric (the metric will be used to evaluate the training and the validation sets)',
             Metrics_final)
