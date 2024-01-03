@@ -52,6 +52,6 @@ def target_transformation(dataframe, target, y_train, y_test, step_further) :
             flag_norm, flag_transf, step_further = 3, 20, 7
     
     # Creo lista per l'applicazione finale della pipeline
-    Norm_tar_list = [flag_transformation, target_minmax, flag_norm, flag_transf]
+    List_normalization = [flag_transformation, target_minmax, flag_norm, flag_transf]
 
-    return y_train, y_test, Norm_tar_list, step_further
+    return y_train, y_test, List_normalization, step_further
