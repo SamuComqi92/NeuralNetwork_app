@@ -80,7 +80,6 @@ if uploaded_file is not None:
     ##############################################################################################################################################################################################################
     # Conversione dei valori categorici in valori numerici
     # Viene data la possibilità di convertire i valori in due modi diversi
-    
     st.text("")
     st.text("")
     st.text("")
