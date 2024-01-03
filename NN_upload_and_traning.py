@@ -86,9 +86,10 @@ if uploaded_file is not None:
         dataframe, Tra_categ_list, step_further = Function_Categoric_to_numeric.Categoric_to_numeric(dataframe, Categ, step_further)
     else :
         Tra_categ = []
+        list_imputation_dict = []
         jobs_encoder = None
         step_further = 4
-        Tra_categ_list = [Tra_categ, jobs_encoder]
+        Tra_categ_list = [Tra_categ, jobs_encoder, list_imputation_dict]
 
     ##############################################################################################################################################################################################################
     # Creazione dei set di Training e Validation per la valutazione del modello
