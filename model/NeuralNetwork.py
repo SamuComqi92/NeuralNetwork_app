@@ -10,7 +10,7 @@ from itertools import product
 from scipy.special import softmax
 from sklearn.preprocessing import MinMaxScaler, StandardScaler, LabelBinarizer, OneHotEncoder
 from sklearn.metrics import precision_score, recall_score, f1_score, accuracy_score, confusion_matrix, precision_recall_curve, roc_auc_score, roc_curve
-from sklearn.metrics import mean_squared_error, mean_absolute_error, mean_absolute_percentage_error, r2_score
+from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 
 ##################################################################################################################################################################################################################
 
@@ -298,19 +298,10 @@ class NeuralNet :
             else :
                 raise ValueError("Misspelled or inappropriate metric for %s" % self.task)
         else :
-             #rms = mean_squared_error(y_actual, y_predicted, squared=False)
-             #elif self.metric == "MAE" :       # metrics.mean_absolute_error(y_true, y_pred, *)    Mean absolute error regression loss.
-             #elif self.metric == "MAPE" :      # metrics.mean_absolute_percentage_error(...)
-             #elif self.metric == "R2" :        # metrics.r2_score(y_true, y_pred, *[, ...])
             if self.metric == "RMSE" :
-                Metricc = mean_squared_error(yy, anodes[-1].T, squared=False)
-                #Metricc = np.sqrt(((anodes[-1].T - yy)**2).sum()/len(yy))
+                Metricc = mean_squared_error(yy, anodes[-1].T, squared = False)
             elif self.metric == "MAE" :
                 Metricc = mean_absolute_error(yy, anodes[-1].T)
-                #Metricc = (abs(anodes[-1].T - yy)).sum()/len(yy)
-            elif self.metric == "MAPE" :
-                #Metricc = mean_absolute_percentage_error(yy, anodes[-1].T)
-                Metricc = 100*( abs((anodes[-1].T - yy)/yy) ).sum()/len(yy)
             elif self.metric == "R2" :
                 Metricc = r2_score(yy, anodes[-1].T )
             else :
@@ -410,27 +401,10 @@ class NeuralNet :
             else :
                 raise ValueError("Misspelled or inappropriate metric for %s" % self.task)
         else :
-            #if self.metric == "RMSE" :
-            #    Metricc = mean_squared_error(yy, anodes[-1].T, squared=False)
-                #Metricc = np.sqrt(((anodes[-1].T - yy)**2).sum()/len(yy))
-            #elif self.metric == "MAE" :
-            #    Metricc = mean_absolute_error(yy, anodes[-1].T)
-                #Metricc = (abs(anodes[-1].T - yy)).sum()/len(yy)
-            #elif self.metric == "MAPE" :
-            #    Metricc = mean_absolute_percentage_error(yy, anodes[-1].T)
-                #Metricc = 100*( abs((anodes[-1].T - yy)/yy) ).sum()/len(yy)
-            #elif self.metric == "R2" :
-            #    Metricc = r2_score(yy, anodes[-1].T )
-                
             if metric == "RMSE" :
                 return mean_squared_error(np.array(y).reshape(len(y),1), self.Predict(X))
-                #return np.sqrt(((self.Predict(X) - np.array(y).reshape(len(y),1))**2).sum()/len(y))
             elif metric == "MAE" :
                 return mean_absolute_error(np.array(y).reshape(len(y),1), self.Predict(X))
-                #return (abs(self.Predict(X) - np.array(y).reshape(len(y),1))).sum()/len(y)
-            elif metric == "MAPE" :
-                #return mean_absolute_percentage_error(np.array(y).reshape(len(y),1), self.Predict(X))
-                return 100*( abs((self.Predict(X) - np.array(y).reshape(len(y),1))/np.array(y).reshape(len(y),1)) ).sum()/len(y)
             elif metric == "R2" :
                 return r2_score(y, self.Predict(X) )
             else :
