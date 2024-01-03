@@ -105,7 +105,7 @@ if uploaded_file is not None:
     ##############################################################################################################################################################################################################
     # Trasformazione della colonna Target
     if step_further == 6 :
-        y_train, y_test, Norm_tar_list, step_further = Function_Target_transformation.Target_transformation(dataframe, Tar, y_train, y_test, step_further)
+        y_train, y_test, Norm_tar_list, step_further = Function_Target_transformation.target_transformation(dataframe, Tar, y_train, y_test, step_further)
 
         # Checkbox per mostrare i meno il target
         if st.checkbox('Show Target (training set)', key = 61):                
