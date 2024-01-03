@@ -309,8 +309,8 @@ class NeuralNet :
                 Metricc = mean_absolute_error(yy, anodes[-1].T)
                 #Metricc = (abs(anodes[-1].T - yy)).sum()/len(yy)
             elif self.metric == "MAPE" :
-                Metricc = mean_absolute_percentage_error(yy, anodes[-1].T)
-                #Metricc = 100*( abs((anodes[-1].T - yy)/yy) ).sum()/len(yy)
+                #Metricc = mean_absolute_percentage_error(yy, anodes[-1].T)
+                Metricc = 100*( abs((anodes[-1].T - yy)/yy) ).sum()/len(yy)
             elif self.metric == "R2" :
                 Metricc = r2_score(yy, anodes[-1].T )
             else :
@@ -429,8 +429,8 @@ class NeuralNet :
                 return mean_absolute_error(np.array(y).reshape(len(y),1), self.Predict(X))
                 #return (abs(self.Predict(X) - np.array(y).reshape(len(y),1))).sum()/len(y)
             elif metric == "MAPE" :
-                return mean_absolute_percentage_error(np.array(y).reshape(len(y),1), self.Predict(X))
-                #return 100*( abs((self.Predict(X) - np.array(y).reshape(len(y),1))/np.array(y).reshape(len(y),1)) ).sum()/len(y)
+                #return mean_absolute_percentage_error(np.array(y).reshape(len(y),1), self.Predict(X))
+                return 100*( abs((self.Predict(X) - np.array(y).reshape(len(y),1))/np.array(y).reshape(len(y),1)) ).sum()/len(y)
             elif metric == "R2" :
                 return r2_score(y, self.Predict(X) )
             else :
