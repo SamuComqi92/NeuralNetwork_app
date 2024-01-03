@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from sklearn.preprocessing import MinMaxScaler, StandardScaler, LabelBinarizer, OneHotEncoder
 
 # La funzione calcola le metriche finali del modello dopo il training e crea dei plot
-def Metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list) :
+def Metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, Final_metric) :
     """
     La funzione accetta i seguenti argomenti:
     - Model: modello di rete neurale (dopo il traning)
@@ -13,6 +13,7 @@ def Metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list) :
     - y_train, y_test: colonna target per training e validation
     - Task: task dell'analisi
     - Norm_tar_list: metodo di normalizzazione della colonna target
+    - Final_metric: metrica di valutazione scelta dall'utente
     La funzione restituisce:
     - Plot Learning curve, sia per regressione che per classificazione
     - Plot y_real vs. y_predicted (solo per regressione)
@@ -22,6 +23,7 @@ def Metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list) :
         res_tr = Model.metric_tr
         res_te = Model.metric_te
     elif Task == "Regression" and Norm_tar_list[3] == 20:
+        # E' necessario trasformare la colonna target per il calcolo delle metriche reali
         res_tr = np.sqrt( ((Norm_tar_list[1].inverse_transform(Model.Predict(X_train)) -  Norm_tar_list[1].inverse_transform(y_train))**2).sum()/len(y_train)  )
         res_te = np.sqrt( ((Norm_tar_list[1].inverse_transform(Model.Predict(X_test)) -  Norm_tar_list[1].inverse_transform(y_test))**2).sum()/len(y_test) )
         st.write('Training real RMSE: {:.5f} -- Validation real RMSE: {:.5f}'.format(res_tr, res_te))
