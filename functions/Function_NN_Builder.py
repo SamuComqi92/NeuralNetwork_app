@@ -20,7 +20,7 @@ def NN_Builder(dataframe) :
     left_column, right_column = st.columns(2)            # Nella parte principale, crea due colonne dove posso sistemare testi e bottoni
     with left_column:                                    # Qui scelgo di scrivere cose solo nela parte destra
         Task = st.selectbox(
-            '\nTask of the analysis',
+            '\\nTask of the analysis',
             ['','Classification','Regression'])
 
         st.text("")
