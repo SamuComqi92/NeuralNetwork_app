@@ -5,22 +5,17 @@ import streamlit as st
 from sklearn.preprocessing import LabelBinarizer
 
 # La funzione converte i valori categorici in valori numerici (per l'applicazione del modello di Machine Learning) in base al metodo scelto dall'utente
-def Categoric_to_numeric(dataframe, Categ, step_further) :
+def Categoric_to_numeric(dataframe, categorical_features, step_further) :
     """
     La funzione accetta i seguenti argomenti:
     - dataframe: da controllare
-    - Categ: lista di colonne categoriche scelte dall'utente
+    - categorical_features: lista di colonne categoriche scelte dall'utente
     - step_further: flag di avanzamento
     La funzione restituisce i seguenti risultati:
     - dataframe modificato
     - Tra_categ_list: lista con informazioni relative al metodo utilizzato
     - step_further: step di avanzamento
     """
-    # Check dello step, della presenza di colonne categoriche e dell'assenza di valori mancanti (altrimenti, lo script si interrompe)
-    st.text("")
-    st.text("")
-    st.text("")
-    st.write("### Categorical features to numeric")
 
     # Menu dropdown per la scelta del metodo di conversione
     Tra_categ = st.selectbox(
@@ -32,7 +27,7 @@ def Categoric_to_numeric(dataframe, Categ, step_further) :
         pass
     elif Tra_categ == 'OneHotEncoder':
         jobs_encoder = LabelBinarizer()
-        for i in Categ :
+        for i in categorical_features :
             columns = np.unique(dataframe[i].astype(str))
             m = 0
             for j in columns :
@@ -43,7 +38,7 @@ def Categoric_to_numeric(dataframe, Categ, step_further) :
 
     elif Tra_categ == 'String to numbers':
         jobs_encoder = None
-        for i in Categ :
+        for i in categorical_features :
             dataframe[i].replace(np.unique(dataframe[i]),np.arange(0,len(np.unique(dataframe[i]))),inplace = True)
 
     # Aggiornamento dello step
