@@ -5,7 +5,7 @@ import streamlit as st
 from sklearn.model_selection import train_test_split
 
 # La funzione splitta il dataframe in Training e Test set, in base alla scelta dell'utente
-def Train_Test_Split(dataframe, Categ, Numer, Tar, step_further) :
+def train_test_customsplit(dataframe, Categ, Numer, Tar, step_further) :
     """
     La funzione accetta i seguenti argomenti
     - dataframe: dataframe da usare per lo split
