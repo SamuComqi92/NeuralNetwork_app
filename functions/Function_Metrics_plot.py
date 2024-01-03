@@ -64,4 +64,4 @@ def Metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list) :
 
     st.pyplot(fig)
 
-    return 0
+    return True
