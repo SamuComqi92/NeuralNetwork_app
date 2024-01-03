@@ -57,4 +57,4 @@ def standardize_X_train(dataframe, X_train, X_test, step_further) :
             X_train = pd.DataFrame(set_scaler.transform(X_train), columns = X_train.columns)
             X_test = pd.DataFrame(set_scaler.transform(X_test), columns = X_test.columns)
 
-    return X_train, X_test, Tra_num, step_further, flag_stand
+    return X_train, X_test, type_transformation, step_further, flag_stand
