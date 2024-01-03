@@ -19,16 +19,16 @@ def Metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, F
     - Plot y_real vs. y_predicted (solo per regressione)
     """
     # Calcolo delle metriche finali
-    if Task == "Classification" :
+    if Task == "Classification" or (Task == "Regressione" and Norm_tar_list[3] == 0) :        # Metriche calcolate direttamente dal modello
         res_tr = Model.metric_tr
         res_te = Model.metric_te
-    elif Task == "Regression" and Norm_tar_list[3] == 20:
-        # E' necessario trasformare la colonna target per il calcolo delle metriche reali
+    # Se la colonna target è stata trasformata, è necessario invertire la trasformazione per il calcolo delle metriche reali
+    elif Task == "Regression" and Norm_tar_list[3] == 20:                                    # MinMax
         res_tr = np.sqrt( ((Norm_tar_list[1].inverse_transform(Model.Predict(X_train)) -  Norm_tar_list[1].inverse_transform(y_train))**2).sum()/len(y_train)  )
         res_te = np.sqrt( ((Norm_tar_list[1].inverse_transform(Model.Predict(X_test)) -  Norm_tar_list[1].inverse_transform(y_test))**2).sum()/len(y_test) )
         st.write('Training real RMSE: {:.5f} -- Validation real RMSE: {:.5f}'.format(res_tr, res_te))
-    elif Task == "Regression" and Norm_tar_list[3] == 10:
-        res_tr = np.sqrt( (( 10**Model.Predict(X_train) -  10**(y_train))**2).sum()/len(y_train)  )
+    elif Task == "Regression" and Norm_tar_list[3] == 10:                                    # Log(x+1)
+        res_tr = np.sqrt( (( 10**Model.Predict(X_train) -  10**(y_train))**2).sum()/len(y_train)  )    
         res_te = np.sqrt( (( 10**Model.Predict(X_test) -  10**(y_test))**2).sum()/len(y_test) )
         st.write('Training real RMSE: {:.5f} -- Validation real RMSE: {:.5f}'.format(res_tr, res_te))
     
@@ -36,7 +36,8 @@ def Metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, F
     st.session_state["res_tr"]  = res_tr
     st.session_state["res_te"]  = res_te
 
-    # Plot delle Learning curves
+    # Creazione del plot finale
+    # Learning curves
     fig, (ax1,ax2,ax3) = plt.subplots(1, 3, figsize = (15, 4))
     ax1.plot(Model.cost_function_tr, '-b')
     ax1.plot(Model.cost_function_te,'-r')
