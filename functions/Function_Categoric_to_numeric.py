@@ -17,12 +17,17 @@ def Categoric_to_numeric(dataframe, categorical_features, step_further) :
     - step_further: step di avanzamento
     """
 
-    st.text("\n" * 3)
+    st.text("")
+    st.text("")
+    st.text("")
     st.write("### Categorical features to numeric")
 
     # Menu dropdown per la scelta del metodo di conversione
     menu_transformation = st.selectbox( 'How would you like to transform categorical features?', ['','OneHotEncoder','String to numbers'] )
 
+    # Inizializzo la lista di dizionari per il replacement (nel caso di "String to numbers")
+    list_imputation_dict = []
+    
     # Gestione delle varie scelte
     if menu_transformation == 'OneHotEncoder':
         jobs_encoder = LabelBinarizer()                        # Definizione oggetto encoder
@@ -41,6 +46,9 @@ def Categoric_to_numeric(dataframe, categorical_features, step_further) :
             pass
         elif menu_transformation == 'String to numbers':
             for i in categorical_features :
+                result_dict = dict(zip(np.unique(dataframe[i]), np.arange(0,len(np.unique(dataframe[i])))))
+                list_imputation_dict.append(result_dict)
+                st.write(result_dict)
                 dataframe[i].replace(np.unique(dataframe[i]), np.arange(0,len(np.unique(dataframe[i]))), inplace = True)
 
     # Aggiornamento dello step
