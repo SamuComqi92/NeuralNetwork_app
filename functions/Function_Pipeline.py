@@ -24,25 +24,20 @@ def Pipeline_NN(uploaded_file_test, Selected_columns_start, Numer, Categ, Tar, S
  
     # Salvo il file caricato in un dataframe
     # Quest'ultimo verrà modificato a seconda delle scelte dell'utente
-    try:
-        dataframe_test = pd.read_csv(uploaded_file_test, delimiter = ';')
-        if len(dataframe_test.columns) == 1 :
-            dataframe_test = pd.read_csv(uploaded_file_test, delimiter = ',')
-    except Exception as e:
-        st.error(f"Error: {e}")
+    dataframe_test = pd.read_csv(uploaded_file_test, delimiter=';')
     
-    # Drop rows and columns with more than 70% of missing data
+    # Drop columns with more than 70% of missing data
     dataframe_test = dataframe_test[Selected_columns_start]
 
     #Convert to numeric (conversion of CSV file does not always work)
-    for i in Numer :
+    for i in Numer + Tar :
         dataframe_test[i] = dataframe_test[i].astype(str).str.replace(',', '.').astype(float)
         dataframe_test[i].apply(pd.to_numeric)
 
     # Trasformazione della colonna Target
-    for i in Tar :
-        dataframe_test[i] = dataframe_test[i].astype(str).str.replace(',', '.').astype(float)
-        dataframe_test[i].apply(pd.to_numeric)
+    #for i in Tar :
+    #    dataframe_test[i] = dataframe_test[i].astype(str).str.replace(',', '.').astype(float)
+    #    dataframe_test[i].apply(pd.to_numeric)
         
     # Missing numerical features
     if Sub_num_list[0] == '' :
