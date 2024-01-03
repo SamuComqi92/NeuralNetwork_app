@@ -17,6 +17,9 @@ def Categoric_to_numeric(dataframe, categorical_features, step_further) :
     - step_further: step di avanzamento
     """
 
+    st.text("\n" * 3)
+    st.write("### Categorical features to numeric")
+
     # Menu dropdown per la scelta del metodo di conversione
     menu_transformation = st.selectbox( 'How would you like to transform categorical features?', ['','OneHotEncoder','String to numbers'] )
 
