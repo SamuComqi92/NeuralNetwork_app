@@ -67,6 +67,7 @@ def Pipeline_NN(uploaded_file_test, Selected_columns_start, Numer, Categ, Tar, S
     # Missing values in target column
     dataframe_test = dataframe_test.dropna(subset = Tar)
 
+    st.write(Categ)
     # Categorical to numerical column transformation
     if Tra_categ_list[0] == '' :
         pass
@@ -77,7 +78,6 @@ def Pipeline_NN(uploaded_file_test, Selected_columns_start, Numer, Categ, Tar, S
             for j in columns_test :
                 columns_test[m] = i + "_" + columns_test[m]
                 m=m+1
-            st.write(columns_test)
             transformed_test = pd.DataFrame(Tra_categ_list[1].transform(dataframe_test[i].astype(str)), columns = columns_test)
             dataframe_test = pd.concat([transformed_test, dataframe_test], axis=1).drop([i], axis=1)
     elif Tra_categ_list[0] == 'String to numbers':
