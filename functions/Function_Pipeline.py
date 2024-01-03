@@ -81,14 +81,14 @@ def pipeline_nn(uploaded_file_test, Selected_columns_start, Numer, Categ, Tar, S
             idx = idx + 1
           
     # Creation of X (attributes) and y (target)
-    X_test_final = pd.DataFrame(dataframe_test.drop(Tar,axis=1), columns = dataframe_test.drop(Tar,axis=1).columns)
+    X_test_final = pd.DataFrame(dataframe_test.drop(Tar,axis=1))#, columns = dataframe_test.drop(Tar,axis=1).columns)
     y_test_final = np.array( dataframe_test[Tar] )
 
     # Standardize the file
     if Tra_num_list[0] == '' :
         pass
     elif Tra_num_list[0] == 'MinMaxScaler' or Tra_num_list[0] == 'StandardScaler':
-        X_test_final = pd.DataFrame(Tra_num_list[1].transform(X_test_final), columns = X_test_final.columns)
+        X_test_final = pd.DataFrame(Tra_num_list[1].transform(X_test_final))#, columns = X_test_final.columns)
     elif Tra_num_list[0] == 'Do not normalize':
         pass
 
