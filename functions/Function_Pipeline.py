@@ -4,7 +4,7 @@ import numpy as np
 import streamlit as st
 
 # Funzione per eseguire una pipeline
-def Pipeline_NN(uploaded_file_test, Selected_columns_start, Numer, Categ, Tar, Sub_num_list, Sub_categ_list, 
+def pipeline_nn(uploaded_file_test, Selected_columns_start, Numer, Categ, Tar, Sub_num_list, Sub_categ_list, 
                 Tra_categ_list, dataframe_orig, Tra_num_list, Norm_tar_list) :
     """ La funzione applica tutte le trasformazioni scelte dall'utente sul file CSV di test caricato tramite pulsante.
     La funzione restituisce il dataframe con gli attributi e la colonna target, entrambi trasformati, e il dataframe_test completo finale (trasformato).
