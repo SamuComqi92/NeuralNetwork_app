@@ -37,13 +37,13 @@ def standardize_X_train(dataframe, X_train, X_test, step_further) :
         pass
     else :
         if type_transformation == 'MinMaxScaler':
-            Set_scaler = MinMaxScaler()
+            st.session_state["Set_scaler"] = MinMaxScaler()
             #Set_scaler.fit(X_train)
             #X_train = pd.DataFrame(Set_scaler.transform(X_train), columns = X_train.columns)
             #X_test = pd.DataFrame(Set_scaler.transform(X_test), columns = X_test.columns)
             flag_stand, step_further = 1, 6
         elif type_transformation == 'StandardScaler':
-            Set_scaler = StandardScaler()
+            st.session_state["Set_scaler"] = StandardScaler()
             #Set_scaler.fit(X_train)
             #X_train = pd.DataFrame(Set_scaler.transform(X_train), columns = X_train.columns)
             #X_test = pd.DataFrame(Set_scaler.transform(X_test), columns = X_test.columns)
@@ -53,8 +53,8 @@ def standardize_X_train(dataframe, X_train, X_test, step_further) :
 
         # Fit e trasformazione
         if type_transformation != 'Do not normalize':
-            set_scaler.fit(X_train)
-            X_train = pd.DataFrame(set_scaler.transform(X_train), columns = X_train.columns)
-            X_test = pd.DataFrame(set_scaler.transform(X_test), columns = X_test.columns)
+            st.session_state["Set_scaler"].fit(X_train)
+            X_train = pd.DataFrame(st.session_state["Set_scaler"].transform(X_train), columns = X_train.columns)
+            X_test = pd.DataFrame(st.session_state["Set_scaler"].transform(X_test), columns = X_test.columns)
 
     return X_train, X_test, type_transformation, step_further, flag_stand
