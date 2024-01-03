@@ -32,7 +32,6 @@ def Model_Finalization(X, y, Model, Task, Final_metric, Tra_num, Norm_tar_list, 
     # Standardizzazzione di X
     if flag_stand == 0 or flag_stand == 3 :
         XX_train = X
-        pass
     elif flag_stand == 1:
         Set_scaler_x = MinMaxScaler()
         Set_scaler_x.fit(X)
@@ -54,7 +53,6 @@ def Model_Finalization(X, y, Model, Task, Final_metric, Tra_num, Norm_tar_list, 
     if Norm_tar_list[2] == 0 or Norm_tar_list[2] == 2 :
         target_minmax_y = None
         yy_train = y
-        pass
     elif Norm_tar_list[2] == 1:
         target_minmax_y = None
         yy_train = np.log10(y+1)
