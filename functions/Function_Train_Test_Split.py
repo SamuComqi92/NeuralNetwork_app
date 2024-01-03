@@ -23,9 +23,9 @@ def train_test_customsplit(dataframe, Categ, Numer, Tar, step_further) :
     - step_further
     """
     
-    st.text("")
-    st.text("")
-    st.text("")
+    st.text("\n" * 3)
+    #st.text("")
+    #st.text("")
     st.write("### Creation of Training and Test set")
     
     # Creazione di X (attributi) e y (target) come array
