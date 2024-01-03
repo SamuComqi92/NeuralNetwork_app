@@ -62,7 +62,7 @@ def Pipeline_NN(uploaded_file_test, Selected_columns_start, Numer, Categ, Tar, S
     # Missing values in target column
     dataframe_test = dataframe_test.dropna(subset = Tar)
 
-    st.write(Categ)
+    st.write(Tra_categ_list[1])
     # Categorical to numerical column transformation
     if Tra_categ_list[0] == '' :
         pass
