@@ -100,7 +100,7 @@ if uploaded_file is not None:
     # Standardizzazione del dataframe X per il Training
     # Check avanzamento e valori nulli
     if step_further == 5 and dataframe.isna().sum().sum() == 0:
-        X_train, X_test, Tra_num, step_further, flag_stand = Function_Standard_X_train.Standard_X_train(dataframe, X_train, X_test, step_further)
+        X_train, X_test, Tra_num, step_further, flag_stand = Function_Standard_X_train.standardize_X_train(dataframe, X_train, X_test, step_further)
 
     ##############################################################################################################################################################################################################
     # Trasformazione della colonna Target
