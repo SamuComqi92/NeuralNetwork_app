@@ -35,14 +35,14 @@ def Pipeline_NN(uploaded_file_test, Selected_columns_start, Numer, Categ, Tar, S
     dataframe_test = dataframe_test[Selected_columns_start]
 
     #Convert to numeric (conversion of CSV file does not always work)
-    for i in Numer + Tar :
+    for i in Numer :
         dataframe_test[i] = dataframe_test[i].astype(str).str.replace(',', '.').astype(float)
         dataframe_test[i].apply(pd.to_numeric)
 
     # Trasformazione della colonna Target
-    #for i in Tar :
-    #    dataframe_test[i] = dataframe_test[i].astype(str).str.replace(',', '.').astype(float)
-    #    dataframe_test[i].apply(pd.to_numeric)
+    for i in Tar :
+        dataframe_test[i] = dataframe_test[i].astype(str).str.replace(',', '.').astype(float)
+        dataframe_test[i].apply(pd.to_numeric)
         
     # Missing numerical features
     if Sub_num_list[0] == '' :
@@ -68,7 +68,6 @@ def Pipeline_NN(uploaded_file_test, Selected_columns_start, Numer, Categ, Tar, S
     dataframe_test = dataframe_test.dropna(subset = Tar)
 
     # Categorical to numerical column transformation
-    st.write(Categ)
     if Tra_categ_list[0] == '' :
         pass
     elif Tra_categ_list[0] == 'OneHotEncoder':
