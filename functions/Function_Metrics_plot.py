@@ -3,6 +3,7 @@ import streamlit as st
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import MinMaxScaler, StandardScaler, LabelBinarizer, OneHotEncoder
+from sklearn.metrics import r2_score, mean_squared_error, mean_absolute_error, mean_absolute_percentage_error
 
 # La funzione calcola le metriche finali del modello dopo il training e crea dei plot
 def Metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, Final_metric) :
@@ -24,19 +25,60 @@ def Metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, F
         res_te = Model.metric_te
     # Se la colonna target è stata trasformata, è necessario invertire la trasformazione per il calcolo delle metriche reali
 
-# rms = mean_squared_error(y_actual, y_predicted, squared=False)
- #elif self.metric == "MAE" :       # metrics.mean_absolute_error(y_true, y_pred, *)    Mean absolute error regression loss.
- #elif self.metric == "MAPE" :      # metrics.mean_absolute_percentage_error(...)
- #elif self.metric == "R2" :        # metrics.r2_score(y_true, y_pred, *[, ...])
+            #if self.metric == "RMSE" :
+            #    Metricc = mean_squared_error(yy, anodes[-1].T, squared=False)
+                #Metricc = np.sqrt(((anodes[-1].T - yy)**2).sum()/len(yy))
+            #elif self.metric == "MAE" :
+            #    Metricc = mean_absolute_error(yy, anodes[-1].T)
+                #Metricc = (abs(anodes[-1].T - yy)).sum()/len(yy)
+            #elif self.metric == "MAPE" :
+            #    Metricc = mean_absolute_percentage_error(yy, anodes[-1].T)
+                #Metricc = 100*( abs((anodes[-1].T - yy)/yy) ).sum()/len(yy)
+            #elif self.metric == "R2" :
+            #    Metricc = r2_score(yy, anodes[-1].T )
 
     elif Task == "Regression" and Norm_tar_list[3] == 20:                                    # MinMax
-        res_tr = np.sqrt( ((Norm_tar_list[1].inverse_transform(Model.Predict(X_train)) -  Norm_tar_list[1].inverse_transform(y_train))**2).sum()/len(y_train)  )
-        res_te = np.sqrt( ((Norm_tar_list[1].inverse_transform(Model.Predict(X_test)) -  Norm_tar_list[1].inverse_transform(y_test))**2).sum()/len(y_test) )
-        st.write('Training real RMSE: {:.5f} -- Validation real RMSE: {:.5f}'.format(res_tr, res_te))
+        y_real_tr = Norm_tar_list[1].inverse_transform(y_train)
+        y_real_te = Norm_tar_list[1].inverse_transform(y_test)
+        y_predicted_tr = Norm_tar_list[1].inverse_transform(Model.Predict(X_train))
+        y_precited_te = Norm_tar_list[1].inverse_transform(Model.Predict(X_test))
+        
+        if Final_metric == "RMSE"
+            res_tr = mean_squared_error(y_real_tr, y_predicted_tr, squared=False)
+            res_te = mean_squared_error(y_real_te, y_predicted_te, squared=False)
+        elif Final_metric = "MAE" :
+            res_tr = mean_absolute_error(y_real_tr, y_predicted_tr)
+            res_te = mean_absolute_error(y_real_te, y_predicted_te)
+        elif Final_metric = "MAPE" :
+            res_tr = mean_absolute_percentage_error(y_real_tr, y_predicted_tr)
+            res_te = mean_absolute_percentage_error(y_real_te, y_predicted_te)
+        elif Final_metric = "R2" :
+            res_tr = r2_score(y_real_tr, y_predicted_tr)
+            res_te = r2_score(y_real_te, y_predicted_te)
+        #res_tr = np.sqrt( ((Norm_tar_list[1].inverse_transform(Model.Predict(X_train)) -  Norm_tar_list[1].inverse_transform(y_train))**2).sum()/len(y_train)  )
+        #res_te = np.sqrt( ((Norm_tar_list[1].inverse_transform(Model.Predict(X_test)) -  Norm_tar_list[1].inverse_transform(y_test))**2).sum()/len(y_test) )
+        st.write('Training real {}: {:.5f} -- Validation real {}: {:.5f}'.format(Final_metric, res_tr, Final_metric, res_te))
     elif Task == "Regression" and Norm_tar_list[3] == 10:                                    # Log(x+1)
-        res_tr = np.sqrt( (( 10**Model.Predict(X_train) -  10**(y_train))**2).sum()/len(y_train)  )    
-        res_te = np.sqrt( (( 10**Model.Predict(X_test) -  10**(y_test))**2).sum()/len(y_test) )
-        st.write('Training real RMSE: {:.5f} -- Validation real RMSE: {:.5f}'.format(res_tr, res_te))
+        y_real_tr = 10**(y_train) + 1
+        y_real_te = 10**(y_test) + 1
+        y_predicted_tr = 10**Model.Predict(X_train) + 1
+        y_precited_te = 10**Model.Predict(X_test) + 1
+        
+        if Final_metric == "RMSE"
+            res_tr = mean_squared_error(y_real_tr, y_predicted_tr, squared=False)
+            res_te = mean_squared_error(y_real_te, y_predicted_te, squared=False)
+        elif Final_metric = "MAE" :
+            res_tr = mean_absolute_error(y_real_tr, y_predicted_tr)
+            res_te = mean_absolute_error(y_real_te, y_predicted_te)
+        elif Final_metric = "MAPE" :
+            res_tr = mean_absolute_percentage_error(y_real_tr, y_predicted_tr)
+            res_te = mean_absolute_percentage_error(y_real_te, y_predicted_te)
+        elif Final_metric = "R2" :
+            res_tr = r2_score(y_real_tr, y_predicted_tr)
+            res_te = r2_score(y_real_te, y_predicted_te)
+        #res_tr = np.sqrt( (( 10**Model.Predict(X_train) -  10**(y_train))**2).sum()/len(y_train)  )    
+        #res_te = np.sqrt( (( 10**Model.Predict(X_test) -  10**(y_test))**2).sum()/len(y_test) )
+        st.write('Training real {}: {:.5f} -- Validation real {}: {:.5f}'.format(Final_metric, res_tr, Final_metric, res_te))
     
     # Salvo risultati in session
     st.session_state["res_tr"]  = res_tr
