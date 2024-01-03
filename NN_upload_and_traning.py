@@ -91,7 +91,8 @@ if uploaded_file is not None:
         step_further = 4
         Tra_categ_list = [Tra_categ, jobs_encoder, list_imputation_dict]
 
-    # Salvo in sessione il nome delle colonne del dataframe dopo tutte le trasformazioni
+    # Rimozione colonna "index" e salvataggio in sessione il nome delle colonne del dataframe dopo tutte le trasformazioni
+    dataframe.drop(["index"], axis = 1, inplace = True)
     st.session_state["Final_columns"] = dataframe.columns
     
     ##############################################################################################################################################################################################################
