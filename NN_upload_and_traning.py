@@ -84,16 +84,14 @@ if uploaded_file is not None:
     # Check dello step, della presenza di colonne categoriche e dell'assenza di valori mancanti (altrimenti, lo script si interrompe)
     if step_further == 3 and len(Categ) != 0 and dataframe.isna().sum().sum() == 0 :
         dataframe, Tra_categ_list, step_further = Function_Categoric_to_numeric.Categoric_to_numeric(dataframe, Categ, step_further)
+        st.session_state["Final_columns"] = dataframe.drop(["index"], axis = 1, inplace = True).columns
     else :
         Tra_categ = []
         list_imputation_dict = []
         jobs_encoder = None
         step_further = 4
         Tra_categ_list = [Tra_categ, jobs_encoder, list_imputation_dict]
-
-    # Rimozione colonna "index" e salvataggio in sessione il nome delle colonne del dataframe dopo tutte le trasformazioni
-    dataframe.drop(["index"], axis = 1, inplace = True)
-    st.session_state["Final_columns"] = dataframe.columns
+        st.session_state["Final_columns"] = dataframe.drop(["index"], axis = 1, inplace = True).columns
     
     ##############################################################################################################################################################################################################
     # Creazione dei set di Training e Validation per la valutazione del modello
