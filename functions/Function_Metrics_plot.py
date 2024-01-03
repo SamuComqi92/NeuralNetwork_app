@@ -29,8 +29,8 @@ def Metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, F
         y_predicted_tr = Norm_tar_list[1].inverse_transform(Model.Predict(X_train))
         y_predicted_te = Norm_tar_list[1].inverse_transform(Model.Predict(X_test))
         if Final_metric == "RMSE" :
-            res_tr = mean_squared_error(y_real_tr, y_predicted_tr, squared=False)
-            res_te = mean_squared_error(y_real_te, y_predicted_te, squared=False)
+            res_tr = mean_squared_error(y_real_tr, y_predicted_tr, squared = False)
+            res_te = mean_squared_error(y_real_te, y_predicted_te, squared = False)
         elif Final_metric == "MAE" :
             res_tr = mean_absolute_error(y_real_tr, y_predicted_tr)
             res_te = mean_absolute_error(y_real_te, y_predicted_te)
@@ -44,8 +44,8 @@ def Metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, F
         y_predicted_tr = 10**Model.Predict(X_train) + 1
         y_predicted_te = 10**Model.Predict(X_test) + 1
         if Final_metric == "RMSE" :
-            res_tr = mean_squared_error(y_real_tr, y_predicted_tr, squared=False)
-            res_te = mean_squared_error(y_real_te, y_predicted_te, squared=False)
+            res_tr = mean_squared_error(y_real_tr, y_predicted_tr, squared = False)
+            res_te = mean_squared_error(y_real_te, y_predicted_te, squared = False)
         elif Final_metric == "MAE" :
             res_tr = mean_absolute_error(y_real_tr, y_predicted_tr)
             res_te = mean_absolute_error(y_real_te, y_predicted_te)
