@@ -5,7 +5,7 @@ import streamlit as st
 
 # Funzione per eseguire una pipeline
 def pipeline_nn(uploaded_file_test, Selected_columns_start, Numer, Categ, Tar, Sub_num_list, Sub_categ_list, 
-                Tra_categ_list, dataframe_orig, Tra_num_list, Norm_tar_list) :
+                Tra_categ_list, dataframe_columns, Tra_num_list, Norm_tar_list) :
     """ La funzione applica tutte le trasformazioni scelte dall'utente sul file CSV di test caricato tramite pulsante.
     La funzione restituisce il dataframe con gli attributi e la colonna target, entrambi trasformati, e il dataframe_test completo finale (trasformato).
     Gli argomenti della funzione sono i seguenti:
@@ -17,7 +17,7 @@ def pipeline_nn(uploaded_file_test, Selected_columns_start, Numer, Categ, Tar, S
      - Sub_num_list: lista con metodo di imputation dei valori numerici mancanti e valore (nel caso di sostituzione con media o mediana)
      - Sub_categ_list: lista con metodo di imputation dei valori categorici mancanti e valore (nel caso di sostituzione con moda oppure "NAN")
      - Tra_categ_list: lista con metodo di trasformazione delle colonne categoriche e possibile encoder
-     - dataframe_orig: dataframe originale da cui prendere i valori unici
+     - dataframe_columns: colonne del dataframe originale trasformato
      - Tra_num_list: lista con metodo di trasformazione delle colonne numeriche e possibile encoder
      - Norm_tar_list: lista con flag di trasformazione della colonna target e possibile min_max_scaler
     """
@@ -79,7 +79,10 @@ def pipeline_nn(uploaded_file_test, Selected_columns_start, Numer, Categ, Tar, S
         for i in Categ :
             dataframe_test[i].replace(List_dict[idx], inplace = True)
             idx = idx + 1
-          
+
+    # Impostazione nome per le colonne del dataframe finale
+    dataframe_test.columns = dataframe_columns
+                  
     # Creation of X (attributes) and y (target)
     X_test_final = pd.DataFrame(dataframe_test.drop(Tar,axis=1))#, columns = dataframe_test.drop(Tar,axis=1).columns)
     y_test_final = np.array( dataframe_test[Tar] )
