@@ -101,7 +101,7 @@ def NN_Builder(dataframe) :
         else :
             Metrics_final = ["RMSE", "MAE", "MAPE", "R2"]
         Final_metric = st.selectbox(
-            'Choose the Evaluation metric (the metric will be used to evaluate the training and the validation sets)',
+            'fChoose the Evaluation metric (the metric will be used to evaluate the training and the validation sets)',
             Metrics_final)
 
     # Check del numero di activation functions e del numero di Hidden layers
