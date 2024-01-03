@@ -23,6 +23,54 @@ def Metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, F
         res_tr = Model.metric_tr
         res_te = Model.metric_te
     # Se la colonna target è stata trasformata, è necessario invertire la trasformazione per il calcolo delle metriche reali
+
+"""
+    metrics.mean_absolute_error(y_true, y_pred, *)    Mean absolute error regression loss.
+    metrics.mean_squared_error(y_true, y_pred, *)     Mean squared error regression loss.
+    metrics.mean_squared_log_error(y_true, y_pred, *) Mean squared logarithmic error regression loss.
+
+metrics.median_absolute_error(y_true, y_pred, *)
+
+Median absolute error regression loss.
+
+metrics.mean_absolute_percentage_error(...)
+
+Mean absolute percentage error (MAPE) regression loss.
+
+metrics.r2_score(y_true, y_pred, *[, ...])
+
+ (coefficient of determination) regression score function.
+
+metrics.mean_poisson_deviance(y_true, y_pred, *)
+
+Mean Poisson deviance regression loss.
+
+metrics.mean_gamma_deviance(y_true, y_pred, *)
+
+Mean Gamma deviance regression loss.
+
+metrics.mean_tweedie_deviance(y_true, y_pred, *)
+
+Mean Tweedie deviance regression loss.
+
+metrics.d2_tweedie_score(y_true, y_pred, *)
+
+D^2 regression score function, fraction of Tweedie deviance explained.
+
+metrics.mean_pinball_loss(y_true, y_pred, *)
+
+Pinball loss for quantile regression.
+
+metrics.d2_pinball_score(y_true, y_pred, *)
+
+ regression score function, fraction of pinball loss explained.
+
+metrics.d2_absolute_error_score(y_true, ...)
+
+ regression score function, fraction of absolute error explained.
+
+Multilabel ranking metrics
+"""
     elif Task == "Regression" and Norm_tar_list[3] == 20:                                    # MinMax
         res_tr = np.sqrt( ((Norm_tar_list[1].inverse_transform(Model.Predict(X_train)) -  Norm_tar_list[1].inverse_transform(y_train))**2).sum()/len(y_train)  )
         res_te = np.sqrt( ((Norm_tar_list[1].inverse_transform(Model.Predict(X_test)) -  Norm_tar_list[1].inverse_transform(y_test))**2).sum()/len(y_test) )
