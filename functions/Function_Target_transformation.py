@@ -5,7 +5,7 @@ import numpy as np
 from sklearn.preprocessing import MinMaxScaler, StandardScaler, LabelBinarizer, OneHotEncoder
 
 # La funzione trasforma, se necessario, la colonna target, soprattutto in casi con modelli di Regressione
-def Target_transformation(dataframe, Tar, y_train, y_test, step_further) :
+def target_transformation(dataframe, Tar, y_train, y_test, step_further) :
     """
     La funzione accetta i seguenti argomenti:
     - dataframe: da controllare per capire come trasformare la colonna target
