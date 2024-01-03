@@ -51,7 +51,7 @@ if uploaded_file is not None:
     st.write("**Note**: Rows with more than 70\% of missing data will be removed from the dataset")
 
     # Rimozione righe e colonne con più del 70% di valori mancanti    
-    dataframe, Selected_columns_start = Function_Remove_70_missing.Remove_70_missing(dataframe)
+    dataframe, Selected_columns_start = Function_Remove_70_missing.remove_missing(dataframe)
 
     ##############################################################################################################################################################################################################
     # Selezione delle varie features (numeriche e categoriche) e della colonna target
