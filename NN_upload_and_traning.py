@@ -136,7 +136,7 @@ if uploaded_file is not None:
             st.write('Training complete!')
 
             # Calcolo metriche finali (per Regressione) e plot
-            Function_Metrics_plot.Metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list)
+            Function_Metrics_plot.Metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, Final_metric)
 
 
         ########################################################################################################################################################################################################
