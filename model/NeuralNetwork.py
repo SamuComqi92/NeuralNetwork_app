@@ -94,9 +94,11 @@ class NeuralNet :
 
     #Activation functions
     def act(function,X) :
-        # The function returns the transformed values according to the specified activation function
-        # - function    activation function 
-        # - X           input matrix (data with no target column)
+        """
+        The function returns the transformed values according to the specified activation function
+        - function    activation function 
+        - X           input matrix (data with no target column)
+        """
         
         if function == "Sigmoid" :
             return 1. / (1. + np.exp(-X))
@@ -116,9 +118,11 @@ class NeuralNet :
 
     #Derivative of the activation functions
     def derivative(function,X) :
-        # The function returns the transformed values according to the derivative of the specified activation function
-        # - function    activation function 
-        # - X           input matrix (data with no target column)
+        """
+        The function returns the transformed values according to the derivative of the specified activation function
+        - function    activation function 
+        - X           input matrix (data with no target column)
+        """
         
         if function == "Sigmoid" :
             return (NeuralNet.act(function,X)) * (1 - NeuralNet.act(function,X))
@@ -138,12 +142,14 @@ class NeuralNet :
     
     #Random initialization of weights (based on the activation function)
     def randw(self, Lin,Lout, function, X) :
-        # Source: https://machinelearningmastery.com/weight-initialization-for-deep-learning-neural-networks/
-        # The function returns a matrix of random weights with dimensions Lout x (Lin + 1)
-        # - Lin         dimension of the input layer
-        # - Lout        dimension of the output layer
-        # - function    activation function
-        # - X           input matrix
+        """
+        Source: https://machinelearningmastery.com/weight-initialization-for-deep-learning-neural-networks/
+        The function returns a matrix of random weights with dimensions Lout x (Lin + 1)
+        - Lin         dimension of the input layer
+        - Lout        dimension of the output layer
+        - function    activation function
+        - X           input matrix
+        """
         
         if self.random_state is not None :
             np.random.seed(self.random_state)
@@ -158,9 +164,11 @@ class NeuralNet :
 
     #Adding bias term to matrices    
     def Bias(m,X) :
-        # The function returns the matrix with a bias row made of 1s
-        # - m           number of elements to add (on one row)
-        # - X           input matrix (data with no target column)
+        """
+        The function returns the matrix with a bias row made of 1s
+        - m           number of elements to add (on one row)
+        - X           input matrix (data with no target column)
+        """
         
         if m != X.shape[1] :
             raise ValueError("The value of m must match the number of columns of X")
@@ -170,9 +178,11 @@ class NeuralNet :
     
     #Forward propagation
     def Forward_propagation(self, X, T) :        
-        # The function returns the values obtained in the last layer through the forward propagation algorithm
-        # - X           input matrix (data with no target column)
-        # - T           tuple containing n matrices (i.e. weights)
+        """
+        The function returns the values obtained in the last layer through the forward propagation algorithm
+        - X           input matrix (data with no target column)
+        - T           tuple containing n matrices (i.e. weights)
+        """
         
         m = X.shape[0]                                 #Number of observations
         n = len(T)                                     #Number of matrices (i.e. weights)
@@ -203,11 +213,13 @@ class NeuralNet :
     
     #Forward and Back propagation
     def ForwardBack_propagation(self, X, y, T) :
-        # The function returns the values obtained in each layer (through forward propagation) and the errors (through back propagaton)
-        # - X           input matrix (data with no target column)
-        # - yy          target variable transformed with OneHotEncoder (number of columns = number of classes)
-        # - T           tuple containing n matrices (i.e. weights)
-          
+        """
+        The function returns the values obtained in each layer (through forward propagation) and the errors (through back propagaton)
+        - X           input matrix (data with no target column)
+        - yy          target variable transformed with OneHotEncoder (number of columns = number of classes)
+        - T           tuple containing n matrices (i.e. weights)
+        """
+        
         m = X.shape[1]                                   #Number of observations
         n = len(T)                                       #Number of matrices (i.e. weights)
         
@@ -250,14 +262,16 @@ class NeuralNet :
     
     #Cost function and Gradient
     def J_Grad(self, X, yy, T) :
-        # The function returns the Cost function (with the regularization term), the Gradient, and the performance metric
-        # - X           input matrix (data with no target column)
-        # - yy          target variable
-        # - labels      number of labels
-        # - Lambda      regularization factor
-        # - metric      chosen metric for extra output
-        # - T           tuple containing n matrices (i.e. weights)
- 
+        """
+        The function returns the Cost function (with the regularization term), the Gradient, and the performance metric
+        - X           input matrix (data with no target column)
+        - yy          target variable
+        - labels      number of labels
+        - Lambda      regularization factor
+        - metric      chosen metric for extra output
+        - T           tuple containing n matrices (i.e. weights)
+        """
+        
         m = X.shape[1]                          #Number of observations
         n = len(T)                              #Number of matrices (i.e. weights)
 
@@ -353,10 +367,12 @@ class NeuralNet :
     
     #Function to predict the probability (for Classification problems)
     def Prediction_proba(self, X, T) :
-        # The function returns the final probabilities of getting the positive class and the corresponding predicted class
-        # This is specific of a binary classification problem. 
-        # - X           input matrix (data with no target column)
-        # - T           tuple containing n matrices (i.e. weights)
+        """
+        The function returns the final probabilities of getting the positive class and the corresponding predicted class
+        This is specific of a binary classification problem. 
+        - X           input matrix (data with no target column)
+        - T           tuple containing n matrices (i.e. weights)
+        """
         
         Final = NeuralNet.Forward_propagation(self, X, T)
         if self.task == "Classification" :
@@ -370,10 +386,12 @@ class NeuralNet :
 
     #Module to compute the model performance (with different metrics)
     def Score(self, X, y, metric) :
-        # The function returns the accuracy (for classification) and RMSE (for regression)
-        # - X           input matrix (data with no target column)
-        # - y           target variable
-        # - metric      metric to evaluate the performance
+        """
+        The function returns the accuracy (for classification) and RMSE (for regression)
+        - X           input matrix (data with no target column)
+        - y           target variable
+        - metric      metric to evaluate the performance
+        """
         
         if self.task == "Classification" :
             if metric == "Accuracy" :
@@ -413,11 +431,13 @@ class NeuralNet :
 
     #Training of the model        
     def Training(self, X_train, y_train, X_test, y_test) :
-        # The function returns the last iteration, a tuple containing the weights, the cost function value at each iteration for the training and validation sets
-        # - X_train         input matrix (data with no target column)
-        # - y_train         target variable
-        # - X_test          matrix for cross-validation
-        # - y_test          target variable for cross-validation
+        """
+        The function returns the last iteration, a tuple containing the weights, the cost function value at each iteration for the training and validation sets
+        - X_train         input matrix (data with no target column)
+        - y_train         target variable
+        - X_test          matrix for cross-validation
+        - y_test          target variable for cross-validation
+        """
         
         #Check dimensions
         if (len(X_train) != len(y_train)) or (len(X_test) != len(y_test)):
@@ -670,10 +690,12 @@ class NeuralNet :
     
     #Module to make predictions
     def Predict(self, X) :
-        # The function returns the corresponding predicted class using the best weights found with training. 
-        # This is specific of a binary classification problem. In the case of regression, it return only the predicted values
-        # - X           input matrix (data with no target column)
-        # - T           tuple containing n matrices (i.e. weights)
+        """
+        The function returns the corresponding predicted class using the best weights found with training. 
+        This is specific of a binary classification problem. In the case of regression, it return only the predicted values
+        - X           input matrix (data with no target column)
+        - T           tuple containing n matrices (i.e. weights)
+        """
         
         Final = NeuralNet.Forward_propagation(self, X, self.best_weights)
         if self.task == "Classification" :
@@ -687,10 +709,12 @@ class NeuralNet :
     
     #Module to predict the probability (for Classification problems)
     def Predict_proba(self, X) :
-        # The function returns the final probabilities of getting the positive class and the corresponding predicted class
-        # This is specific of a binary classification problem. 
-        # - X           input matrix (data with no target column)
-        # - T           tuple containing n matrices (i.e. weights)
+        """
+        The function returns the final probabilities of getting the positive class and the corresponding predicted class
+        This is specific of a binary classification problem. 
+        - X           input matrix (data with no target column)
+        - T           tuple containing n matrices (i.e. weights)
+        """
         
         Final = NeuralNet.Forward_propagation(self, X, self.best_weights)
         if self.task == "Classification" :
