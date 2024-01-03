@@ -15,40 +15,43 @@ from sklearn.metrics import precision_score,recall_score,f1_score, accuracy_scor
 
 #Class NeuralNet
 class NeuralNet :
-    # The class builds a Neural Network for binary classification and regression
-    # It is possible to define:
-    # - The task of the problem ("classification", "regression")
-    # - The activation function ("sigmoid","tanh","relu","leaky_relu","elu","swish").
-    #     It can be a tuple if different activation functions are specified for each layer
-    # - The hidden layers (a tuple where each element represents the number of nodes in each layer)
-    # - The Gradient Descent algorithm ("batch","adam")
-    # - The size of the mini-batches
-    # - The learning rate
-    # - The decay parameter for the learning rate (lr = lr/(1+decay*epoch))
-    # - The type of regularization ("ridge","lasso")
-    # - The regularization factor lambda
-    # - The maximum number of iterations
-    # - The momentum factor in the weights optimization
-    # - A random state for reproducible results
-    # - A flag to display results while processing
-    # - A flag to apply early stopping to the algorithm
-    # - The number of epochs to check for early stopping
-    #      The check occurs in case when Adam, and/or Momentum
-    # - A flag to show the learning curves (i.e. training and test cost functions) updated at each epoch
-    # 
-    # Modules:
-    # - Training: training the Neural Network
-    # - Predict: class prediction (for classification) and value (for regression)
-    # - Predict_proba: probability prediction (only for classification)
-    # - Score: performance metric (different metrics for classification and regression)
-    # 
-    # Attributes:
-    # - last_iter: last iteration of training
-    # - best_weights: best weights found with training
-    # - cost_function_tr: cost function values for the training set up to the last iteration
-    # - cost_function_te: cost function values for the validation set up to the last iteration
-    # - metric_tr: chosen metric with self.metric computed on the training set to be saved at each iteration
-    # - metric_te: chosen metric with self.metric computed on the test set to be saved at each iteration
+    """
+    The class builds a Neural Network for binary classification and regression
+    It is possible to define:
+    - The task of the problem ("classification", "regression")
+    - The activation function ("sigmoid","tanh","relu","leaky_relu","elu","swish").
+        It can be a tuple if different activation functions are specified for each layer
+    - The hidden layers (a tuple where each element represents the number of nodes in each layer)
+    - The Gradient Descent algorithm ("batch","adam")
+    - The size of the mini-batches
+    - The learning rate
+    - The decay parameter for the learning rate (lr = lr/(1+decay*epoch))
+    - The type of regularization ("ridge","lasso")
+    - The regularization factor lambda
+    - The maximum number of iterations
+    - The momentum factor in the weights optimization
+    - A random state for reproducible results
+    - A flag to display results while processing
+    - A flag to apply early stopping to the algorithm
+    - The number of epochs to check for early stopping
+         The check occurs in case when Adam, and/or Momentum
+    - A flag to show the learning curves (i.e. training and test cost functions) updated at each epoch
+    - The metric for the final model evaluation
+    
+    Modules:
+    - Training: training the Neural Network
+    - Predict: class prediction (for classification) and value (for regression)
+    - Predict_proba: probability prediction (only for classification)
+    - Score: performance metric (different metrics for classification and regression)
+    
+    Attributes:
+    - last_iter: last iteration of training
+    - best_weights: best weights found with training
+    - cost_function_tr: cost function values for the training set up to the last iteration
+    - cost_function_te: cost function values for the validation set up to the last iteration
+    - metric_tr: chosen metric with self.metric computed on the training set to be saved at each iteration
+    - metric_te: chosen metric with self.metric computed on the test set to be saved at each iteration
+    """
     
     def __init__(self, task, function = "Sigmoid", Hidden_layers = (5,), algo = "Batch", batch = None,
                  alpha = 0.3, decay = 0.0, regularization = None, Lambda = 0.0, 
