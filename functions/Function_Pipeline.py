@@ -88,7 +88,7 @@ def Pipeline_NN(uploaded_file_test, Selected_columns_start, Numer, Categ, Tar, S
         # Loop per tutte le colonne categoriche
         for i in Categ :
             st.write(i, List_dict[idx])
-            dataframe_test[i].replace(np.unique(dataframe_test[i]),np.arange(0,len(np.unique(dataframe_orig[i]))),inplace=True)
+            dataframe_test[i].replace(List_dict[idx], inplace = True) #np.unique(dataframe_test[i]),np.arange(0,len(np.unique(dataframe_orig[i]))),inplace=True)
             idx = idx + 1
           
     # Creation of X (attributes) and y (target)
