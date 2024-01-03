@@ -68,6 +68,7 @@ def Pipeline_NN(uploaded_file_test, Selected_columns_start, Numer, Categ, Tar, S
     dataframe_test = dataframe_test.dropna(subset = Tar)
 
     # Categorical to numerical column transformation
+    st.write(Categ)
     if Tra_categ_list[0] == '' :
         pass
     elif Tra_categ_list[0] == 'OneHotEncoder':
