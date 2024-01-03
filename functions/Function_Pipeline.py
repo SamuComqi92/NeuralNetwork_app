@@ -84,6 +84,9 @@ def pipeline_nn(uploaded_file_test, Selected_columns_start, Numer, Categ, Tar, S
     X_test_final = pd.DataFrame(dataframe_test.drop(Tar,axis=1))#, columns = dataframe_test.drop(Tar,axis=1).columns)
     y_test_final = np.array( dataframe_test[Tar] )
 
+    # Convertion column names to string (to avoid errors)
+    X_test_final.columns = X_test_final.columns.astype(str)
+                  
     # Standardize the file
     if Tra_num_list[0] == '' :
         pass
