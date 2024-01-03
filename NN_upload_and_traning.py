@@ -99,7 +99,7 @@ if uploaded_file is not None:
     # Creazione dei set di Training e Validation per la valutazione del modello
     # Check iniziale per mostrare la sezione
     if step_further == 4 and (Categ or Numer) and dataframe.isna().sum().sum() == 0:
-        X, y, X_train, X_test, y_train, y_test, step_further = Function_Train_Test_Split.Train_Test_Split(dataframe, Categ, Numer, Tar, step_further)
+        X, y, X_train, X_test, y_train, y_test, step_further = Function_Train_Test_Split.train_test_customsplit(dataframe, Categ, Numer, Tar, step_further)
         
     ##############################################################################################################################################################################################################
     # Standardizzazione del dataframe X per il Training
