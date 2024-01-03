@@ -80,12 +80,7 @@ if uploaded_file is not None:
 
     ##############################################################################################################################################################################################################
     # Conversione dei valori categorici in valori numerici
-    # Viene data la possibilità di convertire i valori in due modi diversi
-    st.text("")
-    st.text("")
-    st.text("")
-    st.write("### Categorical features to numeric")
-    
+    # Viene data la possibilità di convertire i valori in due modi diversi    
     # Check dello step, della presenza di colonne categoriche e dell'assenza di valori mancanti (altrimenti, lo script si interrompe)
     if step_further == 3 and len(Categ) != 0 and dataframe.isna().sum().sum() == 0 :
         dataframe, Tra_categ_list, step_further = Function_Categoric_to_numeric.Categoric_to_numeric(dataframe, Categ, step_further)
