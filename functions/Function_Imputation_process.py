@@ -4,12 +4,12 @@ import numpy as np
 import streamlit as st
 
 # La funzione sostituisce i valori mancanti nelle colonne categoriche in base al metodo scelto dall'utente
-def Imputation_process(dataframe, Categ, Numer) :
+def Imputation_process(dataframe, categorical, numerical) :
     """
     La funzione accetta come argomenti:
     - dataframe: il dataframe da controllare e correggere
-    - Categ: la lista di colonne categoriche scelte dall'utente
-    - Numer: la lista di colonne numeriche scelte dall'utente
+    - categorical: la lista di colonne categoriche scelte dall'utente
+    - numerical: la lista di colonne numeriche scelte dall'utente
     La funzione restituisce:
     - Dataframe modificato
     - Numeri relativi ai metodi utilizzati
@@ -20,86 +20,71 @@ def Imputation_process(dataframe, Categ, Numer) :
 
     # CATEGORICAL
     # Inizializzazione dello step_further e del flag relativo al metodo di sostituzione
-    step_further = 0
-    categ_impute = 0
-    numer_impute = 0
+    step_further, categ_impute, numer_impute = 0, 0, 0
 
     # Controllo che ci siano valori mancanti nel dataframe e che ci siano colonne numeriche
-    if Categ and dataframe.isna().sum().sum() != 0:
+    if categorical and dataframe.isna().sum().sum() != 0:
+        
         # Scelta del metodo di imputation
-        Sub_categ = st.selectbox(
+        categorical_method = st.selectbox(
             'Which imputation method (for NA values) do you like best for categorical features?',
             ['','Substitute null values with string NAN','Substitute null values with the mode','Drop rows (careful!)'])
 
-        if Sub_categ == '' :                                                            # Nessuna imputation (lo script non va avanti se non si sceglie un metodo - grazie al flag step_further)
-            Value_imputation_cat = None
+        # Gestione delle varia casistiche
+        if categorical_method == 'Drop rows (careful!)' :                             # Rimozione delle righe con valori mancanti
+            value_imputation_cat = None
+            a = dataframe[categorical].isnull().to_numpy().nonzero()[0]               # Righe eliminate     
+            step_further, categ_impute = 1, 3
+        else :
             a = np.array([])
-        elif Sub_categ == 'Substitute null values with string NAN':                     # Sostituzione con stringa "NAN"
-            dataframe[Categ] = dataframe[Categ].fillna("NAN")
-            Value_imputation_cat = "NAN"
-            a = np.array([])
-            step_further = 1
-            categ_impute = 1
-        elif Sub_categ == 'Substitute null values with the mode':                       # Sostituzione con la moda
-            Value_imputation_cat = dataframe[Categ].mode().iloc[0]
-            dataframe[Categ] = dataframe[Categ].fillna(Value_imputation_cat)
-            a = np.array([])
-            step_further = 1
-            categ_impute = 2
-        elif Sub_categ == 'Drop rows (careful!)' :                                      # Rimozione delle righe con valori mancanti
-            Value_imputation_cat = None
-            a = dataframe[Categ].isnull().to_numpy().nonzero()[0]
-            step_further = 1
-            categ_impute = 3
+            if categorical_method == '' :                                             # Nessuna imputation (lo script non va avanti se non si sceglie un metodo)
+                value_imputation_cat = None                                           # La sospensione è dovuta allo step_further non aggiornato
+            elif categorical_method == 'Substitute null values with string NAN':      # Sostituzione con stringa "NAN"
+                value_imputation_cat = "NAN"
+                dataframe[categorical] = dataframe[categorical].fillna(value_imputation_cat)
+                step_further, categ_impute = 1, 1
+            elif categorical_method == 'Substitute null values with the mode':        # Sostituzione con la moda
+                value_imputation_cat = dataframe[categorical].mode().iloc[0]
+                dataframe[categorical] = dataframe[categorical].fillna(Value_imputation_cat)
+                step_further, categ_impute = 1, 2
 
     # Se non ci sono colonne categoriche
     else :
-        step_further = 1
-        Sub_categ = ""
-        Value_imputation_cat = None
-        a = np.array([])
-        pass       
+        step_further, categorical_method, value_imputation_cat, a = 1, "", None, np.array([])
 
     #--------------------------------------------------------------------------------------------------------------------------------------------
     # NUMERICAL
     # Controllo che ci siano valori mancanti nel dataframe e che ci siano colonne numeriche
-    if Numer and dataframe.isna().sum().sum() != 0:
-        Sub_num = st.selectbox(
+    if numerical and dataframe.isna().sum().sum() != 0:
+        # Scelta del metodo di imputation
+        numerical_method = st.selectbox(
             'Which imputation method (for NA values) do you like best for numerical features?',
             ['','Substitute null values with the mean','Substitute null values with the median','Drop rows (careful!)'])
 
-        if Sub_num == '' :                                                              # Nessuna imputation
-            Value_imputation = None
+        # Gestione delle varia casistiche
+        if numerical_method == 'Drop rows (careful!)' :                                              # Rimozione delle righe con valori mancanti
+            value_imputation_num = None
+            b = dataframe[Numer].isnull().to_numpy().nonzero()[0]                                    # Righe eliminate
+            step_further, numer_impute = 2, 3
+        else :
             b = np.array([])
-            step_further = 2
-        elif Sub_num == 'Substitute null values with the mean':                         # Sostituzione con media
-            dataframe[Numer] = dataframe[Numer].fillna(dataframe[Numer].mean())
-            Value_imputation = dataframe[Numer].mean()
-            b = np.array([])
-            step_further = 2
-            numer_impute = 1
-        elif Sub_num == 'Substitute null values with the median':                       # Sostituzione con mediana
-            dataframe[Numer] = dataframe[Numer].fillna(dataframe[Numer].median())
-            Value_imputation = dataframe[Numer].median()
-            b = np.array([])
-            step_further = 2
-            numer_impute = 2
-        elif Sub_num == 'Drop rows (careful!)' :                                        # Rimozione delle righe con valori mancanti
-            Value_imputation = None
-            b = dataframe[Numer].isnull().to_numpy().nonzero()[0]
-            step_further = 2
-            numer_impute = 3
-
+            if numerical_method == '' :                                                              # Nessuna imputation
+                value_imputation_num = None
+            elif numerical_method == 'Substitute null values with the mean':                         # Sostituzione con media
+                value_imputation_num = dataframe[numerical].mean()
+                dataframe[numerical] = dataframe[numerical].fillna(value_imputation_num)
+                step_further, numer_impute = 2, 1
+            elif numerical_method == 'Substitute null values with the median':                       # Sostituzione con mediana
+                value_imputation_num = dataframe[numerical].median()
+                dataframe[numerical] = dataframe[numerical].fillna(value_imputation_num)
+                step_further, numer_impute = 2, 2
+    
     # Se non ci sono colonne numeriche
     else :
-        step_further = 2
-        Sub_num = ""
-        Value_imputation = None
-        b = np.array([])
-        pass        
+        step_further, numerical_method, value_imputation_num, b = 2, "", None, np.array([])  
 
     # Creo liste dei parametri che mi serviranno nell'applicazione della pipeline finale
-    Sub_num_list = [Sub_num, Value_imputation]
-    Sub_categ_list = [Sub_categ, Value_imputation_cat]
+    list_numerical = [numerical_method, value_imputation_num]
+    list_categorical = [categorical_method, value_imputation_cat]
 
-    return dataframe, categ_impute, numer_impute, Sub_categ_list, Sub_num_list, step_further, a, b
+    return dataframe, categ_impute, numer_impute, list_numerical, list_categorical, step_further, a, b
