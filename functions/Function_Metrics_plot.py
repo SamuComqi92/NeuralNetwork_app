@@ -46,13 +46,13 @@ def Metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, F
         if Final_metric == "RMSE" :
             res_tr = mean_squared_error(y_real_tr, y_predicted_tr, squared=False)
             res_te = mean_squared_error(y_real_te, y_predicted_te, squared=False)
-        elif Final_metric = "MAE" :
+        elif Final_metric == "MAE" :
             res_tr = mean_absolute_error(y_real_tr, y_predicted_tr)
             res_te = mean_absolute_error(y_real_te, y_predicted_te)
-        elif Final_metric = "MAPE" :
+        elif Final_metric == "MAPE" :
             res_tr = mean_absolute_percentage_error(y_real_tr, y_predicted_tr)
             res_te = mean_absolute_percentage_error(y_real_te, y_predicted_te)
-        elif Final_metric = "R2" :
+        elif Final_metric == "R2" :
             res_tr = r2_score(y_real_tr, y_predicted_tr)
             res_te = r2_score(y_real_te, y_predicted_te)
         #res_tr = np.sqrt( ((Norm_tar_list[1].inverse_transform(Model.Predict(X_train)) -  Norm_tar_list[1].inverse_transform(y_train))**2).sum()/len(y_train)  )
@@ -67,13 +67,13 @@ def Metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, F
         if Final_metric == "RMSE" :
             res_tr = mean_squared_error(y_real_tr, y_predicted_tr, squared=False)
             res_te = mean_squared_error(y_real_te, y_predicted_te, squared=False)
-        elif Final_metric = "MAE" :
+        elif Final_metric == "MAE" :
             res_tr = mean_absolute_error(y_real_tr, y_predicted_tr)
             res_te = mean_absolute_error(y_real_te, y_predicted_te)
-        elif Final_metric = "MAPE" :
+        elif Final_metric == "MAPE" :
             res_tr = mean_absolute_percentage_error(y_real_tr, y_predicted_tr)
             res_te = mean_absolute_percentage_error(y_real_te, y_predicted_te)
-        elif Final_metric = "R2" :
+        elif Final_metric == "R2" :
             res_tr = r2_score(y_real_tr, y_predicted_tr)
             res_te = r2_score(y_real_te, y_predicted_te)
         #res_tr = np.sqrt( (( 10**Model.Predict(X_train) -  10**(y_train))**2).sum()/len(y_train)  )    
