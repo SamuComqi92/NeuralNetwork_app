@@ -29,8 +29,6 @@ def train_test_customsplit(dataframe, target, step_further) :
     st.write("### Creation of Training and Test set")
     
     # Creazione di X (attributi) e y (target) come array
-    #X = np.array( dataframe.drop(target, axis = 1).drop(["index"], axis = 1) )
-    #y = np.array( dataframe[target].to_numpy )
     X = dataframe.drop(target, axis = 1).drop(["index"], axis = 1).to_numpy()
     y = dataframe[target].to_numpy()
     
