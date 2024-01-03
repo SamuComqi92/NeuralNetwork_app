@@ -21,6 +21,7 @@ def train_test_customsplit(dataframe, target, step_further) :
     - y_train: target per il training
     - y_test: target per la validation
     - step_further
+    - final_columns: colonne finali del dataframe
     """
     
     st.text("")
@@ -29,6 +30,7 @@ def train_test_customsplit(dataframe, target, step_further) :
     st.write("### Creation of Training and Test set")
     
     # Creazione di X (attributi) e y (target) come array
+    final_columns = dataframe.drop(["index"], axis = 1).columns
     X = dataframe.drop(target, axis = 1).drop(["index"], axis = 1).to_numpy()
     y = dataframe[target].to_numpy()
     
@@ -47,4 +49,4 @@ def train_test_customsplit(dataframe, target, step_further) :
     X_test = pd.DataFrame(X_test, columns = dataframe.drop(target,axis=1).drop(["index"], axis = 1).columns)
     step_further = 5
 
-    return X, y, X_train, X_test, y_train, y_test, step_further
+    return X, y, X_train, X_test, y_train, y_test, step_further, final_columns
