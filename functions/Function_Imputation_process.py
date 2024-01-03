@@ -45,7 +45,7 @@ def Imputation_process(dataframe, categorical, numerical) :
                 step_further, categ_impute = 1, 1
             elif categorical_method == 'Substitute null values with the mode':        # Sostituzione con la moda
                 value_imputation_cat = dataframe[categorical].mode().iloc[0]
-                dataframe[categorical] = dataframe[categorical].fillna(Value_imputation_cat)
+                dataframe[categorical] = dataframe[categorical].fillna(value_imputation_cat)
                 step_further, categ_impute = 1, 2
 
     # Se non ci sono colonne categoriche
