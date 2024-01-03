@@ -26,11 +26,9 @@ def pipeline_nn(uploaded_file_test, Selected_columns_start, Numer, Categ, Tar, S
     # Quest'ultimo verrà modificato a seconda delle scelte dell'utente
     dataframe_test = pd.read_csv(uploaded_file_test, delimiter=';')
 
-    st.write(dataframe_test)
     # Drop columns with more than 70% of missing data
     dataframe_test = dataframe_test[Selected_columns_start]
 
-    st.write(dataframe_test)
     #Convert to numeric (conversion of CSV file does not always work)
     for i in Numer + Tar :
         dataframe_test[i] = dataframe_test[i].astype(str).str.replace(',', '.').astype(float)
@@ -61,10 +59,6 @@ def pipeline_nn(uploaded_file_test, Selected_columns_start, Numer, Categ, Tar, S
     elif Sub_categ_list[0] == 'Drop rows (careful!)' :
         dataframe_test[Categ] = dataframe_test[Categ].isnull().to_numpy().nonzero()[0]
 
-    # Missing values in target column
-    dataframe_test = dataframe_test.dropna(subset = Tar)
-
-    st.write(Tra_categ_list, dataframe_test.columns)
     # Categorical to numerical column transformation
     if Tra_categ_list[0] == '' :
         pass
@@ -75,7 +69,8 @@ def pipeline_nn(uploaded_file_test, Selected_columns_start, Numer, Categ, Tar, S
             for j in columns_test :
                 columns_test[m] = i + "_" + columns_test[m]
                 m=m+1
-            transformed_test = pd.DataFrame(Tra_categ_list[1].transform(dataframe_test[i].astype(str)), columns = columns_test)
+            st.write(columns_test)
+            transformed_test = pd.DataFrame(Tra_categ_list[1].transform(dataframe_test[i].astype(str)))#, columns = columns_test)
             dataframe_test = pd.concat([transformed_test, dataframe_test], axis=1).drop([i], axis=1)
     elif Tra_categ_list[0] == 'String to numbers':
         # List of dictionaries e inizializzazione indice utilizzato nel loop successivo
