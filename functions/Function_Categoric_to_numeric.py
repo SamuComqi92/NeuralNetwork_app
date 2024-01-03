@@ -48,9 +48,9 @@ def Categoric_to_numeric(dataframe, categorical_features, step_further) :
             for i in categorical_features :
                 result_dict = dict(zip(np.unique(dataframe[i]), np.arange(0,len(np.unique(dataframe[i])))))
                 list_imputation_dict.append(result_dict)
-                st.write(result_dict)
                 dataframe[i].replace(np.unique(dataframe[i]), np.arange(0,len(np.unique(dataframe[i]))), inplace = True)
 
+    st.write(list_imputation_dict)
     # Aggiornamento dello step
     step_further = 4
 
