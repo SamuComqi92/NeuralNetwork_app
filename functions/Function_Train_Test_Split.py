@@ -34,8 +34,7 @@ def Train_Test_Split(dataframe, Categ, Numer, Tar, step_further) :
 
     # Slider per scegliere le dimensioni del Validation set
     # Eventuali errori dovuti a valori categorici non distribuiti in modo corretto si possono risolvere aumentando le dimensioni del training set
-    Size_test = st.slider('Select the size of the Test set (% with respecto the the total number of data)',  100*1/len(X), 100*(len(X)-1)/len(X), 70.0
-        )
+    Size_test = st.slider('Select the size of the Test set (% with respecto the the total number of data)',  100*1/len(X), 100*(len(X)-1)/len(X), 70.0)
 
     st.write('If the training process raises an error due to categorical values not found in the validation set, try to increase the training set size.')
     
