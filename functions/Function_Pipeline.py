@@ -80,15 +80,11 @@ def Pipeline_NN(uploaded_file_test, Selected_columns_start, Numer, Categ, Tar, S
             transformed_test = pd.DataFrame(Tra_categ_list[1].transform(dataframe_test[i].astype(str)), columns = columns_test)
             dataframe_test = pd.concat([transformed_test, dataframe_test], axis=1).drop([i], axis=1)
     elif Tra_categ_list[0] == 'String to numbers':
-        # List of dictionaries
+        # List of dictionaries e inizializzazione indice utilizzato nel loop successivo
         List_dict = Tra_categ_list[2]
-
-        # Inizializzo indice
         idx = 0
-        # Loop per tutte le colonne categoriche
         for i in Categ :
-            st.write(i, List_dict[idx])
-            dataframe_test[i].replace(List_dict[idx], inplace = True) #np.unique(dataframe_test[i]),np.arange(0,len(np.unique(dataframe_orig[i]))),inplace=True)
+            dataframe_test[i].replace(List_dict[idx], inplace = True)
             idx = idx + 1
           
     # Creation of X (attributes) and y (target)
