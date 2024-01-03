@@ -190,7 +190,7 @@ if uploaded_file is not None:
 
             # Trasformazione del dataset con pipeline
             X_test_final, y_test_final, dataframe_test = Function_Pipeline.pipeline_nn(uploaded_file_test, Selected_columns_start, Numer, Categ, Tar, Sub_num_list, Sub_categ_list, 
-                                                                                       Tra_categ_list, dataframe, st.session_state["Tra_num_list_final"], st.session_state["Norm_tar_list_final"])
+                                            Tra_categ_list, st.session_state["Final_columns"], st.session_state["Tra_num_list_final"], st.session_state["Norm_tar_list_final"])
 
             # Applicazione del modello finale
             Predictions_test = st.session_state["Final_model"].Predict( X_test_final )
