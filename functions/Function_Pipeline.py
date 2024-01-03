@@ -25,10 +25,12 @@ def pipeline_nn(uploaded_file_test, Selected_columns_start, Numer, Categ, Tar, S
     # Salvo il file caricato in un dataframe
     # Quest'ultimo verrà modificato a seconda delle scelte dell'utente
     dataframe_test = pd.read_csv(uploaded_file_test, delimiter=';')
-    
+
+    st.write(dataframe_test)
     # Drop columns with more than 70% of missing data
     dataframe_test = dataframe_test[Selected_columns_start]
 
+    st.write(dataframe_test)
     #Convert to numeric (conversion of CSV file does not always work)
     for i in Numer + Tar :
         dataframe_test[i] = dataframe_test[i].astype(str).str.replace(',', '.').astype(float)
