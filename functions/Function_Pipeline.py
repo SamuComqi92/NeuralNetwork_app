@@ -71,6 +71,7 @@ def Pipeline_NN(uploaded_file_test, Selected_columns_start, Numer, Categ, Tar, S
     if Tra_categ_list[0] == '' :
         pass
     elif Tra_categ_list[0] == 'OneHotEncoder':
+        st.write(Categ)
         for i in Categ :
             columns_test = np.unique(dataframe_test[i].astype(str))
             m=0
