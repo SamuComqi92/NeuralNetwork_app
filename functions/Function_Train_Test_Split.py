@@ -23,7 +23,7 @@ def train_test_customsplit(dataframe, Categ, Numer, Tar, step_further) :
     - step_further
     """
     
-    st.text("\n" * 3)
+    st.text("\n" * 4)
     #st.text("")
     #st.text("")
     st.write("### Creation of Training and Test set")
