@@ -38,7 +38,7 @@ def pipeline_nn(uploaded_file_test, Selected_columns_start, Numer, Categ, Tar, S
     if Sub_num_list[0] == '' :
         st.write(1)
     else :
-      st.write(2)
+        st.write(Sub_num_list[0])
       
     if Sub_num_list[0] == '' :
         st.write(1)
