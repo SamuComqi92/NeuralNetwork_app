@@ -36,16 +36,16 @@ def pipeline_nn(uploaded_file_test, Selected_columns_start, Numer, Categ, Tar, S
 
     # Missing numerical features
     if Sub_num_list[0] == '' :
-        st.write(Sub_num_list)
+        st.write(1)
         pass
     elif Sub_num_list[0] == 'Substitute null values with the mean':
-        st.write(Sub_num_list)
+        st.write(2)
         dataframe_test[Numer] = dataframe_test[Numer].fillna(Sub_num_list[1])
     elif Sub_num_list[0] == 'Substitute null values with the median':
-        st.write(Sub_num_list)
+        st.write(3)
         dataframe_test[Numer] = dataframe_test[Numer].fillna(Sub_num_list[1])
     elif Sub_num_list[0] == 'Drop rows (careful!)' :
-        st.write(Sub_num_list)
+        st.write(4)
         dataframe_test[Numer] = dataframe_test[Numer].isnull().to_numpy().nonzero()[0]
 
     # Missing categorical features
