@@ -24,10 +24,10 @@ def pipeline_nn(uploaded_file_test, Selected_columns_start, Numer, Categ, Tar, S
  
     # Salvo il file caricato in un dataframe
     # Quest'ultimo verrà modificato a seconda delle scelte dell'utente
-    dataframe_uplodaded = pd.read_csv(uploaded_file_test, delimiter=';')
+    dataframe_test = pd.read_csv(uploaded_file_test, delimiter=';')
                   
     # Drop columns with more than 70% of missing data
-    dataframe_test = dataframe_uplodaded[Selected_columns_start]
+    dataframe_test = dataframe_test[Selected_columns_start]
 
     #Convert to numeric (conversion of CSV file does not always work)
     for i in Numer + Tar :
@@ -54,6 +54,9 @@ def pipeline_nn(uploaded_file_test, Selected_columns_start, Numer, Categ, Tar, S
     elif Sub_categ_list[0] == 'Drop rows (careful!)' :
         dataframe_test[Categ] = dataframe_test[Categ].isnull().to_numpy().nonzero()[0]
 
+    # Copia del dataframe pulito
+    dataframe_clean = dataframe_test.copy()
+                  
     # Categorical to numerical column transformation
     if Tra_categ_list[0] == '' :
         pass
@@ -105,4 +108,4 @@ def pipeline_nn(uploaded_file_test, Selected_columns_start, Numer, Categ, Tar, S
             y_test_final = np.array(pd.DataFrame(Norm_tar_list[1].transform(y_test_final)))
 
     # Dopo tutte le trasformazioni, restituisco il dataframe con gli attributi e la colonna target, e il dataframe_test completo
-    return X_test_final, y_test_final, dataframe_uplodaded
+    return X_test_final, y_test_final, dataframe_clean
