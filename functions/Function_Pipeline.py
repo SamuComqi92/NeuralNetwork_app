@@ -25,7 +25,7 @@ def pipeline_nn(uploaded_file_test, Selected_columns_start, Numer, Categ, Tar, S
     # Salvo il file caricato in un dataframe
     # Quest'ultimo verrà modificato a seconda delle scelte dell'utente
     dataframe_test = pd.read_csv(uploaded_file_test, delimiter=';')
-
+                  
     # Drop columns with more than 70% of missing data
     dataframe_test = dataframe_test[Selected_columns_start]
 
@@ -34,11 +34,6 @@ def pipeline_nn(uploaded_file_test, Selected_columns_start, Numer, Categ, Tar, S
         dataframe_test[i] = dataframe_test[i].astype(str).str.replace(',', '.').astype(float)
         dataframe_test[i].apply(pd.to_numeric)
 
-    # Trasformazione della colonna Target
-    #for i in Tar :
-    #    dataframe_test[i] = dataframe_test[i].astype(str).str.replace(',', '.').astype(float)
-    #    dataframe_test[i].apply(pd.to_numeric)
-        
     # Missing numerical features
     if Sub_num_list[0] == '' :
         pass
@@ -69,7 +64,7 @@ def pipeline_nn(uploaded_file_test, Selected_columns_start, Numer, Categ, Tar, S
             for j in columns_test :
                 columns_test[m] = i + "_" + columns_test[m]
                 m=m+1
-            transformed_test = pd.DataFrame(Tra_categ_list[1].transform(dataframe_test[i].astype(str)))#, columns = columns_test)
+            transformed_test = pd.DataFrame(Tra_categ_list[1].transform(dataframe_test[i].astype(str)))
             dataframe_test = pd.concat([transformed_test, dataframe_test], axis=1).drop([i], axis=1)
     elif Tra_categ_list[0] == 'String to numbers':
         # List of dictionaries e inizializzazione indice utilizzato nel loop successivo
