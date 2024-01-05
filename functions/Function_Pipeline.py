@@ -37,6 +37,11 @@ def pipeline_nn(uploaded_file_test, Selected_columns_start, Numer, Categ, Tar, S
     # Missing numerical features
     if Sub_num_list[0] == '' :
         st.write(1)
+    else :
+      st.write(2)
+      
+    if Sub_num_list[0] == '' :
+        st.write(1)
         pass
     elif Sub_num_list[0] == 'Substitute null values with the mean':
         st.write(2)
