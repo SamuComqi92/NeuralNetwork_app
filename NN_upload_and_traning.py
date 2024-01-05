@@ -85,11 +85,8 @@ if uploaded_file is not None:
     if step_further == 3 and len(Categ) != 0 and dataframe.isna().sum().sum() == 0 :
         dataframe, Tra_categ_list, step_further = Function_Categoric_to_numeric.Categoric_to_numeric(dataframe, Categ, step_further)
     else :
-        Tra_categ = []
-        list_imputation_dict = []
-        jobs_encoder = None
         step_further = 4
-        Tra_categ_list = [Tra_categ, jobs_encoder, list_imputation_dict]
+        Tra_categ_list = [[], None, []]
     
     ##############################################################################################################################################################################################################
     # Creazione dei set di Training e Validation per la valutazione del modello
@@ -165,8 +162,8 @@ if uploaded_file is not None:
             # Salvo tutto nella sessione (per far in modo che, una volta caricato il file di test, tutti parametri rimangano salvati)
             st.session_state["Final_model"] = Final_model
             st.session_state["Tra_num_list_final"] = Tra_num_list_final
-            st.session_state["flag_finalization"] = flag_finalization
             st.session_state["Norm_tar_list_final"] = Norm_tar_list_final
+            st.session_state["flag_finalization"] = flag_finalization
 
             # Salvataggio del modello finale nel file "Best_model_parameters.json"
             file_path = "Best_model_parameters.json"
