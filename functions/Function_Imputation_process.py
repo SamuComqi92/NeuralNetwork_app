@@ -87,4 +87,4 @@ def Imputation_process(dataframe, categorical, numerical) :
     list_numerical = [numerical_method, value_imputation_num]
     list_categorical = [categorical_method, value_imputation_cat]
 
-    return dataframe, categ_impute, numer_impute, list_numerical, list_categorical, step_further, a, b
+    return dataframe, categ_impute, numer_impute, list_categorical, list_numerical, step_further, a, b
