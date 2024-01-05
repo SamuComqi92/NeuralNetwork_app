@@ -35,6 +35,7 @@ def pipeline_nn(uploaded_file_test, Selected_columns_start, Numer, Categ, Tar, S
         dataframe_test[i].apply(pd.to_numeric)
 
     # Missing numerical features
+    st.write(Sub_num_list)
     if Sub_num_list[0] == '' :
         pass
     elif Sub_num_list[0] == 'Substitute null values with the mean':
@@ -45,6 +46,7 @@ def pipeline_nn(uploaded_file_test, Selected_columns_start, Numer, Categ, Tar, S
         dataframe_test[Numer] = dataframe_test[Numer].isnull().to_numpy().nonzero()[0]
 
     # Missing categorical features
+    st.write(Sub_categ_list)
     if Sub_categ_list[0] == '' :
         pass
     elif Sub_categ_list[0] == 'Substitute null values with string NAN':
