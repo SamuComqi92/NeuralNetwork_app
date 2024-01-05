@@ -55,7 +55,6 @@ def pipeline_nn(uploaded_file_test, Selected_columns_start, Numer, Categ, Tar, S
         dataframe_test[Categ] = dataframe_test[Categ].isnull().to_numpy().nonzero()[0]
 
     # Copia del dataframe pulito
-    st.write(dataframe_test)
     dataframe_clean = dataframe_test.copy()
                   
     # Categorical to numerical column transformation
