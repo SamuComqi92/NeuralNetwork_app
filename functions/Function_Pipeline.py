@@ -69,7 +69,6 @@ def pipeline_nn(uploaded_file_test, Selected_columns_start, Numer, Categ, Tar, S
             for j in columns_test :
                 columns_test[m] = i + "_" + columns_test[m]
                 m=m+1
-            st.write(columns_test)
             transformed_test = pd.DataFrame(Tra_categ_list[1].transform(dataframe_test[i].astype(str)))#, columns = columns_test)
             dataframe_test = pd.concat([transformed_test, dataframe_test], axis=1).drop([i], axis=1)
     elif Tra_categ_list[0] == 'String to numbers':
@@ -81,11 +80,10 @@ def pipeline_nn(uploaded_file_test, Selected_columns_start, Numer, Categ, Tar, S
             idx = idx + 1
 
     # Impostazione nome per le colonne del dataframe finale
-    st.write(dataframe_test.columns, dataframe_columns)
     dataframe_test.columns = dataframe_columns
                   
     # Creation of X (attributes) and y (target)
-    X_test_final = pd.DataFrame(dataframe_test.drop(Tar,axis=1))#, columns = dataframe_test.drop(Tar,axis=1).columns)
+    X_test_final = pd.DataFrame(dataframe_test.drop(Tar,axis=1))
     y_test_final = np.array( dataframe_test[Tar] )
 
     # Convertion column names to string (to avoid errors)
@@ -95,7 +93,7 @@ def pipeline_nn(uploaded_file_test, Selected_columns_start, Numer, Categ, Tar, S
     if Tra_num_list[0] == '' :
         pass
     elif Tra_num_list[0] == 'MinMaxScaler' or Tra_num_list[0] == 'StandardScaler':
-        X_test_final = pd.DataFrame(Tra_num_list[1].transform(X_test_final))#, columns = X_test_final.columns)
+        X_test_final = pd.DataFrame(Tra_num_list[1].transform(X_test_final))
     elif Tra_num_list[0] == 'Do not normalize':
         pass
 
