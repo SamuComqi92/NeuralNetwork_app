@@ -533,6 +533,7 @@ class NeuralNet :
                 # Dizionario della trasformazione
                 unique_classes = Encoder.categories_[0]
                 Class_convertion = { number: label for number, label in zip( range(len(unique_classes)), unique_classes ) }
+                st.write(Class_convertion)
             else :
                 yy = y_train
                 yy_test = y_test
