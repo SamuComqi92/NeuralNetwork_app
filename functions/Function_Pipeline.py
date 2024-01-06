@@ -5,7 +5,7 @@ import streamlit as st
 
 # Funzione per eseguire una pipeline
 def pipeline_nn(uploaded_file_test, Selected_columns_start, Numer, Categ, Tar, Sub_num_list, Sub_categ_list, 
-                Tra_categ_list, dataframe_columns, Tra_num_list, Norm_tar_list) :
+                Tra_categ_list, dataframe_columns, Tra_num_list, Norm_tar_list, Task) :
     """ La funzione applica tutte le trasformazioni scelte dall'utente sul file CSV di test caricato tramite pulsante.
     La funzione restituisce il dataframe con gli attributi e la colonna target, entrambi trasformati, e il dataframe_test completo finale (trasformato).
     Gli argomenti della funzione sono i seguenti:
@@ -20,6 +20,7 @@ def pipeline_nn(uploaded_file_test, Selected_columns_start, Numer, Categ, Tar, S
      - dataframe_columns: colonne del dataframe originale trasformato
      - Tra_num_list: lista con metodo di trasformazione delle colonne numeriche e possibile encoder
      - Norm_tar_list: lista con flag di trasformazione della colonna target e possibile min_max_scaler
+     - Task: tipo di analisi (classificazione, regressione)
     """
  
     # Salvo il file caricato in un dataframe
@@ -30,9 +31,14 @@ def pipeline_nn(uploaded_file_test, Selected_columns_start, Numer, Categ, Tar, S
     dataframe_test = dataframe_test[Selected_columns_start]
 
     #Convert to numeric (conversion of CSV file does not always work)
-    for i in Numer + Tar :
-        dataframe_test[i] = dataframe_test[i].astype(str).str.replace(',', '.').astype(float)
-        dataframe_test[i].apply(pd.to_numeric)
+    if Task == "Regression" :
+        for i in Numer + Tar :
+            dataframe_test[i] = dataframe_test[i].astype(str).str.replace(',', '.').astype(float)
+            dataframe_test[i].apply(pd.to_numeric)
+    else :
+        for i in Numer :
+          dataframe_test[i] = dataframe_test[i].astype(str).str.replace(',', '.').astype(float)
+          dataframe_test[i].apply(pd.to_numeric)
 
     # Missing numerical features
     if Sub_num_list[0] == '' :
