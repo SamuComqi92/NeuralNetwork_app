@@ -169,6 +169,7 @@ if uploaded_file is not None:
             st.session_state["Norm_tar_list_final"] = Norm_tar_list_final
             st.session_state["flag_finalization"] = flag_finalization
 
+            st.write(st.session_state["Final_model"].class_conv)
             # Salvataggio del modello finale nel file "Best_model_parameters.json"
             file_path = "Best_model_parameters.json"
             Final_model.Save_model(file_path)
