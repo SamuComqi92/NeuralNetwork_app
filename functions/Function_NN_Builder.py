@@ -23,7 +23,7 @@ def NN_Builder(dataframe, Task) :
         html_str = f"""
             <style>
             p.a {{
-              font: bold 24px Sans serif;
+              font: bold 23.5px Sans;
             }}
             </style>
             <p class="a">{Task}</p>
