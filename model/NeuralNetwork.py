@@ -44,7 +44,6 @@ class NeuralNet :
     - Predict: class prediction (for classification) and value (for regression)
     - Predict_proba: probability prediction (only for classification)
     - Score: performance metric (different metrics for classification and regression)
-    - Classes: class convertion for classification analysis
     
     Attributes:
     - last_iter: last iteration of training
@@ -53,6 +52,7 @@ class NeuralNet :
     - cost_function_te: cost function values for the validation set up to the last iteration
     - metric_tr: chosen metric with self.metric computed on the training set to be saved at each iteration
     - metric_te: chosen metric with self.metric computed on the test set to be saved at each iteration
+    - class_conv: dizionario con conversione classi (per analisi di classificazione)
     """
     
     def __init__(self, task, function = "Sigmoid", Hidden_layers = (5,), algo = "Batch", batch = None,
