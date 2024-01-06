@@ -703,6 +703,7 @@ class NeuralNet :
         
         Final = NeuralNet.Forward_propagation(self, X, self.best_weights)
         if self.task == "Classification" :
+            st.write(self.class_conv)
             Predictions = Final.argmax(axis=1)
             Predictions = [self.class_conv[value] for value in Predictions]        # Conversione da numeri a stringhe (se necessario)
             return Predictions
