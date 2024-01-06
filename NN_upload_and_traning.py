@@ -54,7 +54,8 @@ if uploaded_file is not None:
     dataframe, Selected_columns_start = Function_Remove_70_missing.remove_missing(dataframe)
 
     # Type of analysis
-    Task1 = st.selectbox( 'Task of this analysis', ['','Classification','Regression'] )
+    Task1 = st.selectbox( 'What is the task of this analysis?', ['','Classification','Regression'] )
+    st.write("If the task is 'Classification', the final model will predict classes; if 'Regression', it will predict numbers.")
     
     ##############################################################################################################################################################################################################
     # Selezione delle varie features (numeriche e categoriche) e della colonna target
