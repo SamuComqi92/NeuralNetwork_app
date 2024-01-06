@@ -530,9 +530,9 @@ class NeuralNet :
                 Encoder = OneHotEncoder().fit(y_train.reshape((len(y_train)),1))
                 yy = Encoder.transform(y_train.reshape((len(y_train)),1)).toarray()
                 yy_test = Encoder.transform(y_test.reshape((len(y_test)),1)).toarray()
-
+                # Dizionario della trasformazione
                 unique_classes = Encoder.categories_[0]
-                st.write( {label: number for label, number in zip(unique_classes, range(len(unique_classes)))})
+                Class_convertion = {label: number for label, number in zip(unique_classes, range(len(unique_classes)))})
             else :
                 yy = y_train
                 yy_test = y_test
@@ -689,7 +689,8 @@ class NeuralNet :
             #self.metric_te = Perf_te
             self.metric_tr = Metric_tr
             self.metric_te = Metric_te
-        
+            self.class_conv = Class_convertion
+
     
     #Module to make predictions
     def Predict(self, X) :
@@ -703,6 +704,7 @@ class NeuralNet :
         Final = NeuralNet.Forward_propagation(self, X, self.best_weights)
         if self.task == "Classification" :
             Predictions = Final.argmax(axis=1)
+            Predictions = [self.class_conv[value] for value in Predictions]        # Conversione da numeri a stringhe (se necessario)
             #for i in np.arange(0,len(Final)) :
             #    Predictions.append(np.argmax(Final[i,:]))
             return Predictions
