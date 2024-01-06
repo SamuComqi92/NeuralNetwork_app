@@ -231,3 +231,7 @@ if uploaded_file is not None:
             st.write("")
             st.write("")
             st.write("Everything is done!")
+
+    # If a task has not been chosen
+    else :
+        st.write("Choose a task for this analysis!")
