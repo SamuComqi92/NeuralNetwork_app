@@ -102,7 +102,6 @@ def pipeline_nn(uploaded_file_test, Selected_columns_start, Numer, Categ, Tar, S
         pass
 
     # Transform target
-    st.write(Norm_tar_list[0])
     if Norm_tar_list[0] == '' or Norm_tar_list[0] == 'No' :
         pass
     else :
