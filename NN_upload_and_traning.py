@@ -230,7 +230,16 @@ if uploaded_file is not None:
             st.write("-----------------------------")
             st.write("")
             st.write("")
-            st.write("Everything is done!")
+            html_str = f"""
+                <style>
+                p.a {{
+                  font: bold 23.5px Sans;
+                }}
+                </style>
+                <p class="a">Everything is done!</p>
+                """                
+            st.markdown(html_str, unsafe_allow_html=True)
+
 
     # If a task has not been chosen
     else :
