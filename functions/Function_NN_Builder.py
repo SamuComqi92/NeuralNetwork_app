@@ -125,4 +125,4 @@ def NN_Builder(dataframe, Task) :
     elif len(Function_) > len(Hidden_layers) :
         st.write("!!! The number of hidden layers must be equal to the number of activation functions !!!")
 
-    return Task, Hidden_layers, Algo, Alpha, Regularization, Momentum, Early_stopping, Verbose, Max_iter, Function_, Batch, Decay, Lambda, Random_state, Patient, Final_metric
+    return Hidden_layers, Algo, Alpha, Regularization, Momentum, Early_stopping, Verbose, Max_iter, Function_, Batch, Decay, Lambda, Random_state, Patient, Final_metric
