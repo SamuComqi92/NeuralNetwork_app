@@ -531,7 +531,7 @@ class NeuralNet :
                 yy = Encoder.transform(y_train.reshape((len(y_train)),1)).toarray()
                 yy_test = Encoder.transform(y_test.reshape((len(y_test)),1)).toarray()
                 
-                st.write( unique_classes = encoder.categories_[0]) )
+                st.write( unique_classes = encoder.categories_[0])
             else :
                 yy = y_train
                 yy_test = y_test
