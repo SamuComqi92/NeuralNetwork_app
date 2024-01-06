@@ -705,6 +705,7 @@ class NeuralNet :
         if self.task == "Classification" :
             Predictions = Final.argmax(axis=1)
             Predictions = [self.class_conv[value] for value in Predictions]        # Conversione da numeri a stringhe (se necessario)
+            st.write(Predictions)
             return Predictions
         else :
             return Final
