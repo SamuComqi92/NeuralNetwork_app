@@ -689,7 +689,10 @@ class NeuralNet :
             #self.metric_te = Perf_te
             self.metric_tr = Metric_tr
             self.metric_te = Metric_te
-            self.class_conv = Class_convertion
+            if self.task == "Classification" :
+                self.class_conv = Class_convertion
+            else :
+                self.class_conv = None
 
     
     #Module to make predictions
