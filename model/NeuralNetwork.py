@@ -530,8 +530,9 @@ class NeuralNet :
                 Encoder = OneHotEncoder().fit(y_train.reshape((len(y_train)),1))
                 yy = Encoder.transform(y_train.reshape((len(y_train)),1)).toarray()
                 yy_test = Encoder.transform(y_test.reshape((len(y_test)),1)).toarray()
-                
-                st.write( Encoder.categories_[0])
+
+                unique_classes = encoder.categories_[0]
+                st.write( {label: number for label, number in zip(unique_classes, range(len(unique_classes)))})
             else :
                 yy = y_train
                 yy_test = y_test
