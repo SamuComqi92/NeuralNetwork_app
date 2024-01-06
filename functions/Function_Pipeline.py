@@ -102,17 +102,12 @@ def pipeline_nn(uploaded_file_test, Selected_columns_start, Numer, Categ, Tar, S
         pass
 
     # Transform target
-    st.write(Norm_tar_list)
-    if Norm_tar_list[0] == '' or Norm_tar_list[0] == 'No' :
+    if Norm_tar_list[0] == 0 or Norm_tar_list[0] == 2 : #'' or Norm_tar_list[0] == 'No' :
         pass
-    else :
-        if float(dataframe_test[Tar].min()) >= 0. :
-            if float(dataframe_test[Tar].max()) > 1. :
-                y_test_final = np.log10(y_test_final+1)
-            else :
-                pass
-        elif float(dataframe_test[Tar].min()) < 0. :
-            y_test_final = np.array(pd.DataFrame(Norm_tar_list[1].transform(y_test_final)))
+    elif Norm_tar_list[0] == 2 :
+        y_test_final = np.log10(y_test_final+1)
+    elif Norm_tar_list[0] == 3 :
+        y_test_final = np.array(pd.DataFrame(Norm_tar_list[1].transform(y_test_final)))
 
     # Dopo tutte le trasformazioni, restituisco il dataframe con gli attributi e la colonna target, e il dataframe_test completo
     return X_test_final, y_test_final, dataframe_clean
