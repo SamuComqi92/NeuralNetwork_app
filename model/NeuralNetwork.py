@@ -748,7 +748,7 @@ class NeuralNet :
             "Regularization": self.regularization,
             "Lambda": self.Lambda,
             "Momentum": self.momentum,
-            "Predictions": list(self.class_conv.items())
+            "Predictions": self.class_conv[0]
         }
 
         # Salvo i dati in un file JSON nel path indicato
