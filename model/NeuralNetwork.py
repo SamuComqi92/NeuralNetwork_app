@@ -216,7 +216,7 @@ class NeuralNet :
         """
         The function returns the values obtained in each layer (through forward propagation) and the errors (through back propagaton)
         - X           input matrix (data with no target column)
-        - yy          target variable transformed with OneHotEncoder (number of columns = number of classes)
+        - y           target variable transformed with OneHotEncoder (number of columns = number of classes)
         - T           tuple containing n matrices (i.e. weights)
         """
         
@@ -530,6 +530,8 @@ class NeuralNet :
                 Encoder = OneHotEncoder().fit(y_train.reshape((len(y_train)),1))
                 yy = Encoder.transform(y_train.reshape((len(y_train)),1)).toarray()
                 yy_test = Encoder.transform(y_test.reshape((len(y_test)),1)).toarray()
+                
+                st.write( unique_classes = encoder.categories_[0]) )
             else :
                 yy = y_train
                 yy_test = y_test
