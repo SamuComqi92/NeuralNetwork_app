@@ -107,7 +107,7 @@ if uploaded_file is not None:
 
     ##############################################################################################################################################################################################################
     # Trasformazione della colonna Target
-    if step_further == 6 :
+    if step_further == 6 and Task1 == 'Regression' :
         y_train, y_test, Norm_tar_list, step_further = Function_Target_transformation.target_transformation(dataframe, Tar, y_train, y_test, step_further)
 
         # Checkbox per mostrare i meno il target
