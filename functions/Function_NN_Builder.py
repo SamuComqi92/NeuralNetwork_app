@@ -4,7 +4,7 @@ import numpy as np
 
 
 # La funzione permette all'utente di scegliere i vari parametri per costuire la rete neurale
-def NN_Builder(dataframe) :
+def NN_Builder(dataframe, Task) :
     """
     La funzione accetta i seguenti argomenti:
     - dataframe: dataframe originale
@@ -19,9 +19,10 @@ def NN_Builder(dataframe) :
     st.write("Set all the hyper-parameters of the Neural Network")
     left_column, right_column = st.columns(2)            # Nella parte principale, crea due colonne dove posso sistemare testi e bottoni
     with left_column:                                    # Qui scelgo di scrivere cose solo nela parte destra
-        Task = st.selectbox(
-            'Task of the analysis',
-            ['','Classification','Regression'])
+        st.write(Task)
+        #Task = st.selectbox(
+        #    'Task of the analysis',
+        #    ['','Classification','Regression'])
 
         st.text("")
         st.text("")
