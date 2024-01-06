@@ -532,7 +532,7 @@ class NeuralNet :
                 yy_test = Encoder.transform(y_test.reshape((len(y_test)),1)).toarray()
                 # Dizionario della trasformazione
                 unique_classes = Encoder.categories_[0]
-                Class_convertion = {label: number for label, number in zip(unique_classes, range(len(unique_classes)))})
+                Class_convertion = { label: number for label, number in zip( unique_classes, range(len(unique_classes)) ) }
             else :
                 yy = y_train
                 yy_test = y_test
