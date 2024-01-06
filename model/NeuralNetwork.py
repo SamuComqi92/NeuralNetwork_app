@@ -533,10 +533,10 @@ class NeuralNet :
                 # Dizionario della trasformazione
                 unique_classes = Encoder.categories_[0]
                 Class_convertion = { number: label for number, label in zip( range(len(unique_classes)), unique_classes ) }
-                st.write(Class_convertion)
             else :
                 yy = y_train
                 yy_test = y_test
+                Class_convertion = None
 
             #Add Bias unit
             X_train_1 = (np.hstack([np.ones((X_train.shape[0],1)),X_train])).T
@@ -690,11 +690,8 @@ class NeuralNet :
             #self.metric_te = Perf_te
             self.metric_tr = Metric_tr
             self.metric_te = Metric_te
-            if self.task == "Classification" :
-                self.class_conv = Class_convertion
-            else :
-                self.class_conv = None
-
+            self.class_conv = Class_convertion
+            
     
     #Module to make predictions
     def Predict(self, X) :
