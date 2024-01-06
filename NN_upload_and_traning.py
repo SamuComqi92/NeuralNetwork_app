@@ -117,7 +117,7 @@ if uploaded_file is not None:
     ##############################################################################################################################################################################################################
     # Costruzione della Rete Neurale
     # Dopo il primo training, è possibile finalizzare il modello ed applicare un nuovo file di test
-    if step_further == 7 :
+    if step_further == 7 and Task1 :
 
         # Scelta dei diversi parametri da parte dell'utente e costruzione dell'oggetto "Model"
         Task, Hidden_layers, Algo, Alpha, Regularization, Momentum, Early_stopping, Verbose, Max_iter, Function_, Batch, Decay, Lambda, Random_state, Patient, Final_metric = Function_NN_Builder.NN_Builder(dataframe, Task1)
