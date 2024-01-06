@@ -135,7 +135,7 @@ if uploaded_file is not None:
             st.write('Training complete!')
 
             # Calcolo metriche finali (per Regressione) e plot
-            Function_Metrics_plot.Metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, Final_metric)
+            Function_Metrics_plot.Metrics_plot(Model, X_train, X_test, y_train, y_test, Task1, Norm_tar_list, Final_metric)
 
 
         ########################################################################################################################################################################################################
@@ -161,7 +161,7 @@ if uploaded_file is not None:
         # Eseguo il training finale e salvo i parametri in un file JSON
         if st.session_state["ButBut"] :
             # Finalizzazione del modello
-            Final_model, Tra_num_list_final, flag_finalization, Norm_tar_list_final = Function_Model_Finalization.Model_Finalization(X, y, Model, Task, Final_metric, Tra_num, Norm_tar_list, flag_stand)
+            Final_model, Tra_num_list_final, flag_finalization, Norm_tar_list_final = Function_Model_Finalization.Model_Finalization(X, y, Model, Task1, Final_metric, Tra_num, Norm_tar_list, flag_stand)
 
             # Salvo tutto nella sessione (per far in modo che, una volta caricato il file di test, tutti parametri rimangano salvati)
             st.session_state["Final_model"] = Final_model
@@ -195,14 +195,14 @@ if uploaded_file is not None:
             Predictions_test = st.session_state["Final_model"].Predict( X_test_final )
             
             # Calcolo predizioni e probabilità (solo per classificazione)
-            if Task == "Classification" :
+            if Task1 == "Classification" :
                 Predictions_prob_test = st.session_state["Final_model"].Predict_proba( X_test_final )
                 dataframe_test["Predictions"] = Predictions_test
                 dataframe_test["Probability"] = Predictions_prob_test
-            if Task == "Regression" and st.session_state["Norm_tar_list_final"][0] == 3:
+            if Task1 == "Regression" and st.session_state["Norm_tar_list_final"][0] == 3:
                 Predictions_test = st.session_state["Norm_tar_list_final"][1].inverse_transform(Predictions_test)
                 dataframe_test["Predictions"] = Predictions_test
-            elif Task == "Regression" and st.session_state["Norm_tar_list_final"][0] == 1:
+            elif Task1 == "Regression" and st.session_state["Norm_tar_list_final"][0] == 1:
                 Predictions_test = 10**Predictions_test + 1
                 dataframe_test["Predictions"] = Predictions_test
 
