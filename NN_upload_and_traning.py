@@ -113,6 +113,8 @@ if uploaded_file is not None:
         # Checkbox per mostrare i meno il target
         if st.checkbox('Show Target (training set)', key = 61):                
             st.write(y_train)
+    else :
+        step_further = 7
 
     ##############################################################################################################################################################################################################
     # Costruzione della Rete Neurale
