@@ -748,7 +748,7 @@ class NeuralNet :
             "Regularization": self.regularization,
             "Lambda": self.Lambda,
             "Momentum": self.momentum,
-            "Predictions": [[key, value] for key, value in self.class_conv.items()]
+            "Predictions": {key: value.tolist() if isinstance(value, np.ndarray) else value for key, value in self.class_conv.items()}
         }
 
         # Salvo i dati in un file JSON nel path indicato
