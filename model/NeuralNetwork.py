@@ -704,10 +704,7 @@ class NeuralNet :
         Final = NeuralNet.Forward_propagation(self, X, self.best_weights)
         if self.task == "Classification" :
             Predictions = Final.argmax(axis=1)
-            st.write(self.class_conv)
-            #Predictions = [self.class_conv.get(value, 'Unknown') for value in Predictions]        # Conversione da numeri a stringhe (se necessario)
-            #for i in np.arange(0,len(Final)) :
-            #    Predictions.append(np.argmax(Final[i,:]))
+            Predictions = [self.class_conv[value] for value in Predictions]        # Conversione da numeri a stringhe (se necessario)
             return Predictions
         else :
             return Final
@@ -725,8 +722,6 @@ class NeuralNet :
         Final = NeuralNet.Forward_propagation(self, X, self.best_weights)
         if self.task == "Classification" :
             Predictions = Final.max(axis=1)
-            #for i in np.arange(0,len(Final)) :
-            #    Predictions.append(np.max(Final[i,:]))
             return Predictions
         else :
             raise ValueError("No probabilities for %s" % self.task)
@@ -750,7 +745,8 @@ class NeuralNet :
             "Decay": self.decay,
             "Regularization": self.regularization,
             "Lambda": self.Lambda,
-            "Momentum": self.momentum
+            "Momentum": self.momentum,
+            "Predictions": self.class_conv
         }
 
         # Salvo i dati in un file JSON nel path indicato
