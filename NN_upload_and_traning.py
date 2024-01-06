@@ -53,6 +53,9 @@ if uploaded_file is not None:
     # Rimozione righe e colonne con più del 70% di valori mancanti    
     dataframe, Selected_columns_start = Function_Remove_70_missing.remove_missing(dataframe)
 
+    # Type of analysis
+    Task1 = st.selectbox( 'Task of this analysis', ['','Classification','Regression'] )
+    
     ##############################################################################################################################################################################################################
     # Selezione delle varie features (numeriche e categoriche) e della colonna target
     # Correzzione colonne numeriche del dataframe
@@ -60,7 +63,7 @@ if uploaded_file is not None:
     st.text("")
     st.text("")
     st.write("### Select Target, Categorical, and Numerical features")
-    dataframe, Tar, Categ, Numer = Function_Feature_selection.Feature_selection(dataframe)
+    dataframe, Tar, Categ, Numer = Function_Feature_selection.Feature_selection(dataframe, Task1)
 
     ##############################################################################################################################################################################################################
     # Gestione dei valori mancanti nelle colonne categoriche e categoriche, e infine i valori mancanti nella colonna Target (che vengono eliminati)
