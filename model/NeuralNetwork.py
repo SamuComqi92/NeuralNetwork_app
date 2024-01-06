@@ -734,6 +734,7 @@ class NeuralNet :
     # Module to save the best model in a given path as a JSON file
     def Save_model(self, file_name) :
         # Set di variabili
+        st.write(list(self.class_conv.items()))
         data = {
             "Task": self.task,
             "Functions": self.function,
