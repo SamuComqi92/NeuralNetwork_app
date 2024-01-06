@@ -704,7 +704,7 @@ class NeuralNet :
         Final = NeuralNet.Forward_propagation(self, X, self.best_weights)
         if self.task == "Classification" :
             Predictions = Final.argmax(axis=1)
-            st.write( np.array([self.class_conv[num] for num in Predictions]) )       # Conversione da numeri a stringhe (se necessario)
+            Predictions = np.array([self.class_conv[num] for num in Predictions])       # Conversione da numeri a stringhe (se necessario)
             return Predictions
         else :
             return Final
