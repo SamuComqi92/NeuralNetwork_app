@@ -44,6 +44,7 @@ class NeuralNet :
     - Predict: class prediction (for classification) and value (for regression)
     - Predict_proba: probability prediction (only for classification)
     - Score: performance metric (different metrics for classification and regression)
+    - Classes: class convertion for classification analysis
     
     Attributes:
     - last_iter: last iteration of training
@@ -730,7 +731,10 @@ class NeuralNet :
     # Module to save the best weights
     def Best_Weights(self) :
         return self.best_weights
-    
+
+    def Classes(self) :
+        return self.class_conv
+        
     # Module to save the best model in a given path as a JSON file
     def Save_model(self, file_name) :
         # Set di variabili
@@ -747,8 +751,7 @@ class NeuralNet :
             "Decay": self.decay,
             "Regularization": self.regularization,
             "Lambda": self.Lambda,
-            "Momentum": self.momentum,
-            "Predictions": {key: value.tolist() if isinstance(value, np.ndarray) else value for key, value in self.class_conv.items()}
+            "Momentum": self.momentum
         }
 
         # Salvo i dati in un file JSON nel path indicato
