@@ -532,7 +532,7 @@ class NeuralNet :
                 yy_test = Encoder.transform(y_test.reshape((len(y_test)),1)).toarray()
                 # Dizionario della trasformazione
                 unique_classes = Encoder.categories_[0]
-                Class_convertion = { label: number for label, number in zip( unique_classes, range(len(unique_classes)) ) }
+                Class_convertion = { number: label for number, label in zip( range(len(unique_classes)), unique_classes ) }
             else :
                 yy = y_train
                 yy_test = y_test
@@ -703,7 +703,6 @@ class NeuralNet :
         
         Final = NeuralNet.Forward_propagation(self, X, self.best_weights)
         if self.task == "Classification" :
-            st.write(self.class_conv)
             Predictions = Final.argmax(axis=1)
             Predictions = np.array([self.class_conv[num] for num in Predictions])        # Conversione da numeri a stringhe (se necessario)
             return Predictions
