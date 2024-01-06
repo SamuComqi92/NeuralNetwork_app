@@ -3,9 +3,9 @@ import pandas as pd
 import streamlit as st
 
 # Funzione per scegliere le feature categoriche, numeriche e target da usare
-def Feature_selection(dataframe) :
+def Feature_selection(dataframe, task) :
     """
-    La funzione accetta come unico argomento il dataframe da controllare. La funzione converte anche in modo corretto le colonne numeriche
+    La funzione accetta come argomenti il dataframe da controllare e il tipo di analisi. La funzione converte anche in modo corretto le colonne numeriche
     La funzione restituisce il dataframe con valori numerici corretti, la colonna target, e le liste delle colonne categoriche e numeriche
     """
     # Check per controllare che il dataframe non sia vuoto + selezione della colonna target
@@ -33,8 +33,13 @@ def Feature_selection(dataframe) :
 
     # Conversione delle colonne numeriche e Target
     # Può capitare che dopo la lettura di un file CSV, i dati numerici (con decimali) non siano convertiti in modo corretto
-    for i in numerical + target :
-        dataframe[i] = dataframe[i].astype(str).str.replace(',', '.').astype(float)
-        dataframe[i].apply(pd.to_numeric)
-
+    if task == "Regression" :
+        for i in numerical + target :
+            dataframe[i] = dataframe[i].astype(str).str.replace(',', '.').astype(float)
+            dataframe[i].apply(pd.to_numeric)
+    else :
+        for i in numerical :
+            dataframe[i] = dataframe[i].astype(str).str.replace(',', '.').astype(float)
+            dataframe[i].apply(pd.to_numeric)
+            
     return dataframe, target, categorical, numerical
