@@ -19,6 +19,7 @@ def NN_Builder(dataframe, Task) :
     st.write("Set all the hyper-parameters of the Neural Network")
     left_column, right_column = st.columns(2)            # Nella parte principale, crea due colonne dove posso sistemare testi e bottoni
     with left_column:                                    # Qui scelgo di scrivere cose solo nela parte destra
+        # Task of the analysis
         st.write("The task is:")
         html_str = f"""
             <style>
@@ -30,9 +31,6 @@ def NN_Builder(dataframe, Task) :
             """
             
         st.markdown(html_str, unsafe_allow_html=True)
-        #Task = st.selectbox(
-        #    'Task of the analysis',
-        #    ['','Classification','Regression'])
 
         st.text("")
         st.text("")
