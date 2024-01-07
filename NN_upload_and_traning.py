@@ -18,7 +18,7 @@ from model import NeuralNetwork
 # Pulizia e trasformazione dataset
 from functions import Function_Remove_70_missing, feature_selection, imputation_process, missing_target, categoric_to_numeric
 # Training, Finalizzazione, e Pipeline
-from functions import Function_Train_Test_Split, Function_Standard_X_train, Function_Target_transformation, Function_NN_Builder, metrics_plot
+from functions import Function_Train_Test_Split, Function_Standard_X_train, Function_Target_transformation, nn_builder, metrics_plot
 # Finalizzazione e Pipeline
 from functions import model_finalization, Function_Pipeline
 
@@ -120,7 +120,7 @@ if uploaded_file is not None:
         if step_further == 7 and Task1 :
     
             # Scelta dei diversi parametri da parte dell'utente e costruzione dell'oggetto "Model"
-            Hidden_layers, Algo, Alpha, Regularization, Momentum, Early_stopping, Verbose, Max_iter, Function_, Batch, Decay, Lambda, Random_state, Patient, Final_metric = Function_NN_Builder.NN_Builder(dataframe, Task1)
+            Hidden_layers, Algo, Alpha, Regularization, Momentum, Early_stopping, Verbose, Max_iter, Function_, Batch, Decay, Lambda, Random_state, Patient, Final_metric = nn_builder.nn_builder(dataframe, Task1)
             Model = NeuralNetwork.NeuralNet(task = Task1, function = Function_, Hidden_layers = Hidden_layers, algo = Algo, batch = Batch, alpha = float(Alpha), decay = float(Decay), 
                             regularization = Regularization, Lambda = float(Lambda), Max_iter = int(Max_iter), momentum = float(Momentum), random_state = int(Random_state), verbose = Verbose,
                             early_stopping = Early_stopping, patient = int(Patient), flag_plot = False, metric = Final_metric)
