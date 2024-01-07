@@ -86,7 +86,7 @@ def Model_Finalization(X, y, Model, Task, Final_metric, Tra_num, Norm_tar_list, 
         st.write("Previous RMSE: {:.5f}".format(st.session_state.res_tr))
     # Nessuna trasformazione
     else :
-        st.write("Final {}: {:.5f}".format(Final_metric, Model.metric_te))
+        st.write("Final {}: {:.5f}".format(Final_metric, Model.last_metric_te))
         st.write("Previous {}: {:.5f}".format(Final_metric, st.session_state.res_te))
 
     return st.session_state.Final_model, Tra_num_list_final, st.session_state["flag_finalization"], Norm_tar_list_final
