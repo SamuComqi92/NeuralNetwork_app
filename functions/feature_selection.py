@@ -3,7 +3,7 @@ import pandas as pd
 import streamlit as st
 
 # Funzione per scegliere le feature categoriche, numeriche e target da usare
-def Feature_selection(dataframe, task) :
+def feature_selection(dataframe, task) :
     """
     La funzione accetta come argomenti il dataframe da controllare e il tipo di analisi. La funzione converte anche in modo corretto le colonne numeriche
     La funzione restituisce il dataframe con valori numerici corretti, la colonna target, e le liste delle colonne categoriche e numeriche
