@@ -61,8 +61,12 @@ def Metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, F
     st.session_state["res_te"]  = res_te
 
     # Creazione del plot finale
-    # Learning curves
-    fig, (ax1,ax2,ax3) = plt.subplots(1, 3, figsize = (15, 4))
+    if Task == "Regression" :
+        fig, (ax1,ax2,ax3) = plt.subplots(1, 3, figsize = (15, 4))
+    else :
+        fig, (ax1,ax2) = plt.subplots(1, 2, figsize = (10, 4))
+    
+    # Plot delle learning curves
     ax1.plot(Model.cost_function_tr, '-b')
     ax1.plot(Model.cost_function_te,'-r')
     ax1.legend(["Training set","Test set"])
@@ -74,26 +78,27 @@ def Metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, F
     if Task == "Regression" :
         if Norm_tar_list[3] == 20 :
             ax2.plot(Norm_tar_list[1].inverse_transform(Model.Predict(X_test)), Norm_tar_list[1].inverse_transform(y_test), 'ob')
-            rangg = np.arange(Norm_tar_list[1].inverse_transform(Model.Predict(X_test)).min(), Norm_tar_list[1].inverse_transform(Model.Predict(X_test)).max())
             ax3.hist(Norm_tar_list[1].inverse_transform(Model.Predict(X_test)) - Norm_tar_list[1].inverse_transform(y_test), bins = 20, color = 'blue', alpha = 0.7)
+            rangg = np.arange(Norm_tar_list[1].inverse_transform(Model.Predict(X_test)).min(), Norm_tar_list[1].inverse_transform(Model.Predict(X_test)).max())
         elif Norm_tar_list[3] == 10 :
             ax2.plot( 10**Model.Predict(X_test)+1, 10**(y_test)+1, 'ob')
-            rangg = np.arange( (10**Model.Predict(X_test) +1 ).min(), (10**Model.Predict(X_test)).max())
             ax3.hist(10**Model.Predict(X_test) - 10**(y_test), bins = 20, color = 'blue', alpha = 0.7)
+            rangg = np.arange( (10**Model.Predict(X_test) +1 ).min(), (10**Model.Predict(X_test)).max())
         else :
             ax2.plot(Model.Predict(X_test),y_test, 'ob')
-            rangg = np.arange(Model.Predict(X_test).min(), Model.Predict(X_test).max())
             ax3.hist(Model.Predict(X_test) - y_test, bins = 20, color = 'blue', alpha = 0.7)
+            rangg = np.arange(Model.Predict(X_test).min(), Model.Predict(X_test).max())
         ax2.plot(rangg,rangg, '-r')
         ax2.set_xlabel("Predictions")
         ax2.set_ylabel("Actual values")
         ax3.set_xlabel("Predictions - Actual")
+    # Solo due plot per le analisi di Classificazione
     else :
         ax2.plot(Model.metric_tr, '-b')
         ax2.plot(Model.metric_te,'-r')
         ax2.set_xlabel("Iteration")
         ax2.set_ylabel("{}".format(Final_metric))
         
-    st.pyplot(fig)
+    #st.pyplot(fig)
 
-    return True
+    return st.pyplot(fig)
