@@ -16,7 +16,7 @@ from sklearn.metrics import precision_score,recall_score,f1_score, accuracy_scor
 # Modello Neural Network
 from model import NeuralNetwork
 # Pulizia e trasformazione dataset
-from functions import Function_Remove_70_missing, feature_selection, imputation_process, Function_Missing_target, categoric_to_numeric
+from functions import Function_Remove_70_missing, feature_selection, imputation_process, missing_target, categoric_to_numeric
 # Training, Finalizzazione, e Pipeline
 from functions import Function_Train_Test_Split, Function_Standard_X_train, Function_Target_transformation, Function_NN_Builder, metrics_plot
 # Finalizzazione e Pipeline
@@ -76,7 +76,7 @@ if uploaded_file is not None:
         st.write("### Deal with missing data")   
         st.write("If the target features has missing values, they will be dropped from the dataset")
         dataframe, categ_impute, numer_impute, Sub_categ_list, Sub_num_list, step_further, a, b = imputation_process.imputation(dataframe, Categ, Numer)
-        dataframe, step_further = Function_Missing_target.Missing_target(dataframe, Categ, Numer, Tar, a, b, step_further)
+        dataframe, step_further = missing_target.missing_target(dataframe, Categ, Numer, Tar, a, b, step_further)
         st.write("Number of missing values: %d" % dataframe.isna().sum().sum())
     
         # Checkbox per mostrare il dataframe pulito
