@@ -88,7 +88,10 @@ def Metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, F
         ax2.set_xlabel("Predictions")
         ax2.set_ylabel("Actual values")
         ax3.set_xlabel("Predictions - Actual")
-
+    else :
+        ax2.plot(Model.metric_tr, '-b')
+        ax2.plot(Model.metric_te,'-r')
+        
     st.pyplot(fig)
 
     return True
