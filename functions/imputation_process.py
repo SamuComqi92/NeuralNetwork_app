@@ -4,7 +4,7 @@ import numpy as np
 import streamlit as st
 
 # La funzione sostituisce i valori mancanti nelle colonne categoriche in base al metodo scelto dall'utente
-def Imputation_process(dataframe, categorical, numerical) :
+def imputation(dataframe, categorical, numerical) :
     """
     La funzione accetta come argomenti:
     - dataframe: il dataframe da controllare e correggere
