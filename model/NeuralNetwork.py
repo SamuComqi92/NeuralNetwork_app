@@ -559,7 +559,6 @@ class NeuralNet :
                     while jj<=ratio_ :
                         # Creo il "pezzo" (a partire dal dataset) che verrà utilizzato nel training
                         batch_slice = slice(self.batch * jj, self.batch * (1 + jj))
-                        st.write(batch_slice)
                         if X_train_1[:, batch_slice].shape[1] != 0:
                         #if (X_train_1[:,0+self.batch*jj:self.batch*(1+jj)]).shape[1] == 0 :
                         #    pass
