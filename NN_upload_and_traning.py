@@ -88,7 +88,7 @@ if uploaded_file is not None:
         # Viene data la possibilità di convertire i valori in due modi diversi    
         # Check dello step, della presenza di colonne categoriche e dell'assenza di valori mancanti (altrimenti, lo script si interrompe)
         if step_further == 3 and len(Categ) != 0 and dataframe.isna().sum().sum() == 0 :
-            dataframe, Tra_categ_list, step_further = categoric_to_numeric.Categoric_to_numeric(dataframe, Categ, step_further)
+            dataframe, Tra_categ_list, step_further = categoric_to_numeric.categoric_to_numeric(dataframe, Categ, step_further)
         else :
             step_further, Tra_categ_list = 4, [[], None, []]
         
