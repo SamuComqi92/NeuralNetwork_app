@@ -18,7 +18,7 @@ from model import NeuralNetwork
 # Pulizia e trasformazione dataset
 from functions import remove_missing, feature_selection, imputation_process, missing_target, categoric_to_numeric
 # Training, Finalizzazione, e Pipeline
-from functions import Function_Train_Test_Split, Function_Standard_X_train, Function_Target_transformation, nn_builder, metrics_plot
+from functions import Function_Train_Test_Split, standardize_x_train, Function_Target_transformation, nn_builder, metrics_plot
 # Finalizzazione e Pipeline
 from functions import model_finalization, test_pipeline
 
@@ -103,7 +103,7 @@ if uploaded_file is not None:
         # Standardizzazione del dataframe X per il Training
         # Check avanzamento e valori nulli
         if step_further == 5 and dataframe.isna().sum().sum() == 0:
-            X_train, X_test, Tra_num, step_further, flag_stand = Function_Standard_X_train.standardize_X_train(dataframe, X_train, X_test, step_further)
+            X_train, X_test, Tra_num, step_further, flag_stand = standardize_x_train.standardize_X_train(dataframe, X_train, X_test, step_further)
     
         ##############################################################################################################################################################################################################
         # Trasformazione della colonna Target
