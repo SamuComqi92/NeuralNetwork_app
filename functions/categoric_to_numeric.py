@@ -5,7 +5,7 @@ import streamlit as st
 from sklearn.preprocessing import LabelBinarizer
 
 # La funzione converte i valori categorici in valori numerici (per l'applicazione del modello di Machine Learning) in base al metodo scelto dall'utente
-def Categoric_to_numeric(dataframe, categorical_features, step_further) :
+def categoric_to_numeric(dataframe, categorical_features, step_further) :
     """
     La funzione accetta i seguenti argomenti:
     - dataframe: da controllare
