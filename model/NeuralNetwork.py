@@ -63,7 +63,7 @@ class NeuralNet :
         self.function = function
         self.Hidden_layers = Hidden_layers     
         self.algo = algo
-        self.batch = batch
+        #self.batch = batch
         self.alpha = alpha
         self.decay = decay
         self.regularization = regularization
