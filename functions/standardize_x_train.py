@@ -5,7 +5,7 @@ import numpy as np
 from sklearn.preprocessing import MinMaxScaler, StandardScaler
 
 # La funzione trasforma il set di training in base alla scelta dell'utente, standardizzando tutti i valori numerici
-def standardize_X_train(dataframe, X_train, X_test, step_further) :
+def standardize_x_train(dataframe, X_train, X_test, step_further) :
     """
     La funzione accetta i seguenti argomenti:
     - dataframe: dataframe per controllare la presenza di valori mancanti
