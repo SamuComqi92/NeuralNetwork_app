@@ -552,7 +552,7 @@ class NeuralNet :
             for i in range(self.Max_iter) :
                 #Stochastic or Mini-batch algorithm
                 flag_batch = 0
-                if (self.batch is not None):    # E' stato quindi scelto un batch per l'addestramento
+                if self.batch != 0:    # E' stato quindi scelto un batch per l'addestramento
                     flag_batch = 1
                     ratio_ = int(X_train_1.shape[1]/self.batch)
                     jj = 0
