@@ -291,11 +291,10 @@ class NeuralNet :
             if self.metric == "Accuracy" :
                 Metricc = Performance
             elif self.metric == "Precision" :
-                st.write(yy.shape)
                 if yy.shape[1] == 2 :
                     Metricc = precision_score(yy.argmax(axis=1), anodes[-1].T.argmax(axis=1))
                 else :
-                    Metricc = precision_score(yy.argmax(axis=1), anodes[-1].T.argmax(axis=1), average = "macro")
+                    Metricc = precision_score(yy.argmax(axis=1), anodes[-1].T.argmax(axis=1), average = "weighted")
             elif self.metric == "Recall" :
                 if yy.shape[1] == 2 :
                     Metricc = recall_score(yy.argmax(axis=1), anodes[-1].T.argmax(axis=1))
@@ -402,22 +401,22 @@ class NeuralNet :
                 if len(np.unique(y))==2 :
                     return precision_score(y, self.Predict(X))
                 else :
-                    return precision_score(y, self.Predict(X), average=None)
+                    return precision_score(y, self.Predict(X), average = "weighted")
             elif metric == "Recall" :
                 if len(np.unique(y))==2 :
                     return recall_score(y, self.Predict(X))
                 else :
-                    return recall_score(y, self.Predict(X), average=None)
+                    return recall_score(y, self.Predict(X), average = "weighted")
             elif metric == "F1 score" :
                 if len(np.unique(y))==2 :
                     return f1_score(y, self.Predict(X))
                 else :
-                    return f1_score(y, self.Predict(X), average=None)
+                    return f1_score(y, self.Predict(X), average = "weighted")
             elif metric == "AUC" :
                 if len(np.unique(y))==2 :
                     return roc_auc_score(y, self.Predict_proba(X))
                 else :
-                    return roc_auc_score(y, NeuralNet.Forward_propagation(self, X, self.best_weights), average=None, multi_class = "ovr")
+                    return roc_auc_score(y, NeuralNet.Forward_propagation(self, X, self.best_weights), average = "weighted", multi_class = "ovr")
             else :
                 raise ValueError("Misspelled or inappropriate metric for %s" % self.task)
         else :
