@@ -21,8 +21,8 @@ def Metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, F
     """
     # Calcolo delle metriche finali
     if Task == "Classification" or (Task == "Regressione" and Norm_tar_list[3] == 0) :        # Metriche calcolate direttamente dal modello
-        res_tr = Model.metric_tr
-        res_te = Model.metric_te
+        res_tr = Model.last_metric_tr
+        res_te = Model.last_metric_te
     elif Task == "Regression" and Norm_tar_list[3] == 20:                                     # MinMax
         y_real_tr = Norm_tar_list[1].inverse_transform(y_train)
         y_real_te = Norm_tar_list[1].inverse_transform(y_test)
@@ -68,7 +68,7 @@ def Metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, F
     ax1.legend(["Training set","Test set"])
     ax1.set_xlabel("Epoch")
     ax1.set_ylabel("Cost function")
-    st.write(Model.metric_te)
+    
     # Confronto risultati Test (solo per regressione)
     #st.pyplot(fig)
     if Task == "Regression" :
