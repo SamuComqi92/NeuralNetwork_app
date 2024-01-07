@@ -576,13 +576,13 @@ class NeuralNet :
 
                             if self.verbose != 0 :
                                 if self.task == "Classification" :
-                                    print('\rIteration: {}/{} -- Batch: {}/{} ----- Training cost: {:.5f} - Validation cost: {:.5f} --- Training {}: {:.5f} - Validation {}: {:.5f}'.format(i,
+                                    st.write('\rIteration: {}/{} -- Batch: {}/{} ----- Training cost: {:.5f} - Validation cost: {:.5f} --- Training {}: {:.5f} - Validation {}: {:.5f}'.format(i,
                                                                                                                                                         self.Max_iter,jj,ratio_,
                                                                                                                                                         J_tr,J_te,
                                                                                                                                                         self.metric, Metric_tr,
                                                                                                                                                         self.metric, Metric_te), end='')
                                 else :
-                                    print('\rIteration: {}/{} -- Batch: {}/{} ----- Training cost: {:.5f} - Validation cost: {:.5f} --- Training {}: {:.5f} - Validation {}: {:.5f}'.format(i,
+                                    st.write('\rIteration: {}/{} -- Batch: {}/{} ----- Training cost: {:.5f} - Validation cost: {:.5f} --- Training {}: {:.5f} - Validation {}: {:.5f}'.format(i,
                                                                                                                                                         self.Max_iter,jj,ratio_,
                                                                                                                                                         J_tr,J_te,
                                                                                                                                                         self.metric, Metric_tr,
