@@ -98,7 +98,5 @@ def Metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, F
         ax2.plot(Model.metric_te,'-r')
         ax2.set_xlabel("Iteration")
         ax2.set_ylabel("{}".format(Final_metric))
-        
-    #st.pyplot(fig)
 
     return st.pyplot(fig)
