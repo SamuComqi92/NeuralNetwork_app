@@ -54,8 +54,6 @@ def Metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, F
             res_te = r2_score(y_real_te, y_predicted_te)
 
     # Risultati finali
-    st.write(Final_metric)
-    st.write(res_tr)
     st.write('Training real {}: {:.5f} -- Validation real {}: {:.5f}'.format(Final_metric, res_tr, Final_metric, res_te))
     
     # Salvo risultati in session
