@@ -291,6 +291,7 @@ class NeuralNet :
             if self.metric == "Accuracy" :
                 Metricc = Performance
             elif self.metric == "Precision" :
+                st.write(yy.shape)
                 if yy.shape[1] == 2 :
                     Metricc = precision_score(yy.argmax(axis=1), anodes[-1].T.argmax(axis=1))
                 else :
