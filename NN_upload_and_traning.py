@@ -18,7 +18,7 @@ from model import NeuralNetwork
 # Pulizia e trasformazione dataset
 from functions import remove_missing, feature_selection, imputation_process, missing_target, categoric_to_numeric
 # Training, Finalizzazione, e Pipeline
-from functions import Function_Train_Test_Split, standardize_x_train, target_transformation, nn_builder, metrics_plot
+from functions import custom_split, standardize_x_train, target_transformation, nn_builder, metrics_plot
 # Finalizzazione e Pipeline
 from functions import model_finalization, test_pipeline
 
@@ -96,7 +96,7 @@ if uploaded_file is not None:
         # Creazione dei set di Training e Validation per la valutazione del modello
         # Check iniziale per mostrare la sezione
         if step_further == 4 and (Categ or Numer) and dataframe.isna().sum().sum() == 0:
-            X, y, X_train, X_test, y_train, y_test, step_further, final_columns = Function_Train_Test_Split.train_test_customsplit(dataframe, Tar, step_further)
+            X, y, X_train, X_test, y_train, y_test, step_further, final_columns = custom_split.train_test_customsplit(dataframe, Tar, step_further)
             st.session_state["Final_columns"] = final_columns
             
         ##############################################################################################################################################################################################################
