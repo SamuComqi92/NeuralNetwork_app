@@ -63,7 +63,7 @@ class NeuralNet :
         self.function = function
         self.Hidden_layers = Hidden_layers     
         self.algo = algo
-        #self.batch = batch
+        self.batch = batch
         self.alpha = alpha
         self.decay = decay
         self.regularization = regularization
@@ -756,7 +756,7 @@ class NeuralNet :
             "Weights": [arr.tolist() for arr in self.best_weights],
             "Weights_shape": [arr.shape for arr in self.best_weights],
             "Algorithm": self.algo,
-            "Batch": self.batch,
+            #"Batch": self.batch,
             "Alpha": self.alpha,
             "Decay": self.decay,
             "Regularization": self.regularization,
