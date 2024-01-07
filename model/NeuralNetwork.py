@@ -756,7 +756,7 @@ class NeuralNet :
             "Weights": [arr.tolist() for arr in self.best_weights],
             "Weights_shape": [arr.shape for arr in self.best_weights],
             "Algorithm": self.algo,
-            #"Batch": self.batch,
+            "Batch": [self.batch],
             "Alpha": self.alpha,
             "Decay": self.decay,
             "Regularization": self.regularization,
