@@ -574,20 +574,20 @@ class NeuralNet :
                             Metr_tr.append(Metric_tr)
                             Metr_te.append(Metric_te)
 
-                            if self.verbose != 0 :
-                                if self.task == "Classification" :
-                                    st.write('\rIteration: {}/{} -- Batch: {}/{} ----- Training cost: {:.5f} - Validation cost: {:.5f} --- Training {}: {:.5f} - Validation {}: {:.5f}'.format(i,
-                                                                                                                                                        self.Max_iter,jj,ratio_,
-                                                                                                                                                        J_tr,J_te,
-                                                                                                                                                        self.metric, Metric_tr,
-                                                                                                                                                        self.metric, Metric_te), end='')
-                                else :
-                                    st.write('\rIteration: {}/{} -- Batch: {}/{} ----- Training cost: {:.5f} - Validation cost: {:.5f} --- Training {}: {:.5f} - Validation {}: {:.5f}'.format(i,
-                                                                                                                                                        self.Max_iter,jj,ratio_,
-                                                                                                                                                        J_tr,J_te,
-                                                                                                                                                        self.metric, Metric_tr,
-                                                                                                                                                        self.metric, Metric_te), end='')
-                            
+                            #if self.verbose != 0 :
+                            #    if self.task == "Classification" :
+                            #        st.write('\rIteration: {}/{} -- Batch: {}/{} ----- Training cost: {:.5f} - Validation cost: {:.5f} --- Training {}: {:.5f} - Validation {}: {:.5f}'.format(i,
+                            #                                                                                                                            self.Max_iter,jj,ratio_,
+                            #                                                                                                                            J_tr,J_te,
+                            #                                                                                                                            self.metric, Metric_tr,
+                            #                                                                                                                            self.metric, Metric_te), end='')
+                            #    else :
+                            #        st.write('\rIteration: {}/{} -- Batch: {}/{} ----- Training cost: {:.5f} - Validation cost: {:.5f} --- Training {}: {:.5f} - Validation {}: {:.5f}'.format(i,
+                            #                                                                                                                            self.Max_iter,jj,ratio_,
+                            #                                                                                                                            J_tr,J_te,
+                            #                                                                                                                            self.metric, Metric_tr,
+                            #                                                                                                                            self.metric, Metric_te), end='')
+                            #
                             #Update weights
                             THETA, Change, M_beta, V_beta = update_weights(G_tr, Change, THETA, M_beta, V_beta, i)
                         jj=jj+1
