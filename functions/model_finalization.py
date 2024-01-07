@@ -9,7 +9,7 @@ from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
 from sklearn.metrics import precision_score,recall_score,f1_score, accuracy_score, confusion_matrix, r2_score, precision_recall_curve, roc_auc_score, roc_curve
 
 # La funzione utilizza l'intero dataset a disposizione per finalizzare il modello con i parametri scelti dall'utente
-def Model_Finalization(X, y, Model, Task, Final_metric, Tra_num, Norm_tar_list, flag_stand) :
+def finalization(X, y, Model, Task, Final_metric, Tra_num, Norm_tar_list, flag_stand) :
     """
     La funzione accetta i seguenti argomenti:
     - X: set attributi completo (senza split)
