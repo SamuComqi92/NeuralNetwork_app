@@ -552,16 +552,21 @@ class NeuralNet :
             for i in range(self.Max_iter) :
                 #Stochastic or Mini-batch algorithm
                 flag_batch = 0
-                if self.batch is not None :
+                if self.batch is not None :    # E' stato quindi scelto un batch per l'addestramento
                     flag_batch = 1
                     ratio_ = int(X_train_1.shape[1]/self.batch)
-                    jj=0
+                    jj = 0
                     while jj<=ratio_ :
-                        if (X_train_1[:,0+self.batch*jj:self.batch*(1+jj)]).shape[1] == 0 :
-                            pass
-                        else :
+                        # Creo il "pezzo" (a partire dal dataset) che verrà utilizzato nel training
+                        batch_slice = slice(self.batch * jj, self.batch * (1 + jj))
+                        st.write(batch_slice)
+                        if X_train_1[:, batch_slice].shape[1] != 0:
+                        #if (X_train_1[:,0+self.batch*jj:self.batch*(1+jj)]).shape[1] == 0 :
+                        #    pass
+                        #else :
                             #Cost function and gradient
-                            J_tr, G_tr, Perf_tr, Metric_tr = NeuralNet.J_Grad(self, X_train_1[:,0+self.batch*jj:self.batch*(1+jj)], yy[0+self.batch*jj:self.batch*(1+jj),:],THETA)
+                            #J_tr, G_tr, Perf_tr, Metric_tr = NeuralNet.J_Grad(self, X_train_1[:,0+self.batch*jj:self.batch*(1+jj)], yy[0+self.batch*jj:self.batch*(1+jj),:],THETA)
+                            J_tr, G_tr, Perf_tr, Metric_tr = NeuralNet.J_Grad(self, X_train_1[:, batch_slice], yy[batch_slice, :], THETA)
                             J_te, G_te, Perf_te, Metric_te = NeuralNet.J_Grad(self, X_test_1, yy_test,THETA)
 
                             #Update cost function lists
