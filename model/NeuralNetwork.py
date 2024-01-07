@@ -52,6 +52,8 @@ class NeuralNet :
     - cost_function_te: cost function values for the validation set up to the last iteration
     - metric_tr: chosen metric with self.metric computed on the training set to be saved at each iteration
     - metric_te: chosen metric with self.metric computed on the test set to be saved at each iteration
+    - last_metric_tr: metric at the last iteration for training set
+    - last_metric_te: metric at the last iteration for validation set
     - class_conv: dizionario con conversione classi (per analisi di classificazione)
     """
     
@@ -698,8 +700,8 @@ class NeuralNet :
             self.best_weights = THETA
             self.cost_function_tr = Cost_tr
             self.cost_function_te = Cost_te
-            #self.metric_tr = Perf_tr
-            #self.metric_te = Perf_te
+            self.last_metric_tr = Metric_tr
+            self.last_metric_te = Metric_te
             self.metric_tr = Metr_tr
             self.metric_te = Metr_te
             self.class_conv = Class_convertion
