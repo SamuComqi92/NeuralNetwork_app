@@ -67,20 +67,18 @@ def Model_Finalization(X, y, Model, Task, Final_metric, Tra_num, Norm_tar_list, 
     Model.Training(XX_train, yy_train, XX_train, yy_train)
 
     # Salvo il modello finale nella sessione (questo verrà utilizzato per l'applicazione finale)
-    #if "Final_model" not in st.session_state :          
-    #    st.session_state.Final_model = Model
-    #else :
     st.session_state.Final_model = Model
 
     # Stampo i risultati finali rispetto a quelli calcolati con il primo training (salvati in sessione)
-    # MinMax
-    if Task == "Regression" and Norm_tar_list[3] == 20:
-        res_tr_final = np.sqrt( ((target_minmax_y.inverse_transform(Model.Predict(XX_train)) -  target_minmax_y.inverse_transform(yy_train))**2).sum()/len(yy_train) )
-        st.write('Real RMSE: {:.5f}'.format(res_tr_final))
-        st.write("Previous RMSE: {:.5f}".format(st.session_state.res_tr))
-    # Log(x+1)
-    elif Task == "Regression" and Norm_tar_list[3] == 10:
-        res_tr_final = np.sqrt( (( 10**Model.Predict(XX_train) -  10**(yy_train) )**2).sum()/len(yy_train) )
+    
+    if Task == "Regression" :
+        # MinMax
+        if Norm_tar_list[3] == 20:
+            res_tr_final = np.sqrt( ((target_minmax_y.inverse_transform(Model.Predict(XX_train)) -  target_minmax_y.inverse_transform(yy_train))**2).sum()/len(yy_train) )
+        # Log(x+1)
+        elif Norm_tar_list[3] == 10:
+            res_tr_final = np.sqrt( (( 10**Model.Predict(XX_train) -  10**(yy_train) )**2).sum()/len(yy_train) )
+        # Stampo risultati finali
         st.write('Real RMSE: {:.5f}'.format(res_tr_final))
         st.write("Previous RMSE: {:.5f}".format(st.session_state.res_tr))
     # Nessuna trasformazione
