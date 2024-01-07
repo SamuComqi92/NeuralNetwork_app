@@ -90,8 +90,7 @@ if uploaded_file is not None:
         if step_further == 3 and len(Categ) != 0 and dataframe.isna().sum().sum() == 0 :
             dataframe, Tra_categ_list, step_further = Function_Categoric_to_numeric.Categoric_to_numeric(dataframe, Categ, step_further)
         else :
-            step_further = 4
-            Tra_categ_list = [[], None, []]
+            step_further, Tra_categ_list = 4, [[], None, []]
         
         ##############################################################################################################################################################################################################
         # Creazione dei set di Training e Validation per la valutazione del modello
@@ -171,8 +170,8 @@ if uploaded_file is not None:
                 st.session_state["flag_finalization"] = flag_finalization
     
                 # Salvataggio del modello finale nel file "Best_model_parameters.json"
-                file_path = "Best_model_parameters.json"
-                Final_model.Save_model(file_path)
+                file_name = "Best_model_parameters.json"
+                Final_model.Save_model(file_name)
     
             ########################################################################################################################################################################################################
             # Model application on a new file
@@ -198,14 +197,14 @@ if uploaded_file is not None:
                 # Calcolo predizioni e probabilità (solo per classificazione)
                 if Task1 == "Classification" :
                     Predictions_prob_test = st.session_state["Final_model"].Predict_proba( X_test_final )
-                    dataframe_test["Predictions"] = Predictions_test
                     dataframe_test["Probability"] = Predictions_prob_test
-                if Task1 == "Regression" and st.session_state["Norm_tar_list_final"][0] == 3:
-                    Predictions_test = st.session_state["Norm_tar_list_final"][1].inverse_transform(Predictions_test)
-                    dataframe_test["Predictions"] = Predictions_test
-                elif Task1 == "Regression" and st.session_state["Norm_tar_list_final"][0] == 1:
-                    Predictions_test = 10**Predictions_test + 1
-                    dataframe_test["Predictions"] = Predictions_test
+                if Task1 == "Regression" :
+                    if st.session_state["Norm_tar_list_final"][0] == 3:
+                        Predictions_test = st.session_state["Norm_tar_list_final"][1].inverse_transform(Predictions_test)
+                    elif st.session_state["Norm_tar_list_final"][0] == 1:
+                        Predictions_test = 10**Predictions_test + 1
+                # Scrivo la colonna finale
+                dataframe_test["Predictions"] = Predictions_test
     
                 # Stampo il dataframe finale con le predizioni (e probabilità solo per classificazione)
                 st.write("")
