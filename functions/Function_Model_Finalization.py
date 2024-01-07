@@ -31,7 +31,7 @@ def Model_Finalization(X, y, Model, Task, Final_metric, Tra_num, Norm_tar_list, 
 
     # Standardizzazzione di X
     if flag_stand == 0 or flag_stand == 3 :
-        XX_train = X
+        XX_train, Set_scaler_x = X, None
     elif flag_stand == 1:
         Set_scaler_x = MinMaxScaler()
         Set_scaler_x.fit(X)
@@ -46,8 +46,7 @@ def Model_Finalization(X, y, Model, Task, Final_metric, Tra_num, Norm_tar_list, 
         st.session_state.Set_scaler_x  = Set_scaler_x
 
     # Creo lista per l'applicazione della pipeline finale
-    Tra_num_list_final = [Tra_num, Set_scaler_x]
-    st.session_state["Tra_num_list_final"] = Tra_num_list_final
+    st.session_state["Tra_num_list_final"] = [Tra_num, Set_scaler_x]
 
     # Normalizzazione di y
     if Norm_tar_list[2] == 0 or Norm_tar_list[2] == 2 :
@@ -68,10 +67,10 @@ def Model_Finalization(X, y, Model, Task, Final_metric, Tra_num, Norm_tar_list, 
     Model.Training(XX_train, yy_train, XX_train, yy_train)
 
     # Salvo il modello finale nella sessione (questo verrà utilizzato per l'applicazione finale)
-    if "Final_model" not in st.session_state :          
-        st.session_state.Final_model = Model
-    else :
-        st.session_state.Final_model = Model
+    #if "Final_model" not in st.session_state :          
+    #    st.session_state.Final_model = Model
+    #else :
+    st.session_state.Final_model = Model
 
     # Stampo i risultati finali rispetto a quelli calcolati con il primo training (salvati in sessione)
     # MinMax
@@ -89,4 +88,4 @@ def Model_Finalization(X, y, Model, Task, Final_metric, Tra_num, Norm_tar_list, 
         st.write("Final {}: {:.5f}".format(Final_metric, Model.last_metric_te))
         st.write("Previous {}: {:.5f}".format(Final_metric, st.session_state.res_te))
 
-    return st.session_state.Final_model, Tra_num_list_final, st.session_state["flag_finalization"], Norm_tar_list_final
+    return st.session_state.Final_model, st.session_state["Tra_num_list_final"], st.session_state["flag_finalization"], Norm_tar_list_final
