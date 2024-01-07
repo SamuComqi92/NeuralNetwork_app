@@ -16,7 +16,7 @@ from sklearn.metrics import precision_score,recall_score,f1_score, accuracy_scor
 # Modello Neural Network
 from model import NeuralNetwork
 # Pulizia e trasformazione dataset
-from functions import Function_Remove_70_missing, Function_Feature_selection, Function_Imputation_process, Function_Missing_target, categoric_to_numeric
+from functions import Function_Remove_70_missing, feature_selection, Function_Imputation_process, Function_Missing_target, categoric_to_numeric
 # Training, Finalizzazione, e Pipeline
 from functions import Function_Train_Test_Split, Function_Standard_X_train, Function_Target_transformation, Function_NN_Builder, Function_Metrics_plot
 # Finalizzazione e Pipeline
@@ -65,7 +65,7 @@ if uploaded_file is not None:
         st.text("")
         st.text("")
         st.write("### Select Target, Categorical, and Numerical features")
-        dataframe, Tar, Categ, Numer = Function_Feature_selection.Feature_selection(dataframe, Task1)
+        dataframe, Tar, Categ, Numer = feature_selection.feature_selection(dataframe, Task1)
     
         ##############################################################################################################################################################################################################
         # Gestione dei valori mancanti nelle colonne categoriche e categoriche, e infine i valori mancanti nella colonna Target (che vengono eliminati)
