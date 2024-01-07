@@ -300,17 +300,17 @@ class NeuralNet :
                 if yy.shape[1] == 2 :
                     Metricc = recall_score(yy.argmax(axis=1), anodes[-1].T.argmax(axis=1))
                 else :
-                    Metricc = recall_score(yy.argmax(axis=1), anodes[-1].T.argmax(axis=1), average=None)
+                    Metricc = recall_score(yy.argmax(axis=1), anodes[-1].T.argmax(axis=1), average = "weighted")
             elif self.metric == "F1 score" :
                 if yy.shape[1] == 2 :
                     Metricc = f1_score(yy.argmax(axis=1), anodes[-1].T.argmax(axis=1))
                 else :
-                    Metricc = f1_score(yy.argmax(axis=1), anodes[-1].T.argmax(axis=1), average=None)
+                    Metricc = f1_score(yy.argmax(axis=1), anodes[-1].T.argmax(axis=1), average = "weighted")
             elif self.metric == "AUC" :
                 if yy.shape[1] == 2 :
                     Metricc = roc_auc_score(yy.argmax(axis=1), anodes[-1].T.argmax(axis=1))
                 else :
-                    Metricc = roc_auc_score(yy.argmax(axis=1), anodes[-1].T.argmax(axis=1), average=None, multi_class = "ovr")
+                    Metricc = roc_auc_score(yy.argmax(axis=1), anodes[-1].T.argmax(axis=1), average = "weighted", multi_class = "ovr")
             else :
                 raise ValueError("Misspelled or inappropriate metric for %s" % self.task)
         else :
