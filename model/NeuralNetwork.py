@@ -693,7 +693,8 @@ class NeuralNet :
                 #Update weights
                 THETA, Change, M_beta, V_beta = update_weights(G_tr, Change, THETA, M_beta, V_beta, i)
                 
-            #Final results     
+            #Final results    
+            st.write(Metric_tr)
             self.last_iter = i
             self.best_weights = THETA
             self.cost_function_tr = Cost_tr
