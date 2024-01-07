@@ -4,7 +4,7 @@ import numpy as np
 
 
 # La funzione permette all'utente di scegliere i vari parametri per costuire la rete neurale
-def NN_Builder(dataframe, Task) :
+def nn_builder(dataframe, Task) :
     """
     La funzione accetta i seguenti argomenti:
     - dataframe: dataframe originale
