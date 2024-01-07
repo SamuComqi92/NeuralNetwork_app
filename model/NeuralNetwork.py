@@ -634,16 +634,30 @@ class NeuralNet :
                     # Update the progress bar with each iteration.
                     with output.container():
                         if self.task == "Classification" :
-                            st.write('Training cost: {:.5f} -- Validation cost: {:.5f}'.format(J_tr,J_te))
-                            st.write('Training {}: {:.5f} -- Validation {}: {:.5f}'.format(self.metric,Metric_tr,self.metric,Metric_te))
+                            if self.batch == 0 :
+                                st.write('Training cost: {:.5f} -- Validation cost: {:.5f}'.format(J_tr,J_te))
+                                st.write('Training {}: {:.5f} -- Validation {}: {:.5f}'.format(self.metric,Metric_tr,self.metric,Metric_te))
+                            else :
+                                st.write('Iteration: {}/{} -- Batch: {}/{} ----- Training cost: {:.5f} - Validation cost: {:.5f} --- Training {}: {:.5f} - Validation {}: {:.5f}'.format(i,
+                                                                                                                                                self.Max_iter,jj,ratio_,
+                                                                                                                                                J_tr,J_te,
+                                                                                                                                                self.metric, Metric_tr,
+                                                                                                                                                self.metric, Metric_te))
                         else :
-                            st.write('Training cost: {:.5f} -- Validation cost: {:.5f}'.format(J_tr,J_te))
-                            st.write('Training {}: {:.5f} -- Validation {}: {:.5f}'.format(self.metric,Metric_tr, self.metric,Metric_te))
-      
+                            if self.batch == 0 :
+                                st.write('Training cost: {:.5f} -- Validation cost: {:.5f}'.format(J_tr,J_te))
+                                st.write('Training {}: {:.5f} -- Validation {}: {:.5f}'.format(self.metric,Metric_tr, self.metric,Metric_te))
+                            else :
+                                st.write('Iteration: {}/{} -- Batch: {}/{} ----- Training cost: {:.5f} - Validation cost: {:.5f} --- Training {}: {:.5f} - Validation {}: {:.5f}'.format(i,
+                                                                                                                                                self.Max_iter,jj,ratio_,
+                                                                                                                                                J_tr,J_te,
+                                                                                                                                                self.metric, Metric_tr,
+                                                                                                                                                self.metric, Metric_te))
+                    #progress on bar updated
                     latest_iteration.text(f'Iteration: {i+1} / {self.Max_iter}')
-                    bar.progress((i + 1)/(self.Max_iter))                  #progress on bar updated
+                    bar.progress((i + 1)/(self.Max_iter))                  
                     
-                
+
                 #Early stopping
                 #The condition i>Iter is added to avoid initial flactuations
                 Iter = 20
