@@ -16,7 +16,7 @@ from sklearn.metrics import precision_score,recall_score,f1_score, accuracy_scor
 # Modello Neural Network
 from model import NeuralNetwork
 # Pulizia e trasformazione dataset
-from functions import Function_Remove_70_missing, feature_selection, imputation_process, missing_target, categoric_to_numeric
+from functions import remove_missing, feature_selection, imputation_process, missing_target, categoric_to_numeric
 # Training, Finalizzazione, e Pipeline
 from functions import Function_Train_Test_Split, Function_Standard_X_train, Function_Target_transformation, nn_builder, metrics_plot
 # Finalizzazione e Pipeline
@@ -51,7 +51,7 @@ if uploaded_file is not None:
     st.write("**Note**: Rows with more than 70\% of missing data will be removed from the dataset")
 
     # Rimozione righe e colonne con più del 70% di valori mancanti    
-    dataframe, Selected_columns_start = Function_Remove_70_missing.remove_missing(dataframe)
+    dataframe, Selected_columns_start = remove_missing.remove_missing(dataframe)
 
     # Type of analysis
     Task1 = st.selectbox( 'What is the task of this analysis?', ['','Classification','Regression'] )
