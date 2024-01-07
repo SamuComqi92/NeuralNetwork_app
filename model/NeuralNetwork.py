@@ -311,7 +311,7 @@ class NeuralNet :
                 else :
                     st.write(yy.argmax(axis=1))
                     st.write(anodes[-1].T.argmax(axis=1))
-                    Metricc = roc_auc_score(yy.argmax(axis=1), anodes[-1].T.argmax(axis=1), multi_class = "ovr")
+                    Metricc = roc_auc_score(yy.argmax(axis=1), anodes[-1].T, multi_class = "ovr")
             else :
                 raise ValueError("Misspelled or inappropriate metric for %s" % self.task)
         else :
