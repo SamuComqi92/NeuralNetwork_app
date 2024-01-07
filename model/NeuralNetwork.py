@@ -295,7 +295,7 @@ class NeuralNet :
                 if yy.shape[1] == 2 :
                     Metricc = precision_score(yy.argmax(axis=1), anodes[-1].T.argmax(axis=1))
                 else :
-                    Metricc = precision_score(yy.argmax(axis=1), anodes[-1].T.argmax(axis=1), average=None)
+                    Metricc = precision_score(yy.argmax(axis=1), anodes[-1].T.argmax(axis=1), average = macro)
             elif self.metric == "Recall" :
                 if yy.shape[1] == 2 :
                     Metricc = recall_score(yy.argmax(axis=1), anodes[-1].T.argmax(axis=1))
