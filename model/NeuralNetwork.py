@@ -609,7 +609,7 @@ class NeuralNet :
                     Cost_te.append(J_te)
                     Metr_tr.append(Metric_tr)
                     Metr_te.append(Metric_te)
-
+                    
                 #Show cost function curves
                 if self.flag_plot == "True" :
                     self.verbose = 0                    #Results are shown on the plot
@@ -686,23 +686,22 @@ class NeuralNet :
                     self.best_weights = THETA
                     self.cost_function_tr = Cost_tr
                     self.cost_function_te = Cost_te
-                    self.metric_tr = Metric_tr
-                    self.metric_te = Metric_te
+                    self.metric_tr = Metr_tr
+                    self.metric_te = Metr_te
                     break
                 
                 #Update weights
                 THETA, Change, M_beta, V_beta = update_weights(G_tr, Change, THETA, M_beta, V_beta, i)
                 
             #Final results    
-            st.write(Metric_tr)
             self.last_iter = i
             self.best_weights = THETA
             self.cost_function_tr = Cost_tr
             self.cost_function_te = Cost_te
             #self.metric_tr = Perf_tr
             #self.metric_te = Perf_te
-            self.metric_tr = Metric_tr
-            self.metric_te = Metric_te
+            self.metric_tr = Metr_tr
+            self.metric_te = Metr_te
             self.class_conv = Class_convertion
             
     
