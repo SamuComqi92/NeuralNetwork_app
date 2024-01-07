@@ -18,7 +18,7 @@ from model import NeuralNetwork
 # Pulizia e trasformazione dataset
 from functions import remove_missing, feature_selection, imputation_process, missing_target, categoric_to_numeric
 # Training, Finalizzazione, e Pipeline
-from functions import Function_Train_Test_Split, standardize_x_train, Function_Target_transformation, nn_builder, metrics_plot
+from functions import Function_Train_Test_Split, standardize_x_train, target_transformation, nn_builder, metrics_plot
 # Finalizzazione e Pipeline
 from functions import model_finalization, test_pipeline
 
@@ -88,7 +88,7 @@ if uploaded_file is not None:
         # Viene data la possibilità di convertire i valori in due modi diversi    
         # Check dello step, della presenza di colonne categoriche e dell'assenza di valori mancanti (altrimenti, lo script si interrompe)
         if step_further == 3 and len(Categ) != 0 and dataframe.isna().sum().sum() == 0 :
-            dataframe, Tra_categ_list, step_further = Function_Categoric_to_numeric.Categoric_to_numeric(dataframe, Categ, step_further)
+            dataframe, Tra_categ_list, step_further = categoric_to_numeric.Categoric_to_numeric(dataframe, Categ, step_further)
         else :
             step_further, Tra_categ_list = 4, [[], None, []]
         
@@ -108,7 +108,7 @@ if uploaded_file is not None:
         ##############################################################################################################################################################################################################
         # Trasformazione della colonna Target
         if step_further == 6 :
-            y_train, y_test, Norm_tar_list, step_further = Function_Target_transformation.target_transformation(dataframe, Tar, y_train, y_test, step_further, Task1)
+            y_train, y_test, Norm_tar_list, step_further = target_transformation.target_transformation(dataframe, Tar, y_train, y_test, step_further, Task1)
     
             # Checkbox per mostrare i meno il target
             if st.checkbox('Show Target (training set)', key = 61):                
