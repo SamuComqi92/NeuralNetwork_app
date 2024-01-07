@@ -68,7 +68,7 @@ def Metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, F
     ax1.legend(["Training set","Test set"])
     ax1.set_xlabel("Epoch")
     ax1.set_ylabel("Cost function")
-    
+    st.write(Model.metric_te)
     # Confronto risultati Test (solo per regressione)
     #st.pyplot(fig)
     if Task == "Regression" :
