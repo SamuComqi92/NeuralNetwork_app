@@ -69,7 +69,7 @@ def NN_Builder(dataframe, Task) :
         st.text("")
         Verbose = st.selectbox(
             'A flag to display results while processing (0: do not deplay, 1: deplay)',
-            ["0","1"])
+            [0, 1])
 
     with right_column :
         Max_iter = st.text_input('Maximum number of iterations (100 by default)', '100')
