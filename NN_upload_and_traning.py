@@ -18,7 +18,7 @@ from model import NeuralNetwork
 # Pulizia e trasformazione dataset
 from functions import Function_Remove_70_missing, feature_selection, imputation_process, Function_Missing_target, categoric_to_numeric
 # Training, Finalizzazione, e Pipeline
-from functions import Function_Train_Test_Split, Function_Standard_X_train, Function_Target_transformation, Function_NN_Builder, Function_Metrics_plot
+from functions import Function_Train_Test_Split, Function_Standard_X_train, Function_Target_transformation, Function_NN_Builder, metrics_plot
 # Finalizzazione e Pipeline
 from functions import Function_Model_Finalization, Function_Pipeline
 
@@ -135,7 +135,7 @@ if uploaded_file is not None:
                 st.write('Training complete!')
     
                 # Calcolo metriche finali (per Regressione) e plot
-                Function_Metrics_plot.Metrics_plot(Model, X_train, X_test, y_train, y_test, Task1, Norm_tar_list, Final_metric)
+                metrics_plot.metrics_plot(Model, X_train, X_test, y_train, y_test, Task1, Norm_tar_list, Final_metric)
     
     
             ########################################################################################################################################################################################################
