@@ -4,7 +4,7 @@ import numpy as np
 import streamlit as st
 
 # La funzione sostituisce i valori mancanti nelle colonne categoriche in base al metodo scelto dall'utente
-def Missing_target(dataframe, categorical, numerical, target, a, b, step_further) :
+def missing_target(dataframe, categorical, numerical, target, a, b, step_further) :
     """
     La funzione accetta come argomenti:
     - dataframe: il dataframe da controllare e correggere
