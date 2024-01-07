@@ -6,7 +6,7 @@ from sklearn.preprocessing import MinMaxScaler, StandardScaler, LabelBinarizer, 
 from sklearn.metrics import r2_score, mean_squared_error, mean_absolute_error
 
 # La funzione calcola le metriche finali del modello dopo il training e crea dei plot
-def Metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, Final_metric) :
+def metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, Final_metric) :
     """
     La funzione accetta i seguenti argomenti:
     - Model: modello di rete neurale (dopo il traning)
