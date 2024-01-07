@@ -629,7 +629,7 @@ class NeuralNet :
                             st.pyplot(fig)
 
                 #Print results (if verbose != 0)
-                if self.verbose != 0 and flag_batch == 0:
+                if self.verbose != 0 : # and flag_batch == 0:
                     #Progress bar
                     # Update the progress bar with each iteration.
                     with output.container():
