@@ -41,7 +41,8 @@ def nn_builder(dataframe, Task) :
 
         st.text("")
         st.text("")
-        Alpha = st.text_input('Learning Rate (0.3 by default - write a value)', '0.3')
+        st.write('Learning Rate')
+        Alpha = st.text_input('Learning Rate (0.3 by default - write a value). A very small value corresponds to a slow-learning algorithm.', '0.3')
 
 
         
