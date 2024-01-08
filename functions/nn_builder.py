@@ -77,8 +77,6 @@ def nn_builder(dataframe, Task) :
     st.write("These are other advanced parameters (you may leave their default values).")
     left_column2, right_column2 = st.columns(2)            # Nella parte principale, crea due colonne dove posso sistemare testi e bottoni
     with left_column2:   
-        st.text("")
-        st.text("")
         Algo = st.selectbox( 'Optimization algorithm', ["Batch","Adam"] )
 
         st.text("")
@@ -97,8 +95,6 @@ def nn_builder(dataframe, Task) :
         st.text("")
         Verbose = st.selectbox( 'A flag to display results while processing (0: do not deplay, 1: deplay)', [0, 1])
     with right_column2 :
-        st.text("")
-        st.text("")
         Batch = st.selectbox( 'Size of mini-batches (0: all data will be used)', np.arange(0,len(dataframe)) )
 
         st.text("")
