@@ -35,9 +35,7 @@ st.set_page_config(
     page_icon = "🧊",
     layout = "wide",
     menu_items={
-        'Get Help': 'https://www.extremelycoolapp.com/help',
-        'Report a bug': "https://www.extremelycoolapp.com/bug",
-        'About': "# This is a header. This is an *extremely* cool app!"
+        'About': "This is simple app to guide users and build a Neural Network model to make predictions."
     }
 )
 
