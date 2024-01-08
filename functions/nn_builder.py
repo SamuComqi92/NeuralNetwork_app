@@ -36,7 +36,7 @@ def nn_builder(dataframe, Task) :
     left_column, right_column = st.columns(2)            # Nella parte principale, crea due colonne dove posso sistemare testi e bottoni
     with left_column:                                    # Qui scelgo di scrivere cose solo nela parte destra
         st.write('Hidden layers and units')
-        Hidden_layers = st.text_input("Write the units for each hidden layer separated by a comma (e.g., '5,6' means that there are two layers with 5 and 6 units respectively)", "5")
+        Hidden_layers = st.text_input("Write the units for each hidden layer separated by a comma (e.g., '5,6' means that there are two layers with 5 and 6 units respectively).", "5")
         Hidden_layers = tuple(map(int, Hidden_layers.split(',')))      # Convertion of the list into a tuple
 
         st.text("")
@@ -44,7 +44,15 @@ def nn_builder(dataframe, Task) :
         st.write('Learning Rate')
         Alpha = st.text_input('Learning Rate (0.3 by default - write a value). A very small value corresponds to a slow-learning algorithm.', '0.3')
 
-
+        st.text("")
+        st.text("")
+        if Task == 'Classification' :
+            Metrics_final = ["Accuracy", "Precision", "Recall", "F1 score", "AUC"]
+        else :
+            Metrics_final = ["RMSE", "MAE", "R2"]
+        Final_metric = st.selectbox(
+            'Choose the Evaluation metric (the metric will be used to evaluate the training and the validation sets)',
+            Metrics_final)
         
         # st.text("")
         # st.text("")
@@ -86,39 +94,34 @@ def nn_builder(dataframe, Task) :
         st.write('Activation function')
         Function_ = st.text_input("Write the activation function (more than one if you want to use a different function for each hidden layer) - 'Sigmoid', 'Tanh', 'Relu', 'Leaky_relu', 'Elu', 'Swish'","Sigmoid")
         Function_ = tuple(map(str, Function_.split(', ')))             # Convertion of the list into a tuple
-            
-        st.text("")
-        st.text("")
-        Batch = st.selectbox(
-            'Size of mini-batches (0: all data will be used)',
-            np.arange(0,len(dataframe))
-            )
 
         st.text("")
         st.text("")
-        Decay = st.text_input('Decay parameter for the Learning rate (0 by default)','0')
-
-        st.text("")
-        st.text("")
-        Lambda = st.text_input('Regularization factor Lambda (0 by default)', '0')
-
-        st.text("")
-        st.text("")
+        st.write('Random State')
         Random_state = st.text_input('A random state value for reproducible results', '0')
+        
+        # st.text("")
+        # st.text("")
+        # Batch = st.selectbox(
+        #     'Size of mini-batches (0: all data will be used)',
+        #     np.arange(0,len(dataframe))
+        #     )
 
-        st.text("")
-        st.text("")
-        Patient = st.text_input('The number of epochs to check for early stopping (it occurs in case when Adam, and/or Momentum are applied)', '5')
+        # st.text("")
+        # st.text("")
+        # Decay = st.text_input('Decay parameter for the Learning rate (0 by default)','0')
 
-        st.text("")
-        st.text("")
-        if Task == 'Classification' :
-            Metrics_final = ["Accuracy", "Precision", "Recall", "F1 score", "AUC"]
-        else :
-            Metrics_final = ["RMSE", "MAE", "R2"]
-        Final_metric = st.selectbox(
-            'Choose the Evaluation metric (the metric will be used to evaluate the training and the validation sets)',
-            Metrics_final)
+        # st.text("")
+        # st.text("")
+        # Lambda = st.text_input('Regularization factor Lambda (0 by default)', '0')
+
+        
+
+        # st.text("")
+        # st.text("")
+        # Patient = st.text_input('The number of epochs to check for early stopping (it occurs in case when Adam, and/or Momentum are applied)', '5')
+
+        
 
     # Check del numero di activation functions e del numero di Hidden layers
     # Se scelgo più di una funzione di attivazione, il numero complessivo deve essere uguale al numero di layer della Rete
