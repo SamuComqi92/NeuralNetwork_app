@@ -98,7 +98,7 @@ if uploaded_file is not None:
         # Check dello step, della presenza di colonne categoriche e dell'assenza di valori mancanti (altrimenti, lo script si interrompe)
         st.write(step_further == 3)
         st.write(len(Categ) != 0)
-        st.write(Categ != "None")
+        st.write(Categ != [None])
         st.write(dataframe.isna().sum().sum() == 0)
         if (step_further == 3) and (len(Categ) != 0 and Categ != "None") and (dataframe.isna().sum().sum() == 0) :
             dataframe, Tra_categ_list, step_further = categoric_to_numeric.categoric_to_numeric(dataframe, Categ, step_further)
