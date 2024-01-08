@@ -77,7 +77,8 @@ def nn_builder(dataframe, Task) :
         #     [0, 1])
 
     with right_column :
-        Max_iter = st.text_input('Maximum number of iterations. The defaul value is 100. A large number of iterations corresponds to a large runtime.', '100')
+        st.write('Number of Iterations')
+        Max_iter = st.text_input('Maximum number of iterations. The defaul value is 100. The larger the number of iterations, the larger the runtime.', '100')
         
         st.text("")
         st.text("")
