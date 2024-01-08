@@ -172,7 +172,7 @@ if uploaded_file is not None:
             # Eseguo il training finale e salvo i parametri in un file JSON
             if st.session_state["ButBut"] :
                 # Finalizzazione del modello
-                Final_model, Tra_num_list_final, flag_finalization, Norm_tar_list_final = model_Finalization.finalization(X, y, Model, Task1, Final_metric, Tra_num, Norm_tar_list, flag_stand)
+                Final_model, Tra_num_list_final, flag_finalization, Norm_tar_list_final = model_finalization.finalization(X, y, Model, Task1, Final_metric, Tra_num, Norm_tar_list, flag_stand)
     
                 # Salvo tutto nella sessione (per far in modo che, una volta caricato il file di test, tutti parametri rimangano salvati)
                 st.session_state["Final_model"] = Final_model
