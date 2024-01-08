@@ -28,8 +28,6 @@ from functions import model_finalization, test_pipeline
 ##################################################################################################################################################################################################################
 
 # Imposto la pagina
-st.markdown("""<style>.reportview-container .main .block-container{{ max-width: 700px; }}</style>""", unsafe_allow_html=True )
-
 st.set_page_config(
     page_title = "Prediction with Neural Networks",
     page_icon = "🧊",
