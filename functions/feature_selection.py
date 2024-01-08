@@ -26,7 +26,7 @@ def feature_selection(dataframe, task) :
             categorical = dataframe.drop(target, axis = 1).columns.tolist()
         elif "None" in categorical :
             pass
-    with right_columns :
+    with right_column :
         # Menu dropdown per multiselezione delle colonne numeriche
         numerical = st.multiselect("Select numerical features:", Lista_col, key = 2)
         if "All" in numerical:
