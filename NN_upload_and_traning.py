@@ -76,7 +76,6 @@ if uploaded_file is not None:
         st.write("### Select Target, Categorical, and Numerical features")
         dataframe, Tar, Categ, Numer = feature_selection.feature_selection(dataframe, Task1)
 
-        st.write(Tar, Categ, Numer)
         ##############################################################################################################################################################################################################
         # Gestione dei valori mancanti nelle colonne categoriche e categoriche, e infine i valori mancanti nella colonna Target (che vengono eliminati)
         # Sia per le colonne numeriche che categoriche, viene data la possibilità di applicare 3 metodi diversi per gestire i valori mancanti.
@@ -113,6 +112,7 @@ if uploaded_file is not None:
         # Standardizzazione del dataframe X per il Training
         # Check avanzamento e valori nulli
         if step_further == 5 and dataframe.isna().sum().sum() == 0:
+            st.write(Tar, Categ, Numer)
             X_train, X_test, Tra_num, step_further, flag_stand = standardize_x_train.standardize_X_train(dataframe, X_train, X_test, step_further)
     
         ##############################################################################################################################################################################################################
