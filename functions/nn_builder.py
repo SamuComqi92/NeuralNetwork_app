@@ -17,21 +17,24 @@ def nn_builder(dataframe, Task) :
     st.text("")
     st.write("### Build the Neural Network")
     st.write("Set all the hyper-parameters of the Neural Network")
+
+    # Task of the analysis
+    st.write("The task is:")
+    html_str = f"""
+        <style>
+        p.a {{
+          font: bold 23.5px Sans;
+        }}
+        </style>
+        <p class="a">{Task}</p>
+        """
+        
+    st.markdown(html_str, unsafe_allow_html=True)
+
+    # Main parameters
+    st.write("These are the main parameters of your Neural Network (you can leave their default values).")
     left_column, right_column = st.columns(2)            # Nella parte principale, crea due colonne dove posso sistemare testi e bottoni
     with left_column:                                    # Qui scelgo di scrivere cose solo nela parte destra
-        # Task of the analysis
-        st.write("The task is:")
-        html_str = f"""
-            <style>
-            p.a {{
-              font: bold 23.5px Sans;
-            }}
-            </style>
-            <p class="a">{Task}</p>
-            """
-            
-        st.markdown(html_str, unsafe_allow_html=True)
-
         st.text("")
         st.text("")
         st.write('Hidden layers and units')
@@ -40,36 +43,40 @@ def nn_builder(dataframe, Task) :
 
         st.text("")
         st.text("")
-        Algo = st.selectbox(
-            'Optimization algorithm',
-            ["Batch","Adam"]
-            )
-
-        st.text("")
-        st.text("")
         Alpha = st.text_input('Learning Rate (0.3 by default - write a value)', '0.3')
 
-        st.text("")
-        st.text("")
-        Regularization = st.selectbox(
-            'Type of Regularization',
-            ["None","Ridge","Lasso"])
 
-        st.text("")
-        st.text("")
-        Momentum = st.text_input('The momentum factor in the weights optimization', '0')
+        
+        # st.text("")
+        # st.text("")
+        # Algo = st.selectbox(
+        #     'Optimization algorithm',
+        #     ["Batch","Adam"]
+        #     )
 
-        st.text("")
-        st.text("")
-        Early_stopping = st.selectbox(
-            'A flag to apply Early-stopping to the algorithm (for Adam, it is better to set it to "False")',
-            ["False","True"])
+        
 
-        st.text("")
-        st.text("")
-        Verbose = st.selectbox(
-            'A flag to display results while processing (0: do not deplay, 1: deplay)',
-            [0, 1])
+        # st.text("")
+        # st.text("")
+        # Regularization = st.selectbox(
+        #     'Type of Regularization',
+        #     ["None","Ridge","Lasso"])
+
+        # st.text("")
+        # st.text("")
+        # Momentum = st.text_input('The momentum factor in the weights optimization', '0')
+
+        # st.text("")
+        # st.text("")
+        # Early_stopping = st.selectbox(
+        #     'A flag to apply Early-stopping to the algorithm (for Adam, it is better to set it to "False")',
+        #     ["False","True"])
+
+        # st.text("")
+        # st.text("")
+        # Verbose = st.selectbox(
+        #     'A flag to display results while processing (0: do not deplay, 1: deplay)',
+        #     [0, 1])
 
     with right_column :
         Max_iter = st.text_input('Maximum number of iterations (100 by default)', '100')
