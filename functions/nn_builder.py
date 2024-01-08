@@ -35,8 +35,6 @@ def nn_builder(dataframe, Task) :
     st.write("These are the main parameters of your Neural Network (you can leave their default values).")
     left_column, right_column = st.columns(2)            # Nella parte principale, crea due colonne dove posso sistemare testi e bottoni
     with left_column:                                    # Qui scelgo di scrivere cose solo nela parte destra
-        st.text("")
-        st.text("")
         st.write('Hidden layers and units')
         Hidden_layers = st.text_input("Scrivi le units presenti in ogni hidden layer separate da una virgola (e.g., '5,6' indica la presenza di due layer da 5 e 6 units ciascuno)", "5")
         Hidden_layers = tuple(map(int, Hidden_layers.split(',')))      # Convertion of the list into a tuple
@@ -79,7 +77,7 @@ def nn_builder(dataframe, Task) :
         #     [0, 1])
 
     with right_column :
-        Max_iter = st.text_input('Maximum number of iterations (100 by default)', '100')
+        Max_iter = st.text_input('Maximum number of iterations. The defaul value is 100. A large number of iterations corresponds to a large runtime.', '100')
         
         st.text("")
         st.text("")
