@@ -112,7 +112,6 @@ if uploaded_file is not None:
         # Standardizzazione del dataframe X per il Training
         # Check avanzamento e valori nulli
         if step_further == 5 and dataframe.isna().sum().sum() == 0:
-            st.write(Tar, Categ, Numer)
             X_train, X_test, Tra_num, step_further, flag_stand = standardize_x_train.standardize_X_train(dataframe, X_train, X_test, step_further)
     
         ##############################################################################################################################################################################################################
