@@ -28,7 +28,16 @@ from functions import model_finalization, test_pipeline
 ##################################################################################################################################################################################################################
 
 # Imposto la larghezza della pagina
-#st.set_page_config(layout="wide")
+
+css = '''
+<style>
+    [data-testid="stSidebar"]{
+        min-width: 400px;
+        max-width: 800px;
+    }
+</style>
+'''
+st.markdown(css, unsafe_allow_html=True)
 
 st.set_page_config(
     page_title = "Prediction with Neural Networks",
