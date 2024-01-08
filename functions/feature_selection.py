@@ -10,7 +10,7 @@ def feature_selection(dataframe, task) :
     """
 
     left_column, center_column, right_column = st.columns(3)
-    with left_column:       
+    with left_column :       
         # Check per controllare che il dataframe non sia vuoto + selezione della colonna target
         if dataframe.empty == False :
             target = st.multiselect('Select the target:', dataframe.columns, key = 100)
@@ -19,7 +19,7 @@ def feature_selection(dataframe, task) :
         Lista_col = dataframe.drop(target, axis = 1).columns.tolist()
         Lista_col.insert(0, 'All')
         Lista_col.insert(0, 'None')
-    with center_columns
+    with center_column :
         # Menu dropdown per multiselezione delle colonne categoriche
         categorical = st.multiselect("Select categorical features:", Lista_col, key = 1)
         if "All" in categorical:
