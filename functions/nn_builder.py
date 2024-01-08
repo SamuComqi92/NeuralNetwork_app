@@ -72,23 +72,18 @@ def nn_builder(dataframe, Task) :
 
     
     # Other parameters
+    st.write("")
+    st.write("")
     st.write("These are other advanced parameters (you may leave their default values).")
     left_column2, right_column2 = st.columns(2)            # Nella parte principale, crea due colonne dove posso sistemare testi e bottoni
     with left_column2:   
         st.text("")
         st.text("")
-        Algo = st.selectbox(
-            'Optimization algorithm',
-            ["Batch","Adam"]
-            )
-
-        
+        Algo = st.selectbox( 'Optimization algorithm', ["Batch","Adam"] )
 
         st.text("")
         st.text("")
-        Regularization = st.selectbox(
-            'Type of Regularization',
-            ["None","Ridge","Lasso"])
+        Regularization = st.selectbox( 'Type of Regularization', ["None","Ridge","Lasso"] )
 
         st.text("")
         st.text("")
@@ -96,22 +91,15 @@ def nn_builder(dataframe, Task) :
 
         st.text("")
         st.text("")
-        Early_stopping = st.selectbox(
-            'A flag to apply Early-stopping to the algorithm (for Adam, it is better to set it to "False")',
-            ["False","True"])
+        Early_stopping = st.selectbox( 'A flag to apply Early-stopping to the algorithm (for Adam, it is better to set it to "False")', ["False","True"])
 
         st.text("")
         st.text("")
-        Verbose = st.selectbox(
-            'A flag to display results while processing (0: do not deplay, 1: deplay)',
-            [0, 1])
+        Verbose = st.selectbox( 'A flag to display results while processing (0: do not deplay, 1: deplay)', [0, 1])
     with right_column2 :
         st.text("")
         st.text("")
-        Batch = st.selectbox(
-            'Size of mini-batches (0: all data will be used)',
-            np.arange(0,len(dataframe))
-            )
+        Batch = st.selectbox( 'Size of mini-batches (0: all data will be used)', np.arange(0,len(dataframe)) )
 
         st.text("")
         st.text("")
@@ -121,11 +109,9 @@ def nn_builder(dataframe, Task) :
         st.text("")
         Lambda = st.text_input('Regularization factor Lambda (0 by default)', '0')
 
-        
-
         st.text("")
         st.text("")
-        Patient = st.text_input('The number of epochs to check for early stopping (it occurs in case when Adam, and/or Momentum are applied)', '5')
+        Patient = st.text_input('The number of epochs to check for early stopping (for Adam and/or with Momentum)', '5')
     
     # Check del numero di activation functions e del numero di Hidden layers
     # Se scelgo più di una funzione di attivazione, il numero complessivo deve essere uguale al numero di layer della Rete
