@@ -32,9 +32,8 @@ st.set_page_config(
     page_title = "Prediction with Neural Networks",
     page_icon = "🧊",
     layout = "wide",
-    menu_items={
-        'About': "This is simple app to guide users and build a Neural Network model to make predictions."
-    }
+    page_width = 800,
+    menu_items = { 'About': "This is simple app to guide users and build a Neural Network model to make predictions." }
 )
 
 # Titolo
