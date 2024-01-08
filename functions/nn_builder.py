@@ -46,12 +46,13 @@ def nn_builder(dataframe, Task) :
 
         st.text("")
         st.text("")
+        st.write("Evaluation Metric")
         if Task == 'Classification' :
             Metrics_final = ["Accuracy", "Precision", "Recall", "F1 score", "AUC"]
         else :
             Metrics_final = ["RMSE", "MAE", "R2"]
         Final_metric = st.selectbox(
-            'Choose the Evaluation metric (the metric will be used to evaluate the training and the validation sets)',
+            'Choose the Evaluation metric (for the evaluation of the training and the validation sets).',
             Metrics_final)
         
         # st.text("")
