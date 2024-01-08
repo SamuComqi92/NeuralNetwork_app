@@ -28,7 +28,19 @@ from functions import model_finalization, test_pipeline
 ##################################################################################################################################################################################################################
 
 # Imposto la larghezza della pagina
-st.set_page_config(layout="wide")
+#st.set_page_config(layout="wide")
+
+st.set_page_config(
+    page_title="Ex-stream-ly Cool App",
+    page_icon="🧊",
+    layout="wide",
+    initial_sidebar_state="expanded",
+    menu_items={
+        'Get Help': 'https://www.extremelycoolapp.com/help',
+        'Report a bug': "https://www.extremelycoolapp.com/bug",
+        'About': "# This is a header. This is an *extremely* cool app!"
+    }
+)
 
 # Titolo
 st.write("# Predictions with Neural Networks")
