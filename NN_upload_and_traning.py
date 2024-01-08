@@ -75,7 +75,8 @@ if uploaded_file is not None:
         st.text("")
         st.write("### Select Target, Categorical, and Numerical features")
         dataframe, Tar, Categ, Numer = feature_selection.feature_selection(dataframe, Task1)
-    
+
+        st.write(Tar, Categ, Numer)
         ##############################################################################################################################################################################################################
         # Gestione dei valori mancanti nelle colonne categoriche e categoriche, e infine i valori mancanti nella colonna Target (che vengono eliminati)
         # Sia per le colonne numeriche che categoriche, viene data la possibilità di applicare 3 metodi diversi per gestire i valori mancanti.
