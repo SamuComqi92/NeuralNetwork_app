@@ -31,10 +31,9 @@ from functions import model_finalization, test_pipeline
 #st.set_page_config(layout="wide")
 
 st.set_page_config(
-    page_title="Ex-stream-ly Cool App",
-    page_icon="🧊",
-    layout="wide",
-    initial_sidebar_state="expanded",
+    page_title = "Prediction with Neural Networks",
+    page_icon = "🧊",
+    layout = "wide",
     menu_items={
         'Get Help': 'https://www.extremelycoolapp.com/help',
         'Report a bug': "https://www.extremelycoolapp.com/bug",
