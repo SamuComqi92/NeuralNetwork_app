@@ -74,6 +74,8 @@ def nn_builder(dataframe, Task) :
     # Other parameters
     st.write("")
     st.write("")
+    st.text("")
+    st.text("")
     st.write("These are other advanced parameters (you may leave their default values).")
     left_column2, right_column2 = st.columns(2)            # Nella parte principale, crea due colonne dove posso sistemare testi e bottoni
     with left_column2:   
