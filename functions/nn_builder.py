@@ -36,7 +36,7 @@ def nn_builder(dataframe, Task) :
     left_column, right_column = st.columns(2)            # Nella parte principale, crea due colonne dove posso sistemare testi e bottoni
     with left_column:                                    # Qui scelgo di scrivere cose solo nela parte destra
         st.write('Hidden layers and units')
-        Hidden_layers = st.text_input("Scrivi le units presenti in ogni hidden layer separate da una virgola (e.g., '5,6' indica la presenza di due layer da 5 e 6 units ciascuno)", "5")
+        Hidden_layers = st.text_input("Write the units for each hidden layer separated by a comma (e.g., '5,6' means that there are two layers with 5 and 6 units respectively)", "5")
         Hidden_layers = tuple(map(int, Hidden_layers.split(',')))      # Convertion of the list into a tuple
 
         st.text("")
