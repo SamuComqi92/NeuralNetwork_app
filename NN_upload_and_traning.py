@@ -28,19 +28,16 @@ from functions import model_finalization, test_pipeline
 ##################################################################################################################################################################################################################
 
 # Imposto la pagina
-css='''
-<style>
-    section.main > div {max-width:75rem}
-</style>
-'''
-st.markdown(css, unsafe_allow_html=True)
-
 st.set_page_config(
     page_title = "Prediction with Neural Networks",
     page_icon = "🧊",
     layout = "wide",
     menu_items = { 'About': "This is simple app to guide users and build a Neural Network model to make predictions." }
 )
+
+css = '''<style> section.main > div {max-width:75rem} </style>'''
+st.markdown(css, unsafe_allow_html=True)
+
 
 # Titolo
 st.write("# Predictions with Neural Networks")
