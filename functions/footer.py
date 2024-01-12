@@ -22,7 +22,7 @@ def footer(*args):
                        text_align = "center",
                        height = px(100),
                        opacity = 1,
-                       display="flex",
+                       #display="flex",
                        align_items="center",
                        justify_content="center"
                        )
