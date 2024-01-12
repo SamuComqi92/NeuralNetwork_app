@@ -1,14 +1,16 @@
 # Importo librerie utili
-import streamlit as st
-import pandas as pd
-import numpy as np
 import json
-import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import streamlit as st
 from itertools import product
+import matplotlib.pyplot as plt
+from htbuilder.units import percent, px
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import MinMaxScaler, StandardScaler, LabelBinarizer, OneHotEncoder
+from htbuilder import HtmlElement, div, hr, a, p, img, styles
 from sklearn.linear_model import LogisticRegression, LinearRegression
 from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
+from sklearn.preprocessing import MinMaxScaler, StandardScaler, LabelBinarizer, OneHotEncoder
 from sklearn.metrics import precision_score,recall_score,f1_score, accuracy_score, confusion_matrix, r2_score, precision_recall_curve, roc_auc_score, roc_curve
 
 # Importo i moduli custom presenti nella cartella "Functions" e il modello di rete neurale nella cartella "Model"
