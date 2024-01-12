@@ -21,6 +21,8 @@ from functions import remove_missing, feature_selection, imputation_process, mis
 from functions import custom_split, standardize_x_train, target_transformation, nn_builder, metrics_plot
 # Finalizzazione e Pipeline
 from functions import model_finalization, test_pipeline
+# Footer
+from functions import footer
 
 ##################################################################################################################################################################################################################
 ##################################################################################################################################################################################################################
@@ -266,6 +268,6 @@ if uploaded_file is not None:
 # --------------------------------------------------------------------------------------------------------------------------------------------------------
 # FOOTER (le funzioni utilizzate sono in functions.py)
 if __name__ == "__main__":
-    myargs = [ "Made in ", image_render('https://avatars3.githubusercontent.com/u/45109972?s=400&v=4', width = px(25), height = px(25)), 
-        " by ", link_render("https://www.linkedin.com/in/samuele-campitiello-913b90104/", "Samuele Campitiello") ]
-    footer(*myargs)
+    myargs = [ "Made in ", footer.image_render('https://avatars3.githubusercontent.com/u/45109972?s=400&v=4', width = px(25), height = px(25)), 
+        " by ", footer.link_render("https://www.linkedin.com/in/samuele-campitiello-913b90104/", "Samuele Campitiello") ]
+    footer.footer(*myargs)
