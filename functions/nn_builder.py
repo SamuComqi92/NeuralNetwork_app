@@ -1,4 +1,4 @@
-r# Importo librerie utili
+# Importo librerie utili
 import streamlit as st
 import numpy as np
 
