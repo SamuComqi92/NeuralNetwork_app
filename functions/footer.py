@@ -24,7 +24,7 @@ def footer(*args):
                        opacity = 1,
                        display="flex",
                        justify_content="center",
-                       font_size=12
+                       font_size=8
                        )
     style_hr = styles(display = "block",
                       margin = px(8, 8, "auto", "auto"),
