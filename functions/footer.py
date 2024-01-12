@@ -13,7 +13,7 @@ def link_render(link, text, **style):
 
 def footer(*args):
     style = """<style> # MainMenu {visibility: hidden;} footer {visibility: hidden;} .stApp { bottom: 85px; } </style>"""
-    style_div = styles( position = "fixed", left = 0, bottom = 0, margin = px(0, 0, 0, 0), width = percent(100), color = "black", text_align = "center", height = px(100), opacity = 1, line_height=px(100))
+    style_div = styles( position = "fixed", left = 0, bottom = 0, margin = px(0, 0, 0, 0), width = percent(100), color = "black", text_align = "center", height = px(100), opacity = 1, line_height=px(1))
     style_hr = styles( display = "block", margin = px(8, 8, "auto", "auto"), border_style = "inset", border_width = px(2) )
     body = p()
     foot = div( style = style_div )( hr( tyle = style_hr ), body )
