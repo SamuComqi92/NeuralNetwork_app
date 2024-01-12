@@ -34,7 +34,7 @@ def nn_builder(dataframe, Task) :
     html_str2 = f"""
         <style>
         p.a {{
-          font: bold 23.5px Sans;
+          font: bold 17px Sans;
         }}
         </style>
         <p class="a">These are the main parameters of your Neural Network (you may leave their default values).</p>
