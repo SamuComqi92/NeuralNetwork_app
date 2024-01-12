@@ -38,8 +38,9 @@ st.markdown('''<style> section.main > div {max-width:75rem} </style>''', unsafe_
 st.write("# Predictions with Neural Networks")
 st.write("")
 st.write("This is a simple app to guide you in the process of applying a custom Neural Network model to a dataset.")
-st.write("Currently, the app supports binary classification, multivariate classification, and regression analyses.")
-st.write("At the moment, the app cannot process dates in your dataset.")
+st.write("Currently:")
+st.write("- The app supports binary classification, multivariate classification, and regression analyses.")
+st.write("- The app cannot process dates in your dataset.")
 
 # Pulsante per upload dati (file CSV)
 st.write("### Upload Data")
