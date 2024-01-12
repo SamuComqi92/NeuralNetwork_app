@@ -21,9 +21,7 @@ def footer(*args):
                        color = "black", 
                        text_align = "center",
                        height = px(100),
-                       line_height = px(0), 
-                       opacity = 1,
-                       justify_content = "top",
+                       opacity = 1
                        )
     style_hr = styles(display = "block",
                       margin = px(8, 8, "auto", "auto"),
