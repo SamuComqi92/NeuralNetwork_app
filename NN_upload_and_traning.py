@@ -22,8 +22,6 @@ from functions import custom_split, standardize_x_train, target_transformation, 
 # Finalizzazione e Pipeline
 from functions import model_finalization, test_pipeline
 
-
-
 ##################################################################################################################################################################################################################
 ##################################################################################################################################################################################################################
 
@@ -66,6 +64,7 @@ if uploaded_file is not None:
     Task1 = st.selectbox( 'What is the task of this analysis?', ['','Classification','Regression'] )
     st.write("If the task is 'Classification', the final model will predict classes; if 'Regression', it will predict numbers.")
 
+    # L'app si avvia solo se è stata scelta la tipologia di analisi
     if Task1 :
         ##############################################################################################################################################################################################################
         # Selezione delle varie features (numeriche e categoriche) e della colonna target
@@ -75,7 +74,8 @@ if uploaded_file is not None:
         st.text("")
         st.write("### Select Target, Categorical, and Numerical features")
         dataframe, Tar, Categ, Numer = feature_selection.feature_selection(dataframe, Task1)
-
+        st.write("Unselected columns will be excluded from the dataset.")
+        
         ##############################################################################################################################################################################################################
         # Gestione dei valori mancanti nelle colonne categoriche e categoriche, e infine i valori mancanti nella colonna Target (che vengono eliminati)
         # Sia per le colonne numeriche che categoriche, viene data la possibilità di applicare 3 metodi diversi per gestire i valori mancanti.
