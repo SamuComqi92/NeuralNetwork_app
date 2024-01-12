@@ -1,4 +1,4 @@
-# Importo librerie utili
+r# Importo librerie utili
 import streamlit as st
 import numpy as np
 
@@ -28,12 +28,11 @@ def nn_builder(dataframe, Task) :
         </style>
         <p class="a">{Task}</p>
         """
-        
     st.markdown(html_str, unsafe_allow_html=True)
 
     # Main parameters
     st.write("These are the main parameters of your Neural Network (you may leave their default values).")
-    left_column, right_column = st.columns(2)            # Nella parte principale, crea due colonne dove posso sistemare testi e bottoni
+    left_column, center_column, right_column = st.columns(3)            # Nella parte principale, crea due colonne dove posso sistemare testi e bottoni
     with left_column:                                    # Qui scelgo di scrivere cose solo nela parte destra
         st.write('Hidden layers and units')
         Hidden_layers = st.text_input("Write the units for each hidden layer separated by a comma (e.g., '5,6' means that there are two layers with 5 and 6 units respectively).", "5")
@@ -43,6 +42,13 @@ def nn_builder(dataframe, Task) :
         st.text("")
         st.write('Learning Rate')
         Alpha = st.text_input('Learning Rate (0.3 by default - write a value). A very small value corresponds to a slow-learning algorithm.', '0.3')
+
+    with center_column :
+        st.text("")
+        st.text("")
+        st.write('Activation function')
+        Function_ = st.text_input("Write the activation function (more than one if you want to use a different function for each hidden layer) - 'Sigmoid', 'Tanh', 'Relu', 'Leaky_relu', 'Elu', 'Swish'","Sigmoid")
+        Function_ = tuple(map(str, Function_.split(', ')))             # Convertion of the list into a tuple
 
         st.text("")
         st.text("")
@@ -54,17 +60,11 @@ def nn_builder(dataframe, Task) :
         Final_metric = st.selectbox(
             'Choose the Evaluation metric (for the evaluation of the training and the validation sets).',
             Metrics_final)
-
+        
     with right_column :
         st.write('Number of Iterations')
         Max_iter = st.text_input('Maximum number of iterations. The defaul value is 100. The larger the number of iterations, the larger the runtime.', '100')
         
-        st.text("")
-        st.text("")
-        st.write('Activation function')
-        Function_ = st.text_input("Write the activation function (more than one if you want to use a different function for each hidden layer) - 'Sigmoid', 'Tanh', 'Relu', 'Leaky_relu', 'Elu', 'Swish'","Sigmoid")
-        Function_ = tuple(map(str, Function_.split(', ')))             # Convertion of the list into a tuple
-
         st.text("")
         st.text("")
         st.write('Random State')
