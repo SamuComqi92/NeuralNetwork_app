@@ -104,7 +104,7 @@ def nn_builder(dataframe, Task) :
 
         st.text("")
         st.text("")
-        Early_stopping = st.selectbox( 'A flag to apply Early-stopping to the algorithm (for Adam, it is better to set it to "False")', ["False","True"])
+        Early_stopping = st.selectbox( 'Flag to apply Early-stopping to the algorithm (for Adam, it is better to set it to "False")', ["False","True"])
 
     with center_column2:   
         Batch = st.selectbox( 'Size of mini-batches (0: all data will be used)', np.arange(0,len(dataframe)) )
@@ -120,7 +120,7 @@ def nn_builder(dataframe, Task) :
     with right_column2 :
         st.text("")
         st.text("")
-        Verbose = st.selectbox( 'A flag to display results while processing (0: do not deplay, 1: deplay)', [0, 1])
+        Verbose = st.selectbox( 'Flag to display results (0: do not deplay, 1: deplay)', [0, 1])
 
         st.text("")
         st.text("")
