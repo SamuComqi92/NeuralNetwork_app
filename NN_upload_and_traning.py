@@ -262,3 +262,10 @@ if uploaded_file is not None:
         st.write("")
         st.write("")
         st.write("Choose a task for this analysis!")
+
+# --------------------------------------------------------------------------------------------------------------------------------------------------------
+# FOOTER (le funzioni utilizzate sono in functions.py)
+if __name__ == "__main__":
+    myargs = [ "Made in ", image_render('https://avatars3.githubusercontent.com/u/45109972?s=400&v=4', width = px(25), height = px(25)), 
+        " by ", link_render("https://www.linkedin.com/in/samuele-campitiello-913b90104/", "Samuele Campitiello") ]
+    footer(*myargs)
