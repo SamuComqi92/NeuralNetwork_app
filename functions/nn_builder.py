@@ -19,14 +19,13 @@ def nn_builder(dataframe, Task) :
     st.write("Set all the hyper-parameters of the Neural Network")
 
     # Task of the analysis
-    st.write("The task is:")
     html_str = f"""
         <style>
         p.a {{
           font: bold 23.5px Sans;
         }}
         </style>
-        <p class="a">{Task}</p>
+        <p class="a">The task is: {Task}</p>
         """
     st.markdown(html_str, unsafe_allow_html=True)
 
