@@ -36,6 +36,11 @@ st.markdown('''<style> section.main > div {max-width:75rem} </style>''', unsafe_
 
 # Titolo
 st.write("# Predictions with Neural Networks")
+st.write("")
+st.write("This is a simple app for applying a custom Neural Network model to a dataset")
+st.write("You will be guided in the entire process").
+st.write("Currently, the app supports binary classification, multivariate classification, and regression analyses")
+st.write("At the moment, the app cannot process dates in your dataset.")
 
 # Pulsante per upload dati (file CSV)
 st.write("### Upload Data")
