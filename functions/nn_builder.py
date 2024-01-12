@@ -40,7 +40,7 @@ def nn_builder(dataframe, Task) :
         """
     st.markdown(html_str2, unsafe_allow_html=True)
 
-#    st.write("These are the main parameters of your Neural Network (you may leave their default values).")
+    # Defining three columns
     left_column, center_column, right_column = st.columns(3)            # Nella parte principale, crea due colonne dove posso sistemare testi e bottoni
     with left_column:                                    # Qui scelgo di scrivere cose solo nela parte destra
         st.write('Hidden layers and units')
@@ -83,7 +83,17 @@ def nn_builder(dataframe, Task) :
     st.write("")
     st.text("")
     st.text("")
-    st.write("These are other advanced parameters (you may leave their default values).")
+    html_str3 = f"""
+        <style>
+        p.a {{
+          font: bold 15px Sans;
+        }}
+        </style>
+        <p class="a">These are other advanced parameters (you may leave their default values).</p>
+        """
+    st.markdown(html_str3, unsafe_allow_html=True)
+
+    # Defining three columns
     left_column2, right_column2 = st.columns(2)            # Nella parte principale, crea due colonne dove posso sistemare testi e bottoni
     with left_column2:   
         Algo = st.selectbox( 'Optimization algorithm', ["Batch","Adam"] )
