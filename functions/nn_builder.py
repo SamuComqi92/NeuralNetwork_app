@@ -66,7 +66,7 @@ def nn_builder(dataframe, Task) :
         st.text("")
         st.text("")
         st.write('Random State')
-        Random_state = st.text_input('A random state value for reproducible results', '0')
+        Random_state = st.text_input('A random state value for reproducible results (it is a value that you can choose randomly).', '0')
 
     
     # Other parameters
