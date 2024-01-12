@@ -41,7 +41,7 @@ def nn_builder(dataframe, Task) :
     st.markdown(html_str2, unsafe_allow_html=True)
 
     # Defining three columns
-    left_column, center_column, right_column = st.columns(3)            # Nella parte principale, crea due colonne dove posso sistemare testi e bottoni
+    left_column, center_column, right_column = st.columns(3)            # Nella parte principale, crea tre colonne dove posso sistemare testi e bottoni
     with left_column:                                    # Qui scelgo di scrivere cose solo nela parte destra
         st.write('Hidden layers and units')
         Hidden_layers = st.text_input("Write the units for each hidden layer separated by a comma (e.g., '5,6' means that there are two layers with 5 and 6 units respectively).", "5")
@@ -94,7 +94,7 @@ def nn_builder(dataframe, Task) :
     st.markdown(html_str3, unsafe_allow_html=True)
 
     # Defining three columns
-    left_column2, right_column2 = st.columns(2)            # Nella parte principale, crea due colonne dove posso sistemare testi e bottoni
+    left_column2, center_column2, right_column2 = st.columns(3)            # Nella parte principale, crea tre colonne dove posso sistemare testi e bottoni
     with left_column2:   
         Algo = st.selectbox( 'Optimization algorithm', ["Batch","Adam"] )
 
@@ -104,21 +104,10 @@ def nn_builder(dataframe, Task) :
 
         st.text("")
         st.text("")
-        Momentum = st.text_input('The momentum factor in the weights optimization', '0')
-
-        st.text("")
-        st.text("")
         Early_stopping = st.selectbox( 'A flag to apply Early-stopping to the algorithm (for Adam, it is better to set it to "False")', ["False","True"])
 
-        st.text("")
-        st.text("")
-        Verbose = st.selectbox( 'A flag to display results while processing (0: do not deplay, 1: deplay)', [0, 1])
-    with right_column2 :
+    with center_column2:   
         Batch = st.selectbox( 'Size of mini-batches (0: all data will be used)', np.arange(0,len(dataframe)) )
-
-        st.text("")
-        st.text("")
-        Decay = st.text_input('Decay parameter for the Learning rate (0 by default)','0')
 
         st.text("")
         st.text("")
@@ -127,6 +116,21 @@ def nn_builder(dataframe, Task) :
         st.text("")
         st.text("")
         Patient = st.text_input('The number of epochs to check for early stopping (for Adam and/or with Momentum)', '5')
+        
+    with right_column2 :
+        st.text("")
+        st.text("")
+        Verbose = st.selectbox( 'A flag to display results while processing (0: do not deplay, 1: deplay)', [0, 1])
+
+        st.text("")
+        st.text("")
+        Decay = st.text_input('Decay parameter for the Learning rate (0 by default)','0')
+
+        st.text("")
+        st.text("")
+        Momentum = st.text_input('The momentum factor in the weights optimization', '0')
+
+        
     
     # Check del numero di activation functions e del numero di Hidden layers
     # Se scelgo più di una funzione di attivazione, il numero complessivo deve essere uguale al numero di layer della Rete
