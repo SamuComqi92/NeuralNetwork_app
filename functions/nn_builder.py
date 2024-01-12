@@ -31,7 +31,17 @@ def nn_builder(dataframe, Task) :
     st.markdown(html_str, unsafe_allow_html=True)
 
     # Main parameters
-    st.write("These are the main parameters of your Neural Network (you may leave their default values).")
+    html_str2 = f"""
+        <style>
+        p.a {{
+          font: bold 23.5px Sans;
+        }}
+        </style>
+        <p class="a">These are the main parameters of your Neural Network (you may leave their default values).</p>
+        """
+    st.markdown(html_str2, unsafe_allow_html=True)
+
+#    st.write("These are the main parameters of your Neural Network (you may leave their default values).")
     left_column, center_column, right_column = st.columns(3)            # Nella parte principale, crea due colonne dove posso sistemare testi e bottoni
     with left_column:                                    # Qui scelgo di scrivere cose solo nela parte destra
         st.write('Hidden layers and units')
