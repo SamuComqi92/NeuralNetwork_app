@@ -20,11 +20,10 @@ def footer(*args):
                        width = percent(100), 
                        color = "black", 
                        text_align = "center",
-                       height = px(50),
+                       height = px(40),
                        opacity = 1,
                        display="flex",
-                       align_items = "center",
-                       #justify_content="center"
+                       justify_content="center"
                        )
     style_hr = styles(display = "block",
                       margin = px(8, 8, "auto", "auto"),
