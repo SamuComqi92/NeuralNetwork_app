@@ -44,8 +44,6 @@ def nn_builder(dataframe, Task) :
         Alpha = st.text_input('Learning Rate (0.3 by default - write a value). A very small value corresponds to a slow-learning algorithm.', '0.3')
 
     with center_column :
-        st.text("")
-        st.text("")
         st.write('Activation function')
         Function_ = st.text_input("Write the activation function (more than one if you want to use a different function for each hidden layer) - 'Sigmoid', 'Tanh', 'Relu', 'Leaky_relu', 'Elu', 'Swish'","Sigmoid")
         Function_ = tuple(map(str, Function_.split(', ')))             # Convertion of the list into a tuple
