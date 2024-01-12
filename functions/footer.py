@@ -23,8 +23,7 @@ def footer(*args):
                        height = px(30),
                        opacity = 1,
                        display="flex",
-                       justify_content="center",
-                       style={"font-size": "16px"}
+                       justify_content="center"
                        )
     style_hr = styles(display = "block",
                       margin = px(8, 8, "auto", "auto"),
