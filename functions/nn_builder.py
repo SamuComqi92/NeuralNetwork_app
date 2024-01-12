@@ -126,7 +126,7 @@ def nn_builder(dataframe, Task) :
 
         st.text("")
         st.text("")
-        Momentum = st.text_input('The momentum factor in the weights optimization', '0')
+        Momentum = st.text_input('The momentum factor in the weights optimization (the value must be equal or larger than 0).', '0')
 
         
     
