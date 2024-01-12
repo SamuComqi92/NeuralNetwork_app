@@ -22,8 +22,8 @@ def footer(*args):
                        text_align = "center",
                        height = px(50),
                        opacity = 1,
-                       display="flex"
-                       #align_items="center",
+                       display="flex",
+                       align_items = "center",
                        #justify_content="center"
                        )
     style_hr = styles(display = "block",
