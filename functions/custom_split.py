@@ -35,8 +35,12 @@ def train_test_customsplit(dataframe, target, step_further) :
     y = dataframe[target].to_numpy()
     
     # Slider per scegliere le dimensioni del Validation set
+    size_test = st.slider(
+        'Select the size of the Test set (% with respecto the the total number of data)', 
+        100*1/len(X), 100*(len(X)-1)/len(X),
+        70.0
+    )
     # Eventuali errori dovuti a valori categorici non distribuiti in modo corretto si possono risolvere aumentando le dimensioni del training set
-    size_test = st.slider('Select the size of the Test set (% with respecto the the total number of data)',  100*1/len(X), 100*(len(X)-1)/len(X), 70.0)
     st.write('If the training process raises an error due to categorical values not found in the validation set, try to increase the training set size.')
     
     # Creazione dei due set
@@ -44,7 +48,7 @@ def train_test_customsplit(dataframe, target, step_further) :
     st.write("Number of data in the Training set: %d" % len(X_train))
     st.write("Number of data in the Test set: %d" % len(X_test))
 
-    # Conversione dei due array in dataframe Pandas
+    # Conversione dei due array in dataframe Pandas e aggiornamento step
     X_train = pd.DataFrame(X_train, columns = dataframe.drop(target,axis=1).drop(["index"], axis = 1).columns)
     X_test = pd.DataFrame(X_test, columns = dataframe.drop(target,axis=1).drop(["index"], axis = 1).columns)
     step_further = 5
