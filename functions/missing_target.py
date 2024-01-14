@@ -18,8 +18,8 @@ def missing_target(dataframe, categorical, numerical, target, a, b, step_further
     - Dataframe modificato
     - Flag step_further
     """
-    # Check dello step e delle scelte dell'utente
-    if step_further == 2 and (categorical or numerical):
+    
+    if step_further == 2 and (categorical or numerical):                # Check dello step e delle scelte dell'utente
         step_further = 3
         miss = np.unique( np.concatenate( (a, b, dataframe[target].isnull().to_numpy().nonzero()[0]), axis = 0) )
         dataframe = dataframe.drop(index = miss, axis = 0)
