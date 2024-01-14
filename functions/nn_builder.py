@@ -10,8 +10,9 @@ def nn_builder(dataframe, Task) :
     - dataframe: dataframe originale
     La funzione restituisce tutti i parametri settati dall'utente
     """
-    # Check dello step di avanzamento
-    step_further = 8
+    
+    step_further = 8            # Aggiornamento step di avanzamento
+    
     st.text("")
     st.text("")
     st.text("")
@@ -19,33 +20,19 @@ def nn_builder(dataframe, Task) :
     st.write("Set all the hyper-parameters of the Neural Network")
 
     # Task of the analysis
-    html_str = f"""
-        <style>
-        p.a {{
-          font: bold 23.5px Sans;
-        }}
-        </style>
-        <p class="a">The task is: {Task}</p>
-        """
+    html_str = f"""<style>p.a {{font: bold 23.5px Sans;}}</style><p class="a">The task is: {Task}</p>"""
     st.markdown(html_str, unsafe_allow_html=True)
 
     # Main parameters
-    html_str2 = f"""
-        <style>
-        p.a {{
-          font: bold 15px Sans;
-        }}
-        </style>
-        <p class="a">These are the main parameters of your Neural Network (you may leave their default values).</p>
-        """
+    html_str2 = f"""<style>p.a {{font: bold 15px Sans;}}</style><p class="a">These are the main parameters of your Neural Network (you may leave their default values).</p>"""
     st.markdown(html_str2, unsafe_allow_html=True)
 
     # Defining three columns
-    left_column, center_column, right_column = st.columns(3)            # Nella parte principale, crea tre colonne dove posso sistemare testi e bottoni
-    with left_column:                                    # Qui scelgo di scrivere cose solo nela parte destra
+    left_column, center_column, right_column = st.columns(3)             # Nella parte principale, crea tre colonne dove posso sistemare testi e bottoni
+    with left_column:                                                    # Qui scelgo di scrivere cose solo nela parte destra
         st.write('Hidden layers and units')
         Hidden_layers = st.text_input("Write the units for each hidden layer separated by a comma (e.g., '5,6' means that there are two layers with 5 and 6 units respectively).", "5")
-        Hidden_layers = tuple(map(int, Hidden_layers.split(',')))      # Convertion of the list into a tuple
+        Hidden_layers = tuple(map(int, Hidden_layers.split(',')))       # Convertion of the list into a tuple
 
         st.text("")
         st.text("")
@@ -64,9 +51,7 @@ def nn_builder(dataframe, Task) :
             Metrics_final = ["Accuracy", "Precision", "Recall", "F1 score", "AUC"]
         else :
             Metrics_final = ["RMSE", "MAE", "R2"]
-        Final_metric = st.selectbox(
-            'Choose the Evaluation metric (for the evaluation of the training and the validation sets).',
-            Metrics_final)
+        Final_metric = st.selectbox( 'Choose the Evaluation metric (for the evaluation of the training and the validation sets).', Metrics_final )
         
     with right_column :
         st.write('Number of Iterations')
@@ -77,23 +62,14 @@ def nn_builder(dataframe, Task) :
         st.write('Random State')
         Random_state = st.text_input('A random state value for reproducible results (it is a value that you can choose randomly).', '0')
 
-    
     # Other parameters
     st.write("")
     st.write("")
     st.text("")
     st.text("")
-    html_str3 = f"""
-        <style>
-        p.a {{
-          font: bold 15px Sans;
-        }}
-        </style>
-        <p class="a">These are other advanced parameters (you may leave their default values).</p>
-        """
+    html_str3 = f"""<style>p.a {{font: bold 15px Sans;}}</style><p class="a">These are other advanced parameters (you may leave their default values).</p>"""
     st.markdown(html_str3, unsafe_allow_html=True)
 
-    # Defining three columns
     left_column2, center_column2, right_column2 = st.columns(3)            # Nella parte principale, crea tre colonne dove posso sistemare testi e bottoni
     with left_column2:   
         Algo = st.selectbox( 'Optimization algorithm', ["Batch","Adam"] )
@@ -128,8 +104,6 @@ def nn_builder(dataframe, Task) :
         st.text("")
         Momentum = st.text_input('The momentum factor in the weights optimization (the value must be equal or larger than 0).', '0')
 
-        
-    
     # Check del numero di activation functions e del numero di Hidden layers
     # Se scelgo più di una funzione di attivazione, il numero complessivo deve essere uguale al numero di layer della Rete
     if len(Function_) < len(Hidden_layers) :
@@ -138,6 +112,6 @@ def nn_builder(dataframe, Task) :
             Copy_func = Copy_func + Function_
         Function_ = Copy_func
     elif len(Function_) > len(Hidden_layers) :
-        st.write("!!! The number of hidden layers must be equal to the number of activation functions !!!")
+        st.write("The number of hidden layers must be equal to the number of activation functions!")
 
     return Hidden_layers, Algo, Alpha, Regularization, Momentum, Early_stopping, Verbose, Max_iter, Function_, Batch, Decay, Lambda, Random_state, Patient, Final_metric
