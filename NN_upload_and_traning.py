@@ -31,19 +31,19 @@ from functions import footer
 
 
 # Function to check for date columns
-def check_dates(date_string):
+def are_columns_in_date_format(dataframe):
     date_patterns = [
-        r'(\d{4}-\d{2}-\d{2})',        # YYYY-MM-DD
-        r'(\d{2}/\d{2}/\d{4})',        # MM/DD/YYYY
-        r'(\d{2}-[a-zA-Z]{3}-\d{4})'   # DD-Mon-YYYY
+        r'\d{4}-\d{2}-\d{2}',          # YYYY-MM-DD
+        r'\d{2}/\d{2}/\d{4}',          # MM/DD/YYYY
+        r'\d{2}-[a-zA-Z]{3}-\d{4}'     # DD-Mon-YYYY
+        # Add more patterns as needed
     ]
-    for pattern in date_patterns:
-        match = re.search(pattern, date_string)
-        if match:
-            return 1
-        else :
-            return 0
-
+    result = {}
+    for column_name in df.columns:
+        values = df[column_name]
+        is_date_format = all(re.match(pattern, str(value)) is not None for pattern in date_patterns for value in values)
+        result[column_name] = is_date_format
+    return result
 
 # Function to convert dates to a consistent format
 def convert_dates(date_string):
@@ -102,8 +102,12 @@ if uploaded_file is not None:
     st.write("**Note**: Rows with more than 70\% of missing data will be removed from the dataset")
 
     # Apply the conversion function to the 'DateColumn'
-    dataframe['Date'] = dataframe['Date'].apply(check_dates)
-    st.write(dataframe)
+    # Check if all columns are in date format
+    result = are_columns_in_date_format(df)
+    
+    # Display the result
+    for column, is_date_format in result.items():
+        st.write(f"Is '{column}' in date format? {is_date_format}")
     
 
     # Rimozione righe e colonne con più del 70% di valori mancanti    
