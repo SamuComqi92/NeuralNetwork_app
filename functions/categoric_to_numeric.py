@@ -23,22 +23,24 @@ def categoric_to_numeric(dataframe, categorical_features, step_further) :
     st.write("### Categorical features to numeric")
 
     # Menu dropdown per la scelta del metodo di conversione
-    menu_transformation = st.selectbox( 'How would you like to transform categorical features?', ['','OneHotEncoder','String to numbers'] )
+    menu_transformation = st.selectbox( 
+        'How would you like to transform categorical features?',
+        ['','OneHotEncoder','String to numbers']
+    )
 
     # Inizializzo la lista di dizionari per il replacement (nel caso di "String to numbers")
     list_imputation_dict = []
     
     # Gestione delle varie scelte
     if menu_transformation == 'OneHotEncoder':
-        jobs_encoder = LabelBinarizer()                        # Definizione oggetto encoder
-        for i in categorical_features :                        # Procedure di rinominazione colonne
+        jobs_encoder = LabelBinarizer()                                                                            # Definizione oggetto encoder
+        for i in categorical_features :                                                                            # Procedure di rinominazione colonne
             columns = np.unique(dataframe[i].astype(str))
             m = 0
             for j in columns :
                 columns[m] = i + "_" + columns[m]
                 m = m + 1
-            # Trasformazione del dataframe
-            transformed = pd.DataFrame(jobs_encoder.fit_transform(dataframe[i].astype(str)), columns = columns)
+            transformed = pd.DataFrame(jobs_encoder.fit_transform(dataframe[i].astype(str)), columns = columns)    # Trasformazione del dataframe
             dataframe = pd.concat([transformed, dataframe], axis = 1).drop([i], axis = 1)
     else :
         jobs_encoder = None
@@ -50,11 +52,8 @@ def categoric_to_numeric(dataframe, categorical_features, step_further) :
                 list_imputation_dict.append(result_dict)
                 dataframe[i].replace(result_dict, inplace = True)
 
-    # Aggiornamento dello step
-    step_further = 4
-
-    # Possibilità di visualizzare il dataframe
-    if menu_transformation != '':
+    step_further = 4                                             # Aggiornamento dello step
+    if menu_transformation != '':                                # Possibilità di visualizzare il dataframe
         if st.checkbox('Show dataframe', key = 530):                
             st.write(dataframe)
 
