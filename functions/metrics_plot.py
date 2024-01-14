@@ -19,11 +19,10 @@ def metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, F
     - Plot Learning curve, sia per regressione che per classificazione
     - Plot y_real vs. y_predicted (solo per regressione)
     """
-    # Calcolo delle metriche finali
-    if Task == "Classification" or (Task == "Regressione" and Norm_tar_list[3] == 0) :        # Metriche calcolate direttamente dal modello
-        res_tr = Model.last_metric_tr
-        res_te = Model.last_metric_te
-    elif Task == "Regression" and Norm_tar_list[3] == 20:                                     # MinMax
+
+    if Task == "Classification" or (Task == "Regressione" and Norm_tar_list[3] == 0) :        # Per "Classificazione", le metriche sono calcolate direttamente dal modello
+        res_tr, res_te = Model.last_metric_tr, Model.last_metric_te
+    elif Task == "Regression" and Norm_tar_list[3] == 20:                                     # Per "Regressione" con MinMax
         y_real_tr = Norm_tar_list[1].inverse_transform(y_train)
         y_real_te = Norm_tar_list[1].inverse_transform(y_test)
         y_predicted_tr = Norm_tar_list[1].inverse_transform(Model.Predict(X_train))
@@ -38,7 +37,7 @@ def metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, F
             res_tr = r2_score(y_real_tr, y_predicted_tr)
             res_te = r2_score(y_real_te, y_predicted_te)
         
-    elif Task == "Regression" and Norm_tar_list[3] == 10:                                    # Log(x+1)
+    elif Task == "Regression" and Norm_tar_list[3] == 10:                                     # Per "Regressione" con Log(x+1)
         y_real_tr = 10**(y_train) + 1
         y_real_te = 10**(y_test) + 1
         y_predicted_tr = 10**Model.Predict(X_train) + 1
@@ -53,11 +52,8 @@ def metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, F
             res_tr = r2_score(y_real_tr, y_predicted_tr)
             res_te = r2_score(y_real_te, y_predicted_te)
 
-    # Risultati finali
     st.write('Training real {}: {:.5f} -- Validation real {}: {:.5f}'.format(Final_metric, res_tr, Final_metric, res_te))
-    
-    # Salvo risultati in session
-    st.session_state["res_tr"], st.session_state["res_te"]  = res_tr, res_te
+    st.session_state["res_tr"], st.session_state["res_te"]  = res_tr, res_te                 # Salvo risultati in session
 
     # Creazione del plot finale
     if Task == "Regression" :
@@ -72,8 +68,7 @@ def metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, F
     ax1.set_xlabel("Epoch")
     ax1.set_ylabel("Cost function")
     
-    # Confronto risultati Test (solo per regressione)
-    #st.pyplot(fig)
+    # Confronto risultati Test (tre plot solo per Regressione)
     if Task == "Regression" :
         if Norm_tar_list[3] == 20 :
             ax2.plot(Norm_tar_list[1].inverse_transform(Model.Predict(X_test)), Norm_tar_list[1].inverse_transform(y_test), 'ob')
@@ -91,7 +86,8 @@ def metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, F
         ax2.set_xlabel("Predictions")
         ax2.set_ylabel("Actual values")
         ax3.set_xlabel("Predictions - Actual")
-    # Solo due plot per le analisi di Classificazione
+    
+    # Due plot per le analisi di Classificazione
     else :
         ax2.plot(Model.metric_tr, '-b')
         ax2.plot(Model.metric_te,'-r')
