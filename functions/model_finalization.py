@@ -26,19 +26,20 @@ def finalization(X, y, Model, Task, Final_metric, Tra_num, Norm_tar_list, flag_s
     - st.session_state["flag_finalization"]: flag di finalizzazione (salvato in sessione)
     - Norm_tar_list_final: lista con metodo di trasformazione per la colonna target
     """
+    
     flag_finalization = 1
     st.session_state["flag_finalization"] = flag_finalization
 
     # Standardizzazzione di X
     if flag_stand == 0 or flag_stand == 3 :
         XX_train, Set_scaler_x = X, None
-    elif flag_stand == 1:
-        Set_scaler_x = MinMaxScaler()
-        Set_scaler_x.fit(X)
-        XX_train = pd.DataFrame(Set_scaler_x.transform(X))
-    elif flag_stand == 2:
-        Set_scaler_x = StandardScaler()
-        Set_scaler_x.fit(X)
+    else :
+        if flag_stand == 1:
+            Set_scaler_x = MinMaxScaler()
+            Set_scaler_x.fit(X)
+        elif flag_stand == 2:
+            Set_scaler_x = StandardScaler()
+            Set_scaler_x.fit(X)
         XX_train = pd.DataFrame(Set_scaler_x.transform(X))
 
     # Salvo il nuovo scaler nella sessione
@@ -63,25 +64,18 @@ def finalization(X, y, Model, Task, Final_metric, Tra_num, Norm_tar_list, flag_s
     # Lista per l'applicazione finale
     Norm_tar_list_final = [Norm_tar_list[2], target_minmax_y]
 
-    # Applicazione del modello a tutto il dataset
+    # Applicazione del modello a tutto il dataset e salvataggio modello
     Model.Training(XX_train, yy_train, XX_train, yy_train)
-
-    # Salvo il modello finale nella sessione (questo verrà utilizzato per l'applicazione finale)
     st.session_state.Final_model = Model
 
     # Stampo i risultati finali rispetto a quelli calcolati con il primo training (salvati in sessione)
-    
     if Task == "Regression" :
-        # MinMax
-        if Norm_tar_list[3] == 20:
+        if Norm_tar_list[3] == 20:            # MinMax
             res_tr_final = np.sqrt( ((target_minmax_y.inverse_transform(Model.Predict(XX_train)) -  target_minmax_y.inverse_transform(yy_train))**2).sum()/len(yy_train) )
-        # Log(x+1)
-        elif Norm_tar_list[3] == 10:
+        elif Norm_tar_list[3] == 10:          # Log(x+1)
             res_tr_final = np.sqrt( (( 10**Model.Predict(XX_train) -  10**(yy_train) )**2).sum()/len(yy_train) )
-        # Stampo risultati finali
         st.write('Real RMSE: {:.5f}'.format(res_tr_final))
         st.write("Previous RMSE: {:.5f}".format(st.session_state.res_tr))
-    # Nessuna trasformazione
     else :
         st.write("Final {}: {:.5f}".format(Final_metric, Model.last_metric_te))
         st.write("Previous {}: {:.5f}".format(Final_metric, st.session_state.res_te))
