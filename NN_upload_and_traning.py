@@ -199,7 +199,7 @@ if uploaded_file is not None:                                                 # 
     
                 st.write("")
                 st.write("If you want to make changes to the original model:")
-                st.write(" 1. Modify the model parameters accordigly")
+                st.write(" 1. Modify the model parameters accordingly")
                 st.write(" 2. Re-train and re-finalize the model")
                 st.write("After that, you will see the new predictions in the uploaded dataframe.")
                 st.write("")
