@@ -39,8 +39,8 @@ def are_columns_in_date_format(dataframe):
         # Add more patterns as needed
     ]
     result = {}
-    for column_name in df.columns:
-        values = df[column_name]
+    for column_name in dataframe.columns:
+        values = dataframe[column_name]
         is_date_format = all(re.match(pattern, str(value)) is not None for pattern in date_patterns for value in values)
         result[column_name] = is_date_format
     return result
@@ -104,8 +104,6 @@ if uploaded_file is not None:
     # Apply the conversion function to the 'DateColumn'
     # Check if all columns are in date format
     result = are_columns_in_date_format(dataframe)
-    
-    # Display the result
     for column, is_date_format in result.items():
         st.write(f"Is '{column}' in date format? {is_date_format}")
     
