@@ -24,21 +24,18 @@ def pipeline_nn(uploaded_file_test, Selected_columns_start, Numer, Categ, Tar, S
     """
  
     # Salvo il file caricato in un dataframe
-    # Quest'ultimo verrà modificato a seconda delle scelte dell'utente
-    dataframe_test = pd.read_csv(uploaded_file_test, delimiter=';')
-                  
-    # Drop columns with more than 70% of missing data
-    dataframe_test = dataframe_test[Selected_columns_start]
+    
+    dataframe_test = pd.read_csv(uploaded_file_test, delimiter=';')          # Quest'ultimo verrà modificato a seconda delle scelte dell'utente
+    dataframe_test = dataframe_test[Selected_columns_start]                  # Drop columns with more than 70% of missing data
 
-    #Convert to numeric (conversion of CSV file does not always work)
+    # Conversione colonne in numeriche (la conversione del CSV non sempre avviene correttamente)
     if Task == "Regression" :
-        for i in Numer + Tar :
-            dataframe_test[i] = dataframe_test[i].astype(str).str.replace(',', '.').astype(float)
-            dataframe_test[i].apply(pd.to_numeric)
-    else :
-        for i in Numer :
-          dataframe_test[i] = dataframe_test[i].astype(str).str.replace(',', '.').astype(float)
-          dataframe_test[i].apply(pd.to_numeric)
+        columns = Numer + Tar
+    else:
+        columns = Numer
+    for i in Numer + Tar :
+        dataframe_test[i] = dataframe_test[i].astype(str).str.replace(',', '.').astype(float)
+        dataframe_test[i].apply(pd.to_numeric)
 
     # Missing numerical features
     if Sub_num_list[0] == '' :
@@ -83,31 +80,23 @@ def pipeline_nn(uploaded_file_test, Selected_columns_start, Numer, Categ, Tar, S
             dataframe_test[i].replace(List_dict[idx], inplace = True)
             idx = idx + 1
 
-    # Impostazione nome per le colonne del dataframe finale
-    dataframe_test.columns = dataframe_columns
-                  
-    # Creation of X (attributes) and y (target)
-    X_test_final = pd.DataFrame(dataframe_test.drop(Tar,axis=1))
+    dataframe_test.columns = dataframe_columns                        # Impostazione nome per le colonne del dataframe finale
+    X_test_final = pd.DataFrame(dataframe_test.drop(Tar,axis=1))      # Creation of X (attributes) and y (target)
     y_test_final = np.array( dataframe_test[Tar] )
-
-    # Convertion column names to string (to avoid errors)
-    X_test_final.columns = X_test_final.columns.astype(str)
+    X_test_final.columns = X_test_final.columns.astype(str)           # Convertion column names to string (to avoid errors)
                   
     # Standardize the file
-    if Tra_num_list[0] == '' :
+    if Tra_num_list[0] == '' or Tra_num_list[0] == 'Do not normalize':
         pass
-    elif Tra_num_list[0] == 'MinMaxScaler' or Tra_num_list[0] == 'StandardScaler':
+    else Tra_num_list[0] == 'MinMaxScaler' or Tra_num_list[0] == 'StandardScaler':
         X_test_final = pd.DataFrame(Tra_num_list[1].transform(X_test_final))
-    elif Tra_num_list[0] == 'Do not normalize':
-        pass
 
     # Transform target
-    if Norm_tar_list[0] == 0 or Norm_tar_list[0] == 2 : #'' or Norm_tar_list[0] == 'No' :
+    if Norm_tar_list[0] == 0 or Norm_tar_list[0] == 2 :
         pass
     elif Norm_tar_list[0] == 2 :
         y_test_final = np.log10(y_test_final+1)
     elif Norm_tar_list[0] == 3 :
         y_test_final = np.array(pd.DataFrame(Norm_tar_list[1].transform(y_test_final)))
 
-    # Dopo tutte le trasformazioni, restituisco il dataframe con gli attributi e la colonna target, e il dataframe_test completo
     return X_test_final, y_test_final, dataframe_clean
