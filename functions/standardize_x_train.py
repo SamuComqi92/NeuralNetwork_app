@@ -32,8 +32,7 @@ def standardize_x_train(dataframe, X_train, X_test, step_further) :
     # Menu dropdown per la scelta del motodo da utilizzare
     type_transformation = st.selectbox( 'How would you like to normalize data?', ['','MinMaxScaler','StandardScaler','Do not normalize'] )
 
-    # Gestione dei vari casi
-    if type_transformation == '' :                                  # L'app non va avanti se non viene selezionato un valore (grazie a step_further non aggiornaot)
+    if type_transformation == '' :                                  # L'app non va avanti se non viene selezionato un valore (grazie a step_further non aggiornato)
         pass
     else :
         if type_transformation == 'MinMaxScaler':
