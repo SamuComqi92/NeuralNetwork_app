@@ -9,26 +9,21 @@ def feature_selection(dataframe, task) :
     La funzione restituisce il dataframe con valori numerici corretti, la colonna target, e le liste delle colonne categoriche e numeriche
     """
 
-    left_column, center_column, right_column = st.columns(3)
+    left_column, center_column, right_column = st.columns(3)                                         # Creazione tre colonne per gestire le casistiche nell'app
     with left_column :       
-        # Check per controllare che il dataframe non sia vuoto + selezione della colonna target
-        if dataframe.empty == False :
+        if dataframe.empty == False :                                                                # Check per controllare che il dataframe non sia vuoto + selezione della colonna target
             target = st.multiselect('Select the target:', dataframe.columns, key = 100)
-    
-        # Lista colonne
-        Lista_col = dataframe.drop(target, axis = 1).columns.tolist()
+        Lista_col = dataframe.drop(target, axis = 1).columns.tolist()                                # Lista colonne
         Lista_col.insert(0, 'All')
         Lista_col.insert(0, 'None')
     with center_column :
-        # Menu dropdown per multiselezione delle colonne categoriche
-        categorical = st.multiselect("Select categorical features:", Lista_col, key = 1)
+        categorical = st.multiselect("Select categorical features:", Lista_col, key = 1)             # Menu dropdown per multiselezione delle colonne categoriche
         if "All" in categorical:
             categorical = dataframe.drop(target, axis = 1).columns.tolist()
         elif "None" in categorical :
             pass
     with right_column :
-        # Menu dropdown per multiselezione delle colonne numeriche
-        numerical = st.multiselect("Select numerical features:", Lista_col, key = 2)
+        numerical = st.multiselect("Select numerical features:", Lista_col, key = 2)                 # Menu dropdown per multiselezione delle colonne numeriche
         if "All" in numerical:
             numerical = dataframe.drop(target, axis = 1).columns.tolist()
         elif "None" in numerical :
@@ -37,12 +32,11 @@ def feature_selection(dataframe, task) :
     # Conversione delle colonne numeriche e Target
     # Può capitare che dopo la lettura di un file CSV, i dati numerici (con decimali) non siano convertiti in modo corretto
     if task == "Regression" :
-        for i in numerical + target :
-            dataframe[i] = dataframe[i].astype(str).str.replace(',', '.').astype(float)
-            dataframe[i].apply(pd.to_numeric)
+        columns = numerical + target
     else :
-        for i in numerical :
-            dataframe[i] = dataframe[i].astype(str).str.replace(',', '.').astype(float)
-            dataframe[i].apply(pd.to_numeric)
-            
+        columns = numerical     
+    for i in columns :
+        dataframe[i] = dataframe[i].astype(str).str.replace(',', '.').astype(float)
+        dataframe[i].apply(pd.to_numeric)
+
     return dataframe, target, categorical, numerical
