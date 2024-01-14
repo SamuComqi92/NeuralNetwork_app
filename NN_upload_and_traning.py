@@ -1,4 +1,5 @@
 # Importo librerie utili
+import re
 import json
 import numpy as np
 import pandas as pd
@@ -25,6 +26,23 @@ from functions import custom_split, standardize_x_train, target_transformation, 
 from functions import model_finalization, test_pipeline
 # Footer
 from functions import footer
+
+
+# Function to convert dates to a consistent format
+def convert_dates(date_string):
+    date_patterns = [
+        r'(\d{4}-\d{2}-\d{2})',        # YYYY-MM-DD
+        r'(\d{2}/\d{2}/\d{4})',        # MM/DD/YYYY
+        r'(\d{2}-[a-zA-Z]{3}-\d{4})'   # DD-Mon-YYYY
+    ]
+    for pattern in date_patterns:
+        match = re.search(pattern, date_string)
+        if match:
+            parsed_date = datetime.strptime(match.group(1), '%Y-%m-%d' if '-' in match.group(1) else '%m/%d/%Y' if '/' in match.group(1) else '%d-%b-%Y')
+            consistent_format = parsed_date.strftime('%Y-%m-%d')
+            return consistent_format
+    return None
+
 
 ##################################################################################################################################################################################################################
 ##################################################################################################################################################################################################################
@@ -65,6 +83,11 @@ if uploaded_file is not None:
     st.write(  pd.DataFrame( {'# Missing values':np.array(dataframe.isna().sum()),'% Missing values':np.array(100*dataframe.isna().sum()/dataframe.shape[0])},index=dataframe.columns))
     st.write("**Note**: Columns with more than 70\% of missing data will be removed from the dataset")
     st.write("**Note**: Rows with more than 70\% of missing data will be removed from the dataset")
+
+    # Apply the conversion function to the 'DateColumn'
+    dataframe['Date'] = dataframe['Date'].apply(convert_dates)
+    st.write(dataframe)
+    
 
     # Rimozione righe e colonne con più del 70% di valori mancanti    
     dataframe, Selected_columns_start = remove_missing.remove_missing(dataframe)
