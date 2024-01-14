@@ -88,7 +88,7 @@ def pipeline_nn(uploaded_file_test, Selected_columns_start, Numer, Categ, Tar, S
     # Standardize the file
     if Tra_num_list[0] == '' or Tra_num_list[0] == 'Do not normalize':
         pass
-    else Tra_num_list[0] == 'MinMaxScaler' or Tra_num_list[0] == 'StandardScaler':
+    elif Tra_num_list[0] == 'MinMaxScaler' or Tra_num_list[0] == 'StandardScaler':
         X_test_final = pd.DataFrame(Tra_num_list[1].transform(X_test_final))
 
     # Transform target
