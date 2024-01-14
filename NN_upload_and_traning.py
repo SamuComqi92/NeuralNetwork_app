@@ -103,7 +103,7 @@ if uploaded_file is not None:
 
     # Apply the conversion function to the 'DateColumn'
     # Check if all columns are in date format
-    result = are_columns_in_date_format(df)
+    result = are_columns_in_date_format(dataframe)
     
     # Display the result
     for column, is_date_format in result.items():
