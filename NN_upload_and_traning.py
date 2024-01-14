@@ -29,6 +29,22 @@ from functions import model_finalization, test_pipeline
 from functions import footer
 
 
+
+# Function to check for date columns
+def check_dates(date_string):
+    date_patterns = [
+        r'(\d{4}-\d{2}-\d{2})',        # YYYY-MM-DD
+        r'(\d{2}/\d{2}/\d{4})',        # MM/DD/YYYY
+        r'(\d{2}-[a-zA-Z]{3}-\d{4})'   # DD-Mon-YYYY
+    ]
+    for pattern in date_patterns:
+        match = re.search(pattern, date_string)
+        if match:
+            return 1
+        else :
+            return 0
+
+
 # Function to convert dates to a consistent format
 def convert_dates(date_string):
     date_patterns = [
@@ -86,7 +102,7 @@ if uploaded_file is not None:
     st.write("**Note**: Rows with more than 70\% of missing data will be removed from the dataset")
 
     # Apply the conversion function to the 'DateColumn'
-    dataframe['Date'] = dataframe['Date'].apply(convert_dates)
+    dataframe['Date'] = dataframe['Date'].apply(check_dates)
     st.write(dataframe)
     
 
