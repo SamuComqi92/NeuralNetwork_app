@@ -38,4 +38,5 @@ def footer(*args):
             body(arg)
         elif isinstance(arg, HtmlElement):
             body(arg)
+    
     st.markdown(str(foot), unsafe_allow_html = True)
