@@ -83,7 +83,7 @@ def metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, F
                     results_metric.append( f1_score(y_test, predictions, average = "weighted") )
             other_results = pd.DataFrame( results_metric,  index = Col_final, columns = [Final_metric] ).T
             st.write("")
-            st.write("Other models:")
+            st.write("Other models (validation set):")
             st.write(other_results)
             
         elif Task == 'Regression':
