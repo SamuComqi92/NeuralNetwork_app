@@ -61,18 +61,19 @@ def metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, F
     if Task == 'Classification':
         Col_final = ["Logistic regression", "Decision Tree", "Random Forest"]
         ID_final = ["Accuracy", "Precision", "Recall", "F1-score"]
-        other_models = [ LogisticRegression(), DecisionTreeClassifier(), RandomForestClassifier(n_estimators = 100, random_state = 42) ]
+        model_log = LogisticRegression()
+        model_dec = DecisionTreeClassifier()
+        model_ran = RandomForestClassifier(n_estimators = 100, random_state = 42)
         acc_models, pre_models, rec_models, f1_models = [], [], [], []
-        for model in other_models :
+        for model in [model_log, model_dec, model_ran] :
             model.fit(X_train, y_train)
             predictions = model.predict(X_test)
-            #acc_models.append( accuracy_score(y_test, predictions) )
-            pre_models.append( precision_score(y_test, predictions))#, average = "weighted") )
-            #rec_models.append( recall_score(y_test, predictions, average = "weighted") )
-            #f1_models.append( f1_score(y_test, predictions, average = "weighted") )
-        st.write(pre_models)
-        #other_results = pd.DataFrame( [acc_models, pre_models, rec_models, f1_models],  columns = Col_final, index = ID_final ).T
-        #st.write(other_results)
+            acc_models.append( accuracy_score(y_test, predictions) )
+            pre_models.append( precision_score(y_test, predictions, average = "macro") )
+            rec_models.append( recall_score(y_test, predictions, average = "macro") )
+            f1_models.append( f1_score(y_test, predictions, average = "macro") )
+        other_results = pd.DataFrame( [acc_models, pre_models, rec_models, f1_models],  columns = Col_final, index = ID_final ).T
+        st.write(other_results)
         
     elif Task == 'Regression':
         model = RandomForestRegressor(n_estimators = 100, random_state = 42)
