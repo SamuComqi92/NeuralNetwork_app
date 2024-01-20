@@ -142,19 +142,11 @@ if uploaded_file is not None:                                                 # 
                     model_log = LogisticRegression()
                     model_ran = RandomForestClassifier(n_estimators = 100, random_state=42)
                     model_tree = DecisionTreeClassifier()
-                    
-                    model_log.fit(X_train, y_train)
-                    model_ran.fit(X_train, y_train)
-                    model_tree.fit(X_train, y_train)
-                    
-                    logreg_predictions = model_log.predict(X_test)
-                    random_predictions = model_ran.predict(X_test)
-                    tree_predictions = model_tree.predict(X_test)
-                    
-                    # Evaluate the models
-                    st.write("Logistic Regression Accuracy:", accuracy_score(y_test, logreg_predictions))
-                    st.write("Random Forest Accuracy:", accuracy_score(y_test, random_predictions))
-                    st.write("Decision Tree Accuracy:", accuracy_score(y_test, tree_predictions))
+
+                    for model in [model_log, model_ran, model_tree] :
+                        model.fit(X_train, y_train)
+                        predictions = model.predict(X_test)
+                        st.write("Accuracy:", accuracy_score(y_test, logreg_predictions))
                     
                 elif Task1 == 'Regression':
                     model = RandomForestRegressor(n_estimators=100, random_state=42)
