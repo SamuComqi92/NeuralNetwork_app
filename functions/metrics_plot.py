@@ -6,10 +6,9 @@ import matplotlib.pyplot as plt
 from sklearn.preprocessing import MinMaxScaler, StandardScaler, LabelBinarizer, OneHotEncoder, label_binarize
 from sklearn.metrics import precision_score, recall_score, f1_score, accuracy_score, r2_score, roc_auc_score
 from sklearn.metrics import r2_score, mean_squared_error, mean_absolute_error
-from sklearn.linear_model import LogisticRegression
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.tree import DecisionTreeClassifier
-
+from sklearn.linear_model import LogisticRegression, LinearRegression
+from sklearn.ensemble import RandomForestClassifier, DecisionTreeRegressor
+from sklearn.tree import DecisionTreeClassifier, RandomForestRegressor
 
 # La funzione calcola le metriche finali del modello dopo il training e crea dei plot
 def metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, Final_metric) :
@@ -99,54 +98,25 @@ def metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, F
                         y_test_bin = label_binarize(y_test, classes = list(np.unique(y_test)))
                         results_metric.append( roc_auc_score(y_test_bin, y_prob, average = "weighted", multi_class = "ovr") )
                         
-            other_results = pd.DataFrame( results_metric,  index = Col_final, columns = [Final_metric] ).T
-            st.write("")
-            st.write("Other models (validation set):")
-            st.write(other_results)
-
-
-        # if self.task == "Classification" :
-        #     if self.metric == "Accuracy" :
-        #         Metricc = Performance
-        #     elif self.metric == "Precision" :
-        #         if yy.shape[1] == 2 :
-        #             Metricc = precision_score(yy.argmax(axis=1), anodes[-1].T.argmax(axis=1))
-        #         else :
-        #             Metricc = precision_score(yy.argmax(axis=1), anodes[-1].T.argmax(axis=1), average = "weighted")
-        #     elif self.metric == "Recall" :
-        #         if yy.shape[1] == 2 :
-        #             Metricc = recall_score(yy.argmax(axis=1), anodes[-1].T.argmax(axis=1))
-        #         else :
-        #             Metricc = recall_score(yy.argmax(axis=1), anodes[-1].T.argmax(axis=1), average = "weighted")
-        #     elif self.metric == "F1 score" :
-        #         if yy.shape[1] == 2 :
-        #             Metricc = f1_score(yy.argmax(axis=1), anodes[-1].T.argmax(axis=1))
-        #         else :
-        #             Metricc = f1_score(yy.argmax(axis=1), anodes[-1].T.argmax(axis=1), average = "weighted")
-        #     elif self.metric == "AUC" :
-        #         if yy.shape[1] == 2 :
-        #             Metricc = roc_auc_score(yy.argmax(axis=1), anodes[-1].T.argmax(axis=1))
-        #         else :
-        #             Metricc = roc_auc_score(yy.argmax(axis=1), anodes[-1].T, average = "weighted", multi_class = "ovr")
-        #     else :
-        #         raise ValueError("Misspelled or inappropriate metric for %s" % self.task)
-        # else :
-        #     if self.metric == "RMSE" :
-        #         Metricc = mean_squared_error(yy, anodes[-1].T, squared = False)
-        #     elif self.metric == "MAE" :
-        #         Metricc = mean_absolute_error(yy, anodes[-1].T)
-        #     elif self.metric == "R2" :
-        #         Metricc = r2_score(yy, anodes[-1].T )
-        #     else :
-        #         raise ValueError("Misspelled or inappropriate metric for %s" % self.task)
-                
         elif Task == 'Regression':
-            model = RandomForestRegressor(n_estimators = 100, random_state = 42)
-            model.fit(X_train, y_train)
-            predictions = model.predict(X_test)
-            mse = mean_squared_error(y_test, predictions)
-            st.write(f'Mean Squared Error: {mse}')
-    
+            Col_final = ["Linear regression", "Decision Tree", "Random Forest"]
+            Models = [ LinearRegression(), DecisionTreeRegressor(), RandomForestRegressor(n_estimators = 100, random_state = 42) ]
+            results_metric = []
+            for model in Models :
+                model.fit(X_train, y_train)
+                predictions = model.predict(X_test)
+                if self.metric == "RMSE" :
+                    results_metric.append( mean_squared_error(yy, anodes[-1].T, squared = False) )
+                elif self.metric == "MAE" :
+                    results_metric.append( mean_absolute_error(yy, anodes[-1].T) )
+                elif self.metric == "R2" :
+                    results_metric.append( r2_score(yy, anodes[-1].T ) )
+
+        other_results = pd.DataFrame( results_metric,  index = Col_final, columns = [Final_metric] ).T
+        st.write("")
+        st.write("Other models (validation set):")
+        st.write(other_results)
+           
 
     # Creazione del plot finale
     if Task == "Regression" :
