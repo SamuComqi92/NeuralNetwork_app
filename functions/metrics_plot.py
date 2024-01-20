@@ -107,20 +107,19 @@ def metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, F
                 predictions = model.predict(X_test)
                 st.write(predictions)
                 if Norm_tar_list[3] == 20:                                     # Per "Regressione" con MinMax
-                    y_real_te = Norm_tar_list[1].inverse_transform(y_test)
-                    y_predicted_te = Norm_tar_list[1].inverse_transform(predictions)
+                    y_real = Norm_tar_list[1].inverse_transform(y_test)
+                    y_predicted = Norm_tar_list[1].inverse_transform(predictions)
                 elif Norm_tar_list[3] == 10:                                   # Per "Regressione" con Log(x+1)
-                    y_real_te = 10**(y_test) + 1
-                    y_predicted_te = 10*predictions + 1
+                    y_real = 10**(y_test) + 1
+                    y_predicted = 10*predictions + 1
 
-                st.write(y_real_te, y_predicted_te, mean_squared_error(y_real_te, y_predicted_te, squared = False))
                 # Final metrics
                 if Final_metric == "RMSE" :
-                    results_metric.append( mean_squared_error(y_real_te, y_predicted_te, squared = False) )
+                    results_metric.append( mean_squared_error(y_real, y_predicted, squared = False) )
                 elif Final_metric == "MAE" :
-                    results_metric.append( mean_absolute_error(y_real_te, y_predicted_te) )
+                    results_metric.append( mean_absolute_error(y_real, y_predicted) )
                 elif Final_metric == "R2" :
-                    results_metric.append( r2_score(y_real_te, y_predicted_te) )
+                    results_metric.append( r2_score(y_real, y_predicted) )
 
         other_results = pd.DataFrame( results_metric,  index = Col_final, columns = [Final_metric] ).T
         st.write("")
