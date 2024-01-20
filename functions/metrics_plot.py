@@ -112,7 +112,7 @@ def metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, F
                     y_real_te = 10**(y_test) + 1
                     y_predicted_te = 10*predictions + 1
 
-                st.write(y_real_te, y_predicted_te)
+                st.write(y_real_te, y_predicted_te, mean_squared_error(y_real_te, y_predicted_te, squared = False))
                 # Final metrics
                 if Final_metric == "RMSE" :
                     results_metric.append( mean_squared_error(y_real_te, y_predicted_te, squared = False) )
