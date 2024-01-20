@@ -61,11 +61,9 @@ def metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, F
     if Task == 'Classification':
         Col_final = ["Logistic regression", "Decision Tree", "Random Forest"]
         ID_final = ["Accuracy", "Precision", "Recall", "F1-score"]
-        model_log = LogisticRegression()
-        model_dec = DecisionTreeClassifier()
-        model_ran = RandomForestClassifier(n_estimators = 100, random_state = 42)
+        Models = [ LogisticRegression(), DecisionTreeClassifier(), RandomForestClassifier(n_estimators = 100, random_state = 42) ]
         acc_models, pre_models, rec_models, f1_models = [], [], [], []
-        for model in [model_log, model_dec, model_ran] :
+        for model in Models :
             model.fit(X_train, y_train)
             predictions = model.predict(X_test)
             acc_models.append( accuracy_score(y_test, predictions) )
