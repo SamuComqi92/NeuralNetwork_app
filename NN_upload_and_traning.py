@@ -132,6 +132,25 @@ if uploaded_file is not None:                                                 # 
                 Model.Training(X_train, y_train, X_test, y_test)                                                              # Training NN
                 st.write('Training complete!')
                 metrics_plot.metrics_plot(Model, X_train, X_test, y_train, y_test, Task1, Norm_tar_list, Final_metric)        # Calcolo metriche finali (per Regressione) e plot
+
+
+                from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
+                # Apply RandomForestClassifier or RandomForestRegressor based on the task
+                if Task1 == 'Classification':
+                    model = RandomForestClassifier(n_estimators=100, random_state=42)
+                    model.fit(X_train, y_train)
+                    predictions = model.predict(X_test)
+                    accuracy = accuracy_score(y_test, predictions)
+                    st.write(f'Accuracy: {accuracy}')
+                elif Task1 == 'Regression':
+                    model = RandomForestRegressor(n_estimators=100, random_state=42)
+                    model.fit(X_train, y_train)
+                    predictions = model.predict(X_test)
+                    mse = mean_squared_error(y_test, predictions)
+                    st.write(f'Mean Squared Error: {mse}')
+                else:
+                    st.write('Invalid task. Supported tasks are "classification" and "regression".')
+
     
             #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             # Model Finalization
