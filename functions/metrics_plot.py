@@ -107,8 +107,8 @@ def metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, F
                 predictions = model.predict(X_test)
                 st.write(predictions)
                 if Norm_tar_list[3] == 20:                                     # Per "Regressione" con MinMax
-                    y_real = Norm_tar_list[1].inverse_transform(y_test)
-                    y_predicted = Norm_tar_list[1].inverse_transform(predictions)
+                    y_real = Norm_tar_list[1].inverse_transform(y_test.reshape(1, -1))
+                    y_predicted = Norm_tar_list[1].inverse_transform(predictions.reshape(1, -1))
                 elif Norm_tar_list[3] == 10:                                   # Per "Regressione" con Log(x+1)
                     y_real = 10**(y_test) + 1
                     y_predicted = 10*predictions + 1
