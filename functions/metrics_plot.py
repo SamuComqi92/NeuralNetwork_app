@@ -62,7 +62,7 @@ def metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, F
         nn_results = pd.DataFrame( [res_tr, res_te],  index = ["Training", "Validation"], columns = [Final_metric] ).T
         st.write("")
         st.write("Neural Network results:")
-        st.dataframe(nn_results)
+        st.table(nn_results)
         st.session_state["res_tr"], st.session_state["res_te"]  = res_tr, res_te                 # Salvo risultati in session
     with right_column :
         # Apply other models
