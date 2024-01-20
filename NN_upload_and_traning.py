@@ -130,40 +130,6 @@ if uploaded_file is not None:                                                 # 
             st.text("")
             if st.button('Start the training!'):                                                                              # Pulsante per avviare il training
                 Model.Training(X_train, y_train, X_test, y_test)                                                              # Training NN
-                
-                # Train other models
-                from sklearn.linear_model import LogisticRegression
-                from sklearn.ensemble import RandomForestClassifier
-                from sklearn.tree import DecisionTreeClassifier
-                # Apply models
-                if Task1 == 'Classification':
-                    model_log = LogisticRegression()
-                    model_ran = RandomForestClassifier(n_estimators = 100, random_state=42)
-                    model_tree = DecisionTreeClassifier()
-
-                    accuracy_models, precision_models, recall_models, f1_models = [], [], [], []
-                    for model in [model_log, model_ran, model_tree] :
-                        model.fit(X_train, y_train)
-                        predictions = model.predict(X_test)
-                        accuracy_models.append( accuracy_score(y_test, predictions) )
-                        precision_models.append( precision_score(y_test, predictions, average = "weighted") )
-                        recall_models.append( recall_score(y_test, predictions, average = "weighted") )
-                        f1_models.append( f1_score(y_test, predictions, average = "weighted") )
-                    other_results = pd.DataFrame(
-                        [accuracy_models, precision_models, recall_models, f1_models], 
-                        columns = ["Logistic regression", "Random Forest", "Decision Tree"], 
-                        index = ["Accuracy", "Precision", "Recall", "F1-score"]
-                        ).T 
-                    st.write(other_results)
-                elif Task1 == 'Regression':
-                    model = RandomForestRegressor(n_estimators = 100, random_state = 42)
-                    model.fit(X_train, y_train)
-                    predictions = model.predict(X_test)
-                    mse = mean_squared_error(y_test, predictions)
-                    st.write(f'Mean Squared Error: {mse}')
-                else:
-                    st.write('Invalid task. Supported tasks are "classification" and "regression".')
-                
                 st.write('Training complete!')
                 metrics_plot.metrics_plot(Model, X_train, X_test, y_train, y_test, Task1, Norm_tar_list, Final_metric)        # Calcolo metriche finali (per Regressione) e plot
 
