@@ -111,6 +111,8 @@ def metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, F
                 elif Norm_tar_list[3] == 10:                                   # Per "Regressione" con Log(x+1)
                     y_real_te = 10**(y_test) + 1
                     y_predicted_te = 10*predictions + 1
+
+                st.write(y_real_te, y_predicted_te)
                 # Final metrics
                 if Final_metric == "RMSE" :
                     results_metric.append( mean_squared_error(y_real_te, y_predicted_te, squared = False) )
