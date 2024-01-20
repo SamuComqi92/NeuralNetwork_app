@@ -57,40 +57,41 @@ def metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, F
             res_tr = r2_score(y_real_tr, y_predicted_tr)
             res_te = r2_score(y_real_te, y_predicted_te)
 
-    # Apply other models
-    if Task == 'Classification':
-        Col_final = ["Logistic regression", "Decision Tree", "Random Forest"]
-        Models = [ LogisticRegression(), DecisionTreeClassifier(), RandomForestClassifier(n_estimators = 100, random_state = 42) ]
-        results_metric = []
-        for model in Models :
+    left_column, right_column = st.columns(2)             # Nella parte principale, crea tre colonne dove posso sistemare testi e bottoni
+    with left_column:    
+        st.write("")
+        st.write("Neural Network results:")
+        st.write('Training real {}: {:.5f} -- Validation real {}: {:.5f}'.format(Final_metric, res_tr, Final_metric, res_te))
+        st.session_state["res_tr"], st.session_state["res_te"]  = res_tr, res_te                 # Salvo risultati in session
+    with righ_column :
+        # Apply other models
+        if Task == 'Classification':
+            Col_final = ["Logistic regression", "Decision Tree", "Random Forest"]
+            Models = [ LogisticRegression(), DecisionTreeClassifier(), RandomForestClassifier(n_estimators = 100, random_state = 42) ]
+            results_metric = []
+            for model in Models :
+                model.fit(X_train, y_train)
+                predictions = model.predict(X_test)
+                if Final_metric == "Accuracy" :
+                    results_metric.append( accuracy_score(y_test, predictions) )
+                elif Final_metric == "Precision" :
+                    results_metric.append( precision_score(y_test, predictions, average = "weighted") )
+                elif Final_metric == "Recall" :
+                    results_metric.append( recall_score(y_test, predictions, average = "weighted") )
+                elif Final_metric == "F1 score" :
+                    results_metric.append( f1_score(y_test, predictions, average = "weighted") )
+            other_results = pd.DataFrame( results_metric,  index = Col_final, columns = [Final_metric] ).T
+            st.write("")
+            st.write("Other models:")
+            st.write(other_results)
+            
+        elif Task == 'Regression':
+            model = RandomForestRegressor(n_estimators = 100, random_state = 42)
             model.fit(X_train, y_train)
             predictions = model.predict(X_test)
-            if Final_metric == "Accuracy" :
-                results_metric.append( accuracy_score(y_test, predictions) )
-            elif Final_metric == "Precision" :
-                results_metric.append( precision_score(y_test, predictions, average = "weighted") )
-            elif Final_metric == "Recall" :
-                results_metric.append( recall_score(y_test, predictions, average = "weighted") )
-            elif Final_metric == "F1 score" :
-                results_metric.append( f1_score(y_test, predictions, average = "weighted") )
-        other_results = pd.DataFrame( results_metric,  index = Col_final, columns = [Final_metric] ).T
-        st.write("")
-        st.write("Other models:")
-        st.write(other_results)
-        
-    elif Task == 'Regression':
-        model = RandomForestRegressor(n_estimators = 100, random_state = 42)
-        model.fit(X_train, y_train)
-        predictions = model.predict(X_test)
-        mse = mean_squared_error(y_test, predictions)
-        st.write(f'Mean Squared Error: {mse}')
-    else:
-        st.write('Invalid task. Supported tasks are "classification" and "regression".')
-
-    st.write("")
-    st.write("Neural Network results:")
-    st.write('Training real {}: {:.5f} -- Validation real {}: {:.5f}'.format(Final_metric, res_tr, Final_metric, res_te))
-    st.session_state["res_tr"], st.session_state["res_te"]  = res_tr, res_te                 # Salvo risultati in session
+            mse = mean_squared_error(y_test, predictions)
+            st.write(f'Mean Squared Error: {mse}')
+    
 
     # Creazione del plot finale
     if Task == "Regression" :
