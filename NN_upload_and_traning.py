@@ -148,9 +148,9 @@ if uploaded_file is not None:                                                 # 
                         model.fit(X_train, y_train)
                         predictions = model.predict(X_test)
                         accuracy_models.append( accuracy_score(y_test, predictions) )
-                        precision_models.append( precision_score(y_test, predictions) )
-                        recall_models.append( recall_score(y_test, predictions) )
-                        f1_models.append( f1_score(y_test, predictions) )
+                        precision_models.append( precision_score(y_test, predictions, average = "weighted") )
+                        recall_models.append( recall_score(y_test, predictions, average = "weighted") )
+                        f1_models.append( f1_score(y_test, predictions, average = "weighted") )
                     other_results = pd.DataFrame(
                         [accuracy_models, precision_models, recall_models, f1_models], 
                         index = ["Logistic regression", "Random Forest", "Decision Tree"], 
