@@ -96,7 +96,7 @@ def metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, F
                         results_metric.append( roc_auc_score(y_encoded, predictions) )
                     else :
                         y_prob = model.predict_proba(X_test)
-                        y_test_bin = label_binarize(y_test, classes = list(set(y_test)))
+                        y_test_bin = label_binarize(y_test, classes = list(np.unique(y_test)))
                         results_metric.append( roc_auc_score(y_test_bin, y_prob, average = "weighted", multi_class = "ovr") )
                         
             other_results = pd.DataFrame( results_metric,  index = Col_final, columns = [Final_metric] ).T
