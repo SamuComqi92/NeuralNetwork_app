@@ -145,7 +145,6 @@ if uploaded_file is not None:                                                 # 
                     
                     model_log.fit(X_train, y_train)
                     model_ran.fit(X_train, y_train)
-                    model_xgb.fit(X_train, y_train)
                     model_tree.fit(X_train, y_train)
                     
                     logreg_predictions = model_log.predict(X_test)
