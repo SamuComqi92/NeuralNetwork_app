@@ -56,7 +56,7 @@ def metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, F
             res_te = r2_score(y_real_te, y_predicted_te)
 
     # Apply other models
-    if Task1 == 'Classification':
+    if Task == 'Classification':
         Col_final = ["Logistic regression", "Decision Tree", "Random Forest"]
         ID_final = ["Accuracy", "Precision", "Recall", "F1-score"]
         other_models = [ LogisticRegression(), DecisionTreeClassifier(), RandomForestClassifier(n_estimators = 100, random_state = 42) ]
@@ -71,7 +71,7 @@ def metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, F
         other_results = pd.DataFrame( [acc_models, pre_models, rec_models, f1_models],  columns = Col_final, index = ID_final ) 
         st.write(other_results)
         
-    elif Task1 == 'Regression':
+    elif Task == 'Regression':
         model = RandomForestRegressor(n_estimators = 100, random_state = 42)
         model.fit(X_train, y_train)
         predictions = model.predict(X_test)
