@@ -143,11 +143,13 @@ if uploaded_file is not None:                                                 # 
                     model_ran = RandomForestClassifier(n_estimators = 100, random_state=42)
                     model_tree = DecisionTreeClassifier()
 
+                    accuracy_models = []
                     for model in [model_log, model_ran, model_tree] :
                         model.fit(X_train, y_train)
                         predictions = model.predict(X_test)
-                        st.write("Accuracy:", accuracy_score(y_test, predictions))
-                    
+                        accuracy_models.append( accuracy_score(y_test, predictions) )
+
+                    st.write(pd.DataFrame(accuracy_models, columns = ["Logistic regression", "Random Forest", "Decision Tree"], index = ["Accuracy"]))
                 elif Task1 == 'Regression':
                     model = RandomForestRegressor(n_estimators=100, random_state=42)
                     model.fit(X_train, y_train)
