@@ -105,7 +105,6 @@ def metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, F
             for model in Models :
                 model.fit(X_train, y_train)
                 predictions = model.predict(X_test)
-                st.write(predictions)
                 if Norm_tar_list[3] == 20:                                     # Per "Regressione" con MinMax
                     y_real = Norm_tar_list[1].inverse_transform(y_test.reshape(1, -1))
                     y_predicted = Norm_tar_list[1].inverse_transform(predictions.reshape(1, -1))
