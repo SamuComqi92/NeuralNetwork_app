@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import MinMaxScaler, StandardScaler, LabelBinarizer, OneHotEncoder
-from sklearn.metrics import precision_score, recall_score, f1_score, accuracy_score, r2_score
+from sklearn.metrics import precision_score, recall_score, f1_score, accuracy_score, r2_score, roc_auc_score
 from sklearn.metrics import r2_score, mean_squared_error, mean_absolute_error
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
@@ -71,7 +71,7 @@ def metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, F
             Models = [ LogisticRegression(), DecisionTreeClassifier(), RandomForestClassifier(n_estimators = 100, random_state = 42) ]
             results_metric = []
 
-            unique_values = len(np.unique(y_test))
+            unique_values = 
             st.write(unique_values)
             
             for model in Models :
@@ -80,11 +80,26 @@ def metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, F
                 if Final_metric == "Accuracy" :
                     results_metric.append( accuracy_score(y_test, predictions) )
                 elif Final_metric == "Precision" :
-                    results_metric.append( precision_score(y_test, predictions, average = "weighted") )
+                    if len(np.unique(y_test)) == 2 :
+                        results_metric.append( precision_score(y_test, predictions) )
+                    else :
+                        results_metric.append( precision_score(y_test, predictions, average = "weighted") )
                 elif Final_metric == "Recall" :
-                    results_metric.append( recall_score(y_test, predictions, average = "weighted") )
+                    if len(np.unique(y_test)) == 2 :
+                        results_metric.append( recall_score(y_test, predictions) )
+                    else :
+                        results_metric.append( recall_score(y_test, predictions, average = "weighted") )
                 elif Final_metric == "F1 score" :
-                    results_metric.append( f1_score(y_test, predictions, average = "weighted") )
+                    if len(np.unique(y_test)) == 2 :
+                        results_metric.append( f1_score(y_test, predictions) )
+                    else :
+                        results_metric.append( f1_score(y_test, predictions, average = "weighted") )
+                elif Final_metric == "AUC" :
+                    if len(np.unique(y_test)) == 2 :
+                        results_metric.append( roc_auc_score(y_test, predictions) )
+                    else :
+                        results_metric.append( roc_auc_score(y_test, predictions, average = "weighted", multi_class = "ovr") )
+                        
             other_results = pd.DataFrame( results_metric,  index = Col_final, columns = [Final_metric] ).T
             st.write("")
             st.write("Other models (validation set):")
