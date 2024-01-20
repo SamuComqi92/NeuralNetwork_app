@@ -4,6 +4,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import MinMaxScaler, StandardScaler, LabelBinarizer, OneHotEncoder
 from sklearn.metrics import r2_score, mean_squared_error, mean_absolute_error
+from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.tree import DecisionTreeClassifier
 
 # La funzione calcola le metriche finali del modello dopo il training e crea dei plot
 def metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, Final_metric) :
@@ -52,6 +55,31 @@ def metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, F
             res_tr = r2_score(y_real_tr, y_predicted_tr)
             res_te = r2_score(y_real_te, y_predicted_te)
 
+    # Apply other models
+    if Task1 == 'Classification':
+        Col_final = ["Logistic regression", "Decision Tree", "Random Forest"]
+        ID_final = ["Accuracy", "Precision", "Recall", "F1-score"]
+        other_models = [ LogisticRegression(), DecisionTreeClassifier(), RandomForestClassifier(n_estimators = 100, random_state = 42) ]
+        acc_models, pre_models, rec_models, f1_models = [], [], [], []
+        for model in other_models :
+            model.fit(X_train, y_train)
+            predictions = model.predict(X_test)
+            acc_models.append( accuracy_score(y_test, predictions) )
+            pre_models.append( precision_score(y_test, predictions, average = "weighted") )
+            rec_models.append( recall_score(y_test, predictions, average = "weighted") )
+            f1_models.append( f1_score(y_test, predictions, average = "weighted") )
+        other_results = pd.DataFrame( [acc_models, pre_models, rec_models, f1_models],  columns = Col_final, index = ID_final ) 
+        st.write(other_results)
+        
+    elif Task1 == 'Regression':
+        model = RandomForestRegressor(n_estimators = 100, random_state = 42)
+        model.fit(X_train, y_train)
+        predictions = model.predict(X_test)
+        mse = mean_squared_error(y_test, predictions)
+        st.write(f'Mean Squared Error: {mse}')
+    else:
+        st.write('Invalid task. Supported tasks are "classification" and "regression".')
+        
     st.write('Training real {}: {:.5f} -- Validation real {}: {:.5f}'.format(Final_metric, res_tr, Final_metric, res_te))
     st.session_state["res_tr"], st.session_state["res_te"]  = res_tr, res_te                 # Salvo risultati in session
 
