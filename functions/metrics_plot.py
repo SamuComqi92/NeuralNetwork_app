@@ -60,17 +60,20 @@ def metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, F
     # Apply other models
     if Task == 'Classification':
         Col_final = ["Logistic regression", "Decision Tree", "Random Forest"]
-        ID_final = ["Accuracy", "Precision", "Recall", "F1-score"]
         Models = [ LogisticRegression(), DecisionTreeClassifier(), RandomForestClassifier(n_estimators = 100, random_state = 42) ]
-        acc_models, pre_models, rec_models, f1_models = [], [], [], []
+        results_metric = []
         for model in Models :
             model.fit(X_train, y_train)
             predictions = model.predict(X_test)
-            acc_models.append( accuracy_score(y_test, predictions) )
-            pre_models.append( precision_score(y_test, predictions, average = "weighted") )
-            rec_models.append( recall_score(y_test, predictions, average = "weighted") )
-            f1_models.append( f1_score(y_test, predictions, average = "weighted") )
-        other_results = pd.DataFrame( [acc_models, pre_models, rec_models, f1_models],  columns = Col_final, index = ID_final ).T
+            if Final_metric == "Accuracy" :
+                results_metric.append( accuracy_score(y_test, predictions) )
+            elif Final_metric == "Precision" :
+                results_metric.append( precision_score(y_test, predictions, average = "weighted") )
+            elif Final_metric == "Recall" :
+                results_metric.append( recall_score(y_test, predictions, average = "weighted") )
+            elif Final_metric == "F1 score" :
+                results_metric.append( f1_score(y_test, predictions, average = "weighted") )
+        other_results = pd.DataFrame( results_metric,  columns = Col_final, index = Final_metric ).T
         st.write("")
         st.write("Other models:")
         st.write(other_results)
