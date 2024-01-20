@@ -5,4 +5,3 @@ pandas
 streamlit
 seaborn
 htbuilder
-xgboost
