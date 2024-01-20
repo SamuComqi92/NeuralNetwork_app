@@ -73,6 +73,7 @@ def metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, F
             rec_models.append( recall_score(y_test, predictions, average = "weighted") )
             f1_models.append( f1_score(y_test, predictions, average = "weighted") )
         other_results = pd.DataFrame( [acc_models, pre_models, rec_models, f1_models],  columns = Col_final, index = ID_final ).T
+        st.write("")
         st.write("Other models:")
         st.write(other_results)
         
