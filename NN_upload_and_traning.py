@@ -10,8 +10,6 @@ import matplotlib.pyplot as plt
 from htbuilder.units import percent, px
 from sklearn.model_selection import train_test_split
 from htbuilder import HtmlElement, div, hr, a, p, img, styles
-from sklearn.linear_model import LogisticRegression, LinearRegression
-from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
 from sklearn.preprocessing import MinMaxScaler, StandardScaler, LabelBinarizer, OneHotEncoder
 from sklearn.metrics import precision_score,recall_score,f1_score, accuracy_score, confusion_matrix, r2_score, precision_recall_curve, roc_auc_score, roc_curve
 
