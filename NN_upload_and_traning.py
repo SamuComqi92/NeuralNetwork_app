@@ -146,7 +146,7 @@ if uploaded_file is not None:                                                 # 
                     for model in [model_log, model_ran, model_tree] :
                         model.fit(X_train, y_train)
                         predictions = model.predict(X_test)
-                        st.write("Accuracy:", accuracy_score(y_test, logreg_predictions))
+                        st.write("Accuracy:", accuracy_score(y_test, predictions))
                     
                 elif Task1 == 'Regression':
                     model = RandomForestRegressor(n_estimators=100, random_state=42)
