@@ -70,6 +70,10 @@ def metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, F
             Col_final = ["Logistic regression", "Decision Tree", "Random Forest"]
             Models = [ LogisticRegression(), DecisionTreeClassifier(), RandomForestClassifier(n_estimators = 100, random_state = 42) ]
             results_metric = []
+
+            unique_values = len( set(y_test) )
+            st.write(unique_values)
+            
             for model in Models :
                 model.fit(X_train, y_train)
                 predictions = model.predict(X_test)
@@ -85,7 +89,43 @@ def metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, F
             st.write("")
             st.write("Other models (validation set):")
             st.write(other_results)
-            
+
+
+        # if self.task == "Classification" :
+        #     if self.metric == "Accuracy" :
+        #         Metricc = Performance
+        #     elif self.metric == "Precision" :
+        #         if yy.shape[1] == 2 :
+        #             Metricc = precision_score(yy.argmax(axis=1), anodes[-1].T.argmax(axis=1))
+        #         else :
+        #             Metricc = precision_score(yy.argmax(axis=1), anodes[-1].T.argmax(axis=1), average = "weighted")
+        #     elif self.metric == "Recall" :
+        #         if yy.shape[1] == 2 :
+        #             Metricc = recall_score(yy.argmax(axis=1), anodes[-1].T.argmax(axis=1))
+        #         else :
+        #             Metricc = recall_score(yy.argmax(axis=1), anodes[-1].T.argmax(axis=1), average = "weighted")
+        #     elif self.metric == "F1 score" :
+        #         if yy.shape[1] == 2 :
+        #             Metricc = f1_score(yy.argmax(axis=1), anodes[-1].T.argmax(axis=1))
+        #         else :
+        #             Metricc = f1_score(yy.argmax(axis=1), anodes[-1].T.argmax(axis=1), average = "weighted")
+        #     elif self.metric == "AUC" :
+        #         if yy.shape[1] == 2 :
+        #             Metricc = roc_auc_score(yy.argmax(axis=1), anodes[-1].T.argmax(axis=1))
+        #         else :
+        #             Metricc = roc_auc_score(yy.argmax(axis=1), anodes[-1].T, average = "weighted", multi_class = "ovr")
+        #     else :
+        #         raise ValueError("Misspelled or inappropriate metric for %s" % self.task)
+        # else :
+        #     if self.metric == "RMSE" :
+        #         Metricc = mean_squared_error(yy, anodes[-1].T, squared = False)
+        #     elif self.metric == "MAE" :
+        #         Metricc = mean_absolute_error(yy, anodes[-1].T)
+        #     elif self.metric == "R2" :
+        #         Metricc = r2_score(yy, anodes[-1].T )
+        #     else :
+        #         raise ValueError("Misspelled or inappropriate metric for %s" % self.task)
+                
         elif Task == 'Regression':
             model = RandomForestRegressor(n_estimators = 100, random_state = 42)
             model.fit(X_train, y_train)
