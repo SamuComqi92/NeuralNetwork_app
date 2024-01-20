@@ -70,10 +70,6 @@ def metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, F
             Col_final = ["Logistic regression", "Decision Tree", "Random Forest"]
             Models = [ LogisticRegression(), DecisionTreeClassifier(), RandomForestClassifier(n_estimators = 100, random_state = 42) ]
             results_metric = []
-
-            unique_values = 
-            st.write(unique_values)
-            
             for model in Models :
                 model.fit(X_train, y_train)
                 predictions = model.predict(X_test)
