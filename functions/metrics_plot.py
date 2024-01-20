@@ -84,7 +84,7 @@ def metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, F
             other_results = pd.DataFrame( results_metric,  index = Col_final, columns = [Final_metric] ).T
             st.write("")
             st.write("Other models:")
-            st.dataframe(other_results)
+            st.table(other_results)
             
         elif Task == 'Regression':
             model = RandomForestRegressor(n_estimators = 100, random_state = 42)
