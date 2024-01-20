@@ -136,25 +136,26 @@ if uploaded_file is not None:                                                 # 
 
                 from sklearn.linear_model import LogisticRegression
                 from sklearn.ensemble import RandomForestClassifier
-                from xgboost import XGBClassifier
-                # Apply RandomForestClassifier or RandomForestRegressor based on the task
+                from sklearn.tree import DecisionTreeClassifier
+                # Apply models
                 if Task1 == 'Classification':
                     model_log = LogisticRegression()
                     model_ran = RandomForestClassifier(n_estimators = 100, random_state=42)
-                    model_xgb = XGBClassifier()
+                    model_tree = DecisionTreeClassifier()
                     
                     model_log.fit(X_train, y_train)
                     model_ran.fit(X_train, y_train)
                     model_xgb.fit(X_train, y_train)
+                    model_tree.fit(X_train, y_train)
                     
                     logreg_predictions = model_log.predict(X_test)
                     random_predictions = model_ran.predict(X_test)
-                    xgb_predictions = model_xgb.predict(X_test)
+                    tree_predictions = model_tree.predict(X_test)
                     
                     # Evaluate the models
                     st.write("Logistic Regression Accuracy:", accuracy_score(y_test, logreg_predictions))
                     st.write("Random Forest Accuracy:", accuracy_score(y_test, random_predictions))
-                    st.write("XGBoost Accuracy:", accuracy_score(y_test, xgb_predictions))
+                    st.write("Decision Tree Accuracy:", accuracy_score(y_test, tree_predictions))
                     
                 elif Task1 == 'Regression':
                     model = RandomForestRegressor(n_estimators=100, random_state=42)
