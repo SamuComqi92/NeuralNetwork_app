@@ -148,9 +148,9 @@ if uploaded_file is not None:                                                 # 
                         model.fit(X_train, y_train)
                         predictions = model.predict(X_test)
                         accuracy_models.append( accuracy_score(y_test, predictions) )
-                    st.write( pd.DataFrame(accuracy_models, columns = ["Logistic regression", "Random Forest", "Decision Tree"]) )
+                    st.write( pd.DataFrame(accuracy_models, index = ["Logistic regression", "Random Forest", "Decision Tree"]).T )
                 elif Task1 == 'Regression':
-                    model = RandomForestRegressor(n_estimators=100, random_state=42)
+                    model = RandomForestRegressor(n_estimators = 100, random_state = 42)
                     model.fit(X_train, y_train)
                     predictions = model.predict(X_test)
                     mse = mean_squared_error(y_test, predictions)
