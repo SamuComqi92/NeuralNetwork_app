@@ -66,6 +66,7 @@ def metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, F
         for model in other_models :
             model.fit(X_train, y_train)
             predictions = model.predict(X_test)
+            st.write(predictions)
             acc_models.append( accuracy_score(y_test, predictions) )
             pre_models.append( precision_score(y_test, predictions, average = "weighted") )
             rec_models.append( recall_score(y_test, predictions, average = "weighted") )
