@@ -153,8 +153,8 @@ if uploaded_file is not None:                                                 # 
                         f1_models.append( f1_score(y_test, predictions, average = "weighted") )
                     other_results = pd.DataFrame(
                         [accuracy_models, precision_models, recall_models, f1_models], 
-                        index = ["Logistic regression", "Random Forest", "Decision Tree"], 
-                        columns = ["Accuracy", "Precision", "Recall", "F1-score"]
+                        columns = ["Logistic regression", "Random Forest", "Decision Tree"], 
+                        index = ["Accuracy", "Precision", "Recall", "F1-score"]
                         ).T 
                     st.write(other_results)
                 elif Task1 == 'Regression':
