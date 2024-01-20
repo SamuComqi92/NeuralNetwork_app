@@ -87,7 +87,7 @@ def metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, F
         st.write('Invalid task. Supported tasks are "classification" and "regression".')
 
     st.write("")
-    st.write("Neural Network results:)
+    st.write("Neural Network results:")
     st.write('Training real {}: {:.5f} -- Validation real {}: {:.5f}'.format(Final_metric, res_tr, Final_metric, res_te))
     st.session_state["res_tr"], st.session_state["res_te"]  = res_tr, res_te                 # Salvo risultati in session
 
