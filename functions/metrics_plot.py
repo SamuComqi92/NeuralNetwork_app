@@ -105,12 +105,12 @@ def metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, F
             for model in Models :
                 model.fit(X_train, y_train)
                 predictions = model.predict(X_test)
-                if self.metric == "RMSE" :
-                    results_metric.append( mean_squared_error(yy, anodes[-1].T, squared = False) )
-                elif self.metric == "MAE" :
-                    results_metric.append( mean_absolute_error(yy, anodes[-1].T) )
-                elif self.metric == "R2" :
-                    results_metric.append( r2_score(yy, anodes[-1].T ) )
+                if Final_metric == "RMSE" :
+                    results_metric.append( mean_squared_error(y_test, predictions, squared = False) )
+                elif Final_metric == "MAE" :
+                    results_metric.append( mean_absolute_error(y_test, predictions) )
+                elif Final_metric == "R2" :
+                    results_metric.append( r2_score(y_test, predictions) )
 
         other_results = pd.DataFrame( results_metric,  index = Col_final, columns = [Final_metric] ).T
         st.write("")
