@@ -33,7 +33,7 @@ def pipeline_nn(uploaded_file_test, Selected_columns_start, Numer, Categ, Tar, S
         columns = Numer + Tar
     else:
         columns = Numer
-    for i in Numer + Tar :
+    for i in columns :
         dataframe_test[i] = dataframe_test[i].astype(str).str.replace(',', '.').astype(float)
         dataframe_test[i].apply(pd.to_numeric)
 
