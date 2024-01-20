@@ -130,10 +130,8 @@ if uploaded_file is not None:                                                 # 
             st.text("")
             if st.button('Start the training!'):                                                                              # Pulsante per avviare il training
                 Model.Training(X_train, y_train, X_test, y_test)                                                              # Training NN
-                st.write('Training complete!')
-                metrics_plot.metrics_plot(Model, X_train, X_test, y_train, y_test, Task1, Norm_tar_list, Final_metric)        # Calcolo metriche finali (per Regressione) e plot
-
-
+                
+                # Train other models
                 from sklearn.linear_model import LogisticRegression
                 from sklearn.ensemble import RandomForestClassifier
                 from sklearn.tree import DecisionTreeClassifier
@@ -165,13 +163,11 @@ if uploaded_file is not None:                                                 # 
                     st.write(f'Mean Squared Error: {mse}')
                 else:
                     st.write('Invalid task. Supported tasks are "classification" and "regression".')
-                   
                 
-                 
-                    
-                
+                st.write('Training complete!')
+                metrics_plot.metrics_plot(Model, X_train, X_test, y_train, y_test, Task1, Norm_tar_list, Final_metric)        # Calcolo metriche finali (per Regressione) e plot
 
-    
+            
             #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             # Model Finalization
             st.text("")
