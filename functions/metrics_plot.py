@@ -68,12 +68,12 @@ def metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, F
             predictions = model.predict(X_test)
             st.write(predictions)
             acc_models.append( accuracy_score(y_test, predictions) )
-            pre_models.append( precision_score(y_test, predictions, average = "weighted") )
-            rec_models.append( recall_score(y_test, predictions, average = "weighted") )
-            f1_models.append( f1_score(y_test, predictions, average = "weighted") )
-            st.write(acc_models, pre_models, rec_models, f1_models)
-        other_results = pd.DataFrame( [acc_models, pre_models, rec_models, f1_models],  columns = Col_final, index = ID_final ).T
-        st.write(other_results)
+            #pre_models.append( precision_score(y_test, predictions, average = "weighted") )
+            #rec_models.append( recall_score(y_test, predictions, average = "weighted") )
+            #f1_models.append( f1_score(y_test, predictions, average = "weighted") )
+            st.write(acc_models)
+        #other_results = pd.DataFrame( [acc_models, pre_models, rec_models, f1_models],  columns = Col_final, index = ID_final ).T
+        #st.write(other_results)
         
     elif Task == 'Regression':
         model = RandomForestRegressor(n_estimators = 100, random_state = 42)
