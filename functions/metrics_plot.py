@@ -3,7 +3,7 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from sklearn.preprocessing import MinMaxScaler, StandardScaler, LabelBinarizer, OneHotEncoder, LabelEncoder
+from sklearn.preprocessing import MinMaxScaler, StandardScaler, LabelBinarizer, OneHotEncoder, label_binarize
 from sklearn.metrics import precision_score, recall_score, f1_score, accuracy_score, r2_score, roc_auc_score
 from sklearn.metrics import r2_score, mean_squared_error, mean_absolute_error
 from sklearn.linear_model import LogisticRegression
@@ -92,12 +92,12 @@ def metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, F
                     else :
                         results_metric.append( f1_score(y_test, predictions, average = "weighted") )
                 elif Final_metric == "AUC" :
-                    label_encoder = LabelEncoder()
-                    y_encoded = label_encoder.fit_transform(y_test)
                     if len(np.unique(y_test)) == 2 :
                         results_metric.append( roc_auc_score(y_encoded, predictions) )
                     else :
-                        results_metric.append( roc_auc_score(y_encoded, predictions, average = "weighted", multi_class = "ovr") )
+                        y_prob = model.predict_proba(X_test)
+                        y_test_bin = label_binarize(y_test, classes = list(set(y_test)))
+                        results_metric.append( roc_auc_score(y_test_bin, y_prob, average = "weighted", multi_class = "ovr") )
                         
             other_results = pd.DataFrame( results_metric,  index = Col_final, columns = [Final_metric] ).T
             st.write("")
