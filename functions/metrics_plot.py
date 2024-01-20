@@ -7,8 +7,8 @@ from sklearn.preprocessing import MinMaxScaler, StandardScaler, LabelBinarizer, 
 from sklearn.metrics import precision_score, recall_score, f1_score, accuracy_score, r2_score, roc_auc_score
 from sklearn.metrics import r2_score, mean_squared_error, mean_absolute_error
 from sklearn.linear_model import LogisticRegression, LinearRegression
-from sklearn.ensemble import RandomForestClassifier, DecisionTreeRegressor
-from sklearn.tree import DecisionTreeClassifier, RandomForestRegressor
+from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
+from sklearn.tree import DecisionTreeClassifier, DecisionTreeRegressor
 
 # La funzione calcola le metriche finali del modello dopo il training e crea dei plot
 def metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, Final_metric) :
