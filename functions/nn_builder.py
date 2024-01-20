@@ -94,7 +94,7 @@ def nn_builder(dataframe, Task) :
         Patient = st.text_input('The number of epochs to check for early stopping (for Adam and/or with Momentum)', '5')
         
     with right_column2 :
-        Verbose = st.selectbox( 'Flag to display results (0: do not deplay, 1: deplay)', [0, 1])
+        Verbose = st.selectbox( 'Flag to display results (0: do not deplay, 1: deplay)', [1, 0])
 
         st.text("")
         st.text("")
