@@ -25,7 +25,7 @@ def metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, F
     - Plot y_real vs. y_predicted (solo per regressione)
     """
 
-    if Task == "Classification" or (Task == "Regressione" and Norm_tar_list[3] == 0) :        # Per "Classificazione", le metriche sono calcolate direttamente dal modello
+    if Task == "Classification" or (Task == "Regression" and Norm_tar_list[3] == 0) :        # Per "Classificazione", le metriche sono calcolate direttamente dal modello
         res_tr, res_te = Model.last_metric_tr, Model.last_metric_te
     elif Task == "Regression" and Norm_tar_list[3] == 20:                                     # Per "Regressione" con MinMax
         y_real_tr = Norm_tar_list[1].inverse_transform(y_train)
@@ -135,7 +135,7 @@ def metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, F
     # Plot delle learning curves
     ax1.plot(Model.cost_function_tr, '-b')
     ax1.plot(Model.cost_function_te,'-r')
-    ax1.legend(["Training set","Test set"])
+    ax1.legend(["Training set","Validation set"])
     ax1.set_xlabel("Epoch")
     ax1.set_ylabel("Cost function")
     
@@ -156,7 +156,7 @@ def metrics_plot(Model, X_train, X_test, y_train, y_test, Task, Norm_tar_list, F
         ax2.plot(rangg,rangg, '-r')
         ax2.set_xlabel("Predictions")
         ax2.set_ylabel("Actual values")
-        ax3.set_xlabel("Predictions - Actual")
+        ax3.set_xlabel("Predictions - Actual (validation set)")
     
     # Due plot per le analisi di Classificazione
     else :
