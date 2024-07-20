@@ -562,11 +562,7 @@ class NeuralNet :
                         # Creo il "pezzo" (a partire dal dataset) che verrà utilizzato nel training
                         batch_slice = slice(self.batch * jj, self.batch * (1 + jj))
                         if X_train_1[:, batch_slice].shape[1] != 0:
-                        #if (X_train_1[:,0+self.batch*jj:self.batch*(1+jj)]).shape[1] == 0 :
-                        #    pass
-                        #else :
                             #Cost function and gradient
-                            #J_tr, G_tr, Perf_tr, Metric_tr = NeuralNet.J_Grad(self, X_train_1[:,0+self.batch*jj:self.batch*(1+jj)], yy[0+self.batch*jj:self.batch*(1+jj),:],THETA)
                             J_tr, G_tr, Perf_tr, Metric_tr = NeuralNet.J_Grad(self, X_train_1[:, batch_slice], yy[batch_slice, :], THETA)
                             J_te, G_te, Perf_te, Metric_te = NeuralNet.J_Grad(self, X_test_1, yy_test,THETA)
 
@@ -592,7 +588,7 @@ class NeuralNet :
                                                                                                                                                             J_tr,J_te,
                                                                                                                                                             self.metric, Metric_tr,
                                                                                                                                                             self.metric, Metric_te))
-                                #progress on bar updated
+                                #Progress on bar updated
                                 latest_iteration.text(f'Iteration: {i+1} / {self.Max_iter}')
                                 bar.progress((i + 1)/(self.Max_iter))
                             
@@ -631,7 +627,7 @@ class NeuralNet :
                         if self.task == "Classification" :
                             ax.plot(Cost_tr[0],'-b')
                             ax.plot(Cost_te[0],'-r')
-                            ax.legend(["Training","Test"])
+                            ax.legend(["Training","Validation"])
                             ax.set_xlabel("Epoch")
                             ax.set_ylabel("Cost function") 
                             st.pyplot(fig)
